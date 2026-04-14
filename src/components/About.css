@@ -1,0 +1,305 @@
+/* ============================================================
+   ABOUT — Asymmetric Split + Hover-Dimming Pillars
+   ============================================================ */
+
+.about {
+  overflow: hidden;
+  background: var(--color-bg-white);
+  position: relative;
+}
+
+/* Subtle grid pattern bg */
+.about__bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(31,40,69,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,40,69,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Top Split ── */
+.about__split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.about__text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about__title {
+  text-align: left;
+}
+
+.about__desc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text-body);
+  margin-top: 20px;
+  margin-bottom: 32px;
+}
+
+.about__quote {
+  position: relative;
+  padding: 28px 32px 28px 48px;
+  border-left: none;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.7;
+  margin: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.about__quote-mark {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  font-size: 5rem;
+  color: var(--color-accent);
+  opacity: 0.4;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+
+/* ── Stats Column ── */
+.about__stats-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  background: var(--color-bg-navy);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(31, 40, 69, 0.2);
+}
+
+.about__stat-card {
+  padding: 40px 48px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.about__stat-card::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  position: absolute;
+  bottom: 0;
+  left: 48px;
+  right: 48px;
+}
+
+.about__stat-card:last-child::after {
+  display: none;
+}
+
+.about__stat-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-stat__value {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.about-stat__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.about__stat-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.about__stat-card:hover .about__stat-bar {
+  opacity: 1;
+}
+
+/* ── Pillars: Horizontal Row with Hover Dimming ── */
+.about__pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-bg-light);
+}
+
+.about__pillar {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  cursor: default;
+  transition: background 0.4s ease, transform 0.4s var(--ease-out-expo);
+  border-right: 1px solid var(--color-border-light);
+}
+
+.about__pillar:last-child {
+  border-right: none;
+}
+
+.about__pillar.is-hovered {
+  background: var(--color-bg-white);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(31, 40, 69, 0.1);
+  z-index: 2;
+  border-radius: var(--radius-xl);
+}
+
+.about__pillar.is-dimmed {
+  opacity: 0.45;
+  transition: opacity 0.4s ease;
+}
+
+.about__pillar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.about__pillar-num {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+.about__pillar-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  font-size: 1.6rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s ease;
+}
+
+.about__pillar.is-hovered .about__pillar-icon {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.about__pillar-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about__pillar-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.3;
+}
+
+.about__pillar-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-body);
+}
+
+.about__pillar-line {
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.about__pillar.is-hovered .about__pillar-line {
+  transform: scaleX(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .about__split {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .about__title {
+    text-align: center;
+  }
+
+  .about__text-col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .about__pillar {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .about__pillar:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__stat-card {
+    padding: 32px 32px;
+  }
+
+  .about__stat-card::after {
+    left: 32px;
+    right: 32px;
+  }
+
+  .about__pillar {
+    padding: 32px 28px;
+  }
+}

@@ -1,0 +1,269 @@
+/* ============================================================
+   TESTIMONIALS — Interactive 3D Carousel (Coverflow Style)
+   ============================================================ */
+
+.testimonials {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.testimonials__carousel {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.testimonials__track {
+  position: relative;
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 48px;
+  /* Prevent interaction clipping */
+  transform-style: preserve-3d;
+}
+
+/* ── Individual Slides ── */
+.testimonials__slide {
+  position: absolute;
+  width: 100%;
+  max-width: 600px;
+  transition: all 0.6s var(--ease-out-expo);
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+/* Base card styling */
+.testimonials__slide-inner {
+  background: var(--color-bg-white);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* very subtle border on white */
+  border-radius: var(--radius-xl);
+  padding: 56px 48px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: all 0.4s ease;
+  height: 100%;
+}
+
+.testimonials__slide-mark {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: Georgia, serif;
+  font-size: 8rem;
+  line-height: 0.8;
+  color: var(--color-accent);
+  opacity: 0.1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testimonials__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.testimonials__slide-inner p.testimonials__text {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #374151;
+  font-style: italic;
+  flex: 1;
+  opacity: 1;
+}
+
+.testimonials__author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.testimonials__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-accent);
+}
+
+.testimonials__name {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #111827; /* Hardcoded near black */
+}
+
+.testimonials__role {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280; /* Hardcoded medium gray */
+  margin-top: 2px;
+}
+
+/* ── Positioning States for Coverflow ── */
+
+/* Center (Active) */
+.testimonials__slide.is-active {
+  transform: translateX(0) scale(1) translateZ(0);
+  z-index: 10;
+  opacity: 1;
+  cursor: default;
+}
+
+.testimonials__slide.is-active .testimonials__slide-inner {
+  border-color: rgba(196, 165, 89, 0.4); /* Gold border for active */
+}
+
+/* Left (Prev) */
+.testimonials__slide.is-prev {
+  transform: translateX(-55%) scale(0.85) translateZ(-100px);
+  z-index: 5;
+  opacity: 0.4;
+}
+
+.testimonials__slide.is-prev:hover {
+  opacity: 0.7;
+  transform: translateX(-55%) scale(0.88) translateZ(-80px);
+}
+
+/* Right (Next) */
+.testimonials__slide.is-next {
+  transform: translateX(55%) scale(0.85) translateZ(-100px);
+  z-index: 5;
+  opacity: 0.4;
+}
+
+.testimonials__slide.is-next:hover {
+  opacity: 0.7;
+  transform: translateX(55%) scale(0.88) translateZ(-80px);
+}
+
+/* Hidden (Others) */
+.testimonials__slide.is-hidden {
+  transform: translateX(0) scale(0.6) translateZ(-200px);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Controls ── */
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.testimonials__btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonials__btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.testimonials__dots {
+  display: flex;
+  gap: 12px;
+}
+
+.testimonials__dot {
+  width: 32px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  padding: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.testimonials__dot-prog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--color-accent);
+  width: 0%;
+}
+
+/* Auto-play progression bar for active dot */
+.testimonials__dot.is-active {
+  width: 48px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.testimonials__dot.is-active .testimonials__dot-prog {
+  animation: dot-fill 5s linear forwards;
+}
+
+@keyframes dot-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* If hovered carousel, pause animation (pseudo implementation in React via re-render, but CSS animation needs to pause) */
+.testimonials__carousel:hover .testimonials__dot.is-active .testimonials__dot-prog {
+  animation-play-state: paused;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .testimonials__track {
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials__slide {
+    max-width: 90vw;
+  }
+  
+  .testimonials__slide-inner {
+    padding: 32px 28px;
+  }
+  
+  .testimonials__slide.is-prev {
+    transform: translateX(-20%) scale(0.9) translateZ(-100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .testimonials__slide.is-next {
+    transform: translateX(20%) scale(0.9) translateZ(-100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .testimonials__controls {
+    gap: 16px;
+  }
+}

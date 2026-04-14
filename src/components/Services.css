@@ -1,0 +1,195 @@
+/* ============================================================
+   SERVICES — Light Sticky Parallax Pattern
+   ============================================================ */
+
+.services {
+  overflow: visible;
+}
+
+.services__container {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+/* ---- Sticky Header Left ---- */
+.services__header {
+  position: relative;
+  height: 100%;
+}
+
+.services__header-sticky {
+  position: sticky;
+  top: 140px;
+  padding-bottom: 40px;
+}
+
+.services__cta {
+  margin-top: 32px;
+}
+
+/* ---- Scrolling Cards Right ---- */
+.services__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.services__card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.5s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+.services__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--color-accent);
+  transition: height 0.5s var(--ease-out-expo);
+}
+
+.services__card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-focus);
+}
+
+.services__card:hover::before {
+  height: 100%;
+}
+
+.services__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.services__card-icon {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  background: var(--color-bg-light);
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.services__card:hover .services__card-icon {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+  border-color: var(--color-primary);
+}
+
+.services__card-number {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  opacity: 0.15;
+}
+
+.services__card-title {
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+
+.services__card-desc {
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+/* Bullet list inside cards for corporate detail */
+.services__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.services__card-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--color-text-body);
+}
+
+.services__card-list svg {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+.services__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.services__card-link svg {
+  transition: transform 0.3s ease;
+}
+
+.services__card-link:hover {
+  color: var(--color-accent);
+}
+
+.services__card-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .services__container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .services__header-sticky {
+    position: relative;
+    top: 0;
+    padding-bottom: 0;
+  }
+  
+  .services__card {
+    padding: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services__card {
+    padding: 24px;
+  }
+  
+  .services__card-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+  }
+  
+  .services__card-title {
+    font-size: 1.4rem;
+  }
+}

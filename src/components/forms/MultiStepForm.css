@@ -1,0 +1,344 @@
+/* ============================================================
+   MULTI STEP FORM — Premium Native (JotForm Style)
+   ============================================================ */
+
+.msf {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease;
+}
+
+.msf:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Progress */
+.msf__progress {
+  position: relative;
+  height: 6px;
+  background: rgba(31, 40, 69, 0.05);
+  border-radius: 3px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.msf__progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 3px;
+  transition: width 0.5s var(--ease-out-expo);
+}
+
+.msf__progress-text {
+  position: absolute;
+  right: 0;
+  top: -24px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Header */
+.msf__header {
+  margin-bottom: 32px;
+}
+
+.msf__step-title {
+  font-size: 1.5rem;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+
+.msf__step-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-body);
+  line-height: 1.6;
+}
+
+/* Body */
+.msf__body {
+  animation: fade-in-up 0.4s var(--ease-out-expo);
+}
+
+/* Fields */
+.msf__field {
+  margin-bottom: 24px;
+}
+
+.msf__label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 10px;
+}
+
+.msf__input,
+.msf__select,
+.msf__textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  color: var(--color-text-dark);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.msf__input:focus,
+.msf__select:focus,
+.msf__textarea:focus {
+  border-color: var(--color-primary);
+  background: var(--color-bg-white);
+  box-shadow: 0 0 0 4px rgba(31, 40, 69, 0.08);
+}
+
+.msf__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231F2845' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 48px;
+}
+
+.msf__select option {
+  background: var(--color-bg-white);
+  color: var(--color-text-dark);
+}
+
+.msf__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Radio */
+.msf__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.msf__radio {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text-dark);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.msf__radio:hover {
+  background: rgba(31, 40, 69, 0.02);
+  border-color: rgba(31, 40, 69, 0.15);
+}
+
+.msf__radio--selected {
+  background: rgba(31, 40, 69, 0.04);
+  border-color: var(--color-primary);
+}
+
+.msf__radio input {
+  display: none;
+}
+
+.msf__radio-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.msf__radio--selected .msf__radio-indicator {
+  border-color: var(--color-primary);
+}
+
+.msf__radio--selected .msf__radio-indicator::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+/* Checkbox */
+.msf__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.msf__checkbox input { display: none; }
+
+.msf__checkbox-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msf__checkbox--checked .msf__checkbox-indicator {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.msf__checkbox--checked .msf__checkbox-indicator::after {
+  content: '✓';
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* File Upload */
+.msf__file-drop input[type="file"] {
+  display: none;
+}
+
+.msf__file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  border: 2px dashed rgba(31, 40, 69, 0.2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  color: var(--color-text-body);
+  font-size: 0.95rem;
+  background: var(--color-bg-light);
+}
+
+.msf__file-label:hover {
+  border-color: var(--color-primary);
+  background: rgba(31, 40, 69, 0.02);
+}
+
+.msf__file-icon {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+}
+
+.msf__file-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Info Box */
+.msf__info-box {
+  padding: 24px;
+  background: rgba(196, 165, 89, 0.08); /* Accent light */
+  border: 1px solid rgba(196, 165, 89, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-dark);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Error */
+.msf__error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+  margin-top: 8px;
+  display: block;
+}
+
+.msf__field--error .msf__input,
+.msf__field--error .msf__select,
+.msf__field--error .msf__textarea {
+  border-color: var(--color-error);
+}
+
+/* Navigation */
+.msf__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.msf__btn-prev {
+  color: var(--color-text-dark);
+  border-color: var(--color-border-light);
+}
+
+.msf__btn-prev:hover {
+  background: var(--color-bg-light);
+  border-color: var(--color-border-focus);
+}
+
+/* Success */
+.msf__success {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.msf__success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 24px;
+  animation: fade-in-up 0.5s var(--ease-out-expo);
+  color: var(--color-success);
+}
+
+.msf__success h3 {
+  font-size: 1.8rem;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+.msf__success p {
+  color: var(--color-text-body);
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .msf {
+    padding: 32px 24px;
+  }
+
+  .msf__nav {
+    flex-wrap: wrap;
+  }
+}
