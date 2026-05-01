@@ -39,12 +39,8 @@
 .navbar__logo-text {
   height: 22px;
   object-fit: contain;
-  filter: brightness(0);
-  transition: filter 0.3s ease;
-}
-
-.navbar--scrolled .navbar__logo-text {
   filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
 }
 
 .navbar__links {
@@ -58,24 +54,16 @@
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 500;
-  color: rgba(26, 26, 46, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   border-radius: var(--radius-full);
   transition: all var(--transition-fast);
   white-space: nowrap;
 }
 
-.navbar__link:hover {
-  color: var(--color-text-dark);
-  background: rgba(0,0,0,0.04);
-}
-
-.navbar--scrolled .navbar__link {
-  color: rgba(255,255,255,0.75);
-}
-
-.navbar--scrolled .navbar__link:hover {
+.navbar__link:hover,
+.navbar__link--active {
   color: #fff;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .navbar__actions {
@@ -94,14 +82,10 @@
 .navbar__hamburger span {
   width: 22px;
   height: 2px;
-  background: var(--color-text-dark);
+  background: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
   transform-origin: center;
-}
-
-.navbar--scrolled .navbar__hamburger span {
-  background: #fff;
 }
 
 .navbar__hamburger.active span:nth-child(1) {
