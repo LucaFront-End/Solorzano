@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { siteConfig, navLinks } from '../data/content';
 import './Footer.css';
 
@@ -19,9 +20,13 @@ export default function Footer() {
           <div className="footer__col">
             <h4 className="footer__col-title">Navegación</h4>
             <ul>
-              {navLinks.slice(0, 5).map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href}>{link.label}</a>
+                  {link.href.startsWith('/') && !link.href.includes('#') ? (
+                    <Link to={link.href}>{link.label}</Link>
+                  ) : (
+                    <a href={link.href}>{link.label}</a>
+                  )}
                 </li>
               ))}
             </ul>

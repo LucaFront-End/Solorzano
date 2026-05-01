@@ -1,0 +1,132 @@
+/* ============================================================
+   PAGE HERO — Internal Pages Banner
+   ============================================================ */
+
+.page-hero {
+  position: relative;
+  background: var(--color-bg-navy);
+  padding: 160px 0 100px;
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.page-hero__bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(196, 165, 89, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(31, 40, 69, 0.3) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.page-hero__glow {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(196, 165, 89, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: phero-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+@keyframes phero-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Breadcrumb */
+.page-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+  font-family: var(--font-heading);
+}
+
+.page-hero__breadcrumb-link {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+}
+
+.page-hero__breadcrumb-link:hover {
+  color: var(--color-accent);
+}
+
+.page-hero__breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+}
+
+.page-hero__breadcrumb-current {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Label */
+.page-hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.page-hero__label::before {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+
+/* Title */
+.page-hero__title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  color: var(--color-text-white);
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+/* Subtitle */
+.page-hero__subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 550px;
+  line-height: 1.7;
+}
+
+/* Accent Line */
+.page-hero__accent-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  border-radius: 2px;
+  margin-top: 32px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 130px 0 70px;
+    min-height: 300px;
+  }
+}

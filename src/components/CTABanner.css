@@ -1,0 +1,183 @@
+/* ============================================================
+   CTA BANNER — Premium Centered Section
+   ============================================================ */
+
+.cta-banner {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(170deg, #0d1224 0%, var(--color-bg-navy) 40%, #131832 100%);
+}
+
+/* ── Decorative Orbs ── */
+.cta-banner__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.cta-banner__orb--1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(196, 165, 89, 0.08);
+  top: -180px;
+  right: -120px;
+}
+
+.cta-banner__orb--2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(31, 40, 69, 0.5);
+  bottom: -200px;
+  left: -100px;
+}
+
+/* Subtle grid pattern */
+.cta-banner__grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* ── Inner container ── */
+.cta-banner__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 120px 40px;
+}
+
+/* ── Badge ── */
+.cta-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196, 165, 89, 0.1);
+  border: 1px solid rgba(196, 165, 89, 0.2);
+  color: var(--color-accent);
+  padding: 8px 22px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+/* ── Title ── */
+.cta-banner__title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: var(--color-text-white);
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  max-width: 700px;
+}
+
+/* ── Subtitle ── */
+.cta-banner__subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+
+/* ── Actions ── */
+.cta-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.cta-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 36px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.4s var(--ease-out-expo);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* WhatsApp button */
+.cta-banner__btn--whatsapp {
+  background: linear-gradient(135deg, #25D366, #1da851);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.25);
+}
+
+.cta-banner__btn--whatsapp::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-banner__btn--whatsapp:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(37, 211, 102, 0.35);
+}
+
+.cta-banner__btn--whatsapp:hover::after {
+  left: 200%;
+}
+
+/* Outline button */
+.cta-banner__btn--outline {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.cta-banner__btn--outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+/* ── Note ── */
+.cta-banner__note {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.03em;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .cta-banner__inner {
+    padding: 80px 24px;
+  }
+
+  .cta-banner__actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .cta-banner__btn {
+    width: 100%;
+  }
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { heroContent, siteConfig } from '../data/content';
 import { useCountUp } from '../hooks/useCountUp';
 import { useTypewriter } from '../hooks/useTypewriter';
@@ -55,13 +56,12 @@ export default function Hero() {
               {heroContent.ctaPrimary}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a
-              href="#servicios"
+            <Link
+              to="/servicios"
               className="hero__cta-secondary"
-              onClick={(e) => { e.preventDefault(); document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' }); }}
             >
               {heroContent.ctaSecondary}
-            </a>
+            </Link>
           </div>
 
           {/* Stats inline */}
