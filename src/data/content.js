@@ -25,8 +25,16 @@ export const siteConfig = {
 export const navLinks = [
   { label: 'Nosotros', href: '/nosotros' },
   { label: 'Servicios', href: '/servicios' },
+  {
+    label: 'Solicitudes',
+    href: '#',
+    children: [
+      { label: 'Solicitud de Diligencias', href: '/formularios/solicitud-de-diligencias' },
+      { label: 'Solicitud de Desvinculaciones', href: '/formularios/solicitud-de-desvinculaciones' },
+      { label: 'Solicitud de Finiquitos', href: '/formularios/solicitud-de-finiquitos' },
+    ],
+  },
   { label: 'Comunidad', href: '/#comunidad' },
-  { label: 'Blog', href: '/#blog' },
   { label: 'Contacto', href: '/contacto' },
 ];
 

@@ -7,7 +7,6 @@ import About from './components/About';
 import MercantileServices from './components/MercantileServices';
 import Testimonials from './components/Testimonials';
 import Clients from './components/Clients';
-import FormsSection from './components/FormsSection';
 import Blog from './components/Blog';
 import Community from './components/Community';
 import Contact from './components/Contact';
@@ -17,6 +16,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import NosotrosPage from './pages/NosotrosPage';
 import ServiciosPage from './pages/ServiciosPage';
 import ContactoPage from './pages/ContactoPage';
+import FormularioPage from './pages/FormularioPage';
 
 function HomePage() {
   return (
@@ -27,7 +27,6 @@ function HomePage() {
       <MercantileServices />
       <Testimonials />
       <Clients />
-      <FormsSection />
       <Blog />
       <Community />
       <Contact />
@@ -45,6 +44,7 @@ export default function App() {
         <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="/servicios" element={<ServiciosPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/formularios/:slug" element={<FormularioPage />} />
       </Routes>
       <Footer />
       <WhatsAppButton />
