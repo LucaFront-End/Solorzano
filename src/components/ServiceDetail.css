@@ -5,7 +5,7 @@
 .service-detail {
   background: var(--color-bg-light);
   min-height: 100vh;
-  padding-top: 80px; /* Offset for sticky nav */
+  padding-top: 0; /* Allow navy hero to slide under the navbar */
 }
 
 /* ── Navigation & Breadcrumbs Bar ── */
@@ -74,7 +74,7 @@
 .service-detail__hero {
   position: relative;
   overflow: hidden;
-  padding: 100px 0;
+  padding: 180px 0 100px; /* Offset 80px for the navbar */
 }
 
 .service-detail__hero-bg {
@@ -449,11 +449,11 @@
 
 @media (max-width: 768px) {
   .service-detail {
-    padding-top: 70px;
+    padding-top: 0;
   }
 
   .service-detail__hero {
-    padding: 60px 0;
+    padding: 130px 0 60px; /* Offset 70px for mobile navbar */
   }
 
   .service-detail__content {
