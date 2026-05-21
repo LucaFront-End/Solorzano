@@ -16,9 +16,11 @@
   animation: glow-pulse-wa 3s ease-in-out infinite;
 }
 
-.whatsapp-btn:hover {
-  transform: scale(1.1) translateY(-4px);
-  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5);
+@media (hover: hover) {
+  .whatsapp-btn:hover {
+    transform: scale(1.1) translateY(-4px);
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5);
+  }
 }
 
 @keyframes glow-pulse-wa {

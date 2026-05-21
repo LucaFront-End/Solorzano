@@ -1,8 +1,16 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { mercantileContent, siteConfig } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import LucideIcon from './LucideIcon';
 import './MercantileServices.css';
+
+const mercantilePaths = [
+  'gestion-corporativa',
+  'asesoria-documental',
+  'representacion-legal',
+  'mediacion-negociacion'
+];
 
 export default function MercantileServices() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -53,17 +61,26 @@ export default function MercantileServices() {
                 </svg>
                 <span>{active.detail}</span>
               </div>
-              <a
-                href={siteConfig.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn--primary mercantile__feature-cta"
-              >
-                Consultar Ahora
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </a>
+              
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '12px' }}>
+                <Link
+                  to={`/servicios/${mercantilePaths[activeIdx]}`}
+                  className="btn btn--primary"
+                >
+                  Ver Detalles
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </Link>
+                <a
+                  href={siteConfig.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--outline"
+                >
+                  Consultar Ahora
+                </a>
+              </div>
             </div>
           </div>
 

@@ -1,8 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { siteConfig, navLinks } from '../data/content';
 import './Footer.css';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const handleNav = (e, href) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      if (!isHomePage) {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      } else {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="container container--wide">
@@ -25,7 +45,7 @@ export default function Footer() {
                   {link.href.startsWith('/') && !link.href.includes('#') ? (
                     <Link to={link.href}>{link.label}</Link>
                   ) : (
-                    <a href={link.href}>{link.label}</a>
+                    <a href={link.href} onClick={(e) => handleNav(e, link.href)}>{link.label}</a>
                   )}
                 </li>
               ))}

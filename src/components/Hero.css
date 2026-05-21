@@ -151,10 +151,12 @@
   transition: all 0.35s var(--ease-out-expo);
 }
 
-.hero__cta:hover {
-  background: var(--color-primary-light);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(44, 52, 101, 0.35);
+@media (hover: hover) {
+  .hero__cta:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(44, 52, 101, 0.35);
+  }
 }
 
 .hero__cta-secondary {
@@ -168,9 +170,11 @@
   transition: all 0.3s ease;
 }
 
-.hero__cta-secondary:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+@media (hover: hover) {
+  .hero__cta-secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
 }
 
 /* ---- Stats ---- */
@@ -354,5 +358,31 @@
 
   .hero__float-card {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero__cta,
+  .hero__cta-secondary {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero__stats {
+    justify-content: center;
+  }
+
+  .hero-stat {
+    align-items: center;
+    text-align: center;
+    padding-right: 16px;
+    margin-right: 16px;
   }
 }

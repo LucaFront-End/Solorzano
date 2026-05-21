@@ -182,10 +182,12 @@
   transition: all 0.3s ease;
 }
 
-.testimonials__btn:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  transform: scale(1.1);
+@media (hover: hover) {
+  .testimonials__btn:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.1);
+  }
 }
 
 .testimonials__dots {
@@ -243,6 +245,11 @@
 }
 
 @media (max-width: 768px) {
+  .testimonials__track {
+    height: 380px;
+    margin-bottom: 28px;
+  }
+
   .testimonials__slide {
     max-width: 90vw;
   }

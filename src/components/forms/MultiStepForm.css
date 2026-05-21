@@ -13,8 +13,10 @@
   transition: box-shadow 0.3s ease;
 }
 
-.msf:hover {
-  box-shadow: var(--shadow-md);
+@media (hover: hover) {
+  .msf:hover {
+    box-shadow: var(--shadow-md);
+  }
 }
 
 /* Progress */
@@ -145,9 +147,11 @@
   font-weight: 500;
 }
 
-.msf__radio:hover {
-  background: rgba(31, 40, 69, 0.02);
-  border-color: rgba(31, 40, 69, 0.15);
+@media (hover: hover) {
+  .msf__radio:hover {
+    background: rgba(31, 40, 69, 0.02);
+    border-color: rgba(31, 40, 69, 0.15);
+  }
 }
 
 .msf__radio--selected {
@@ -248,9 +252,11 @@
   background: var(--color-bg-light);
 }
 
-.msf__file-label:hover {
-  border-color: var(--color-primary);
-  background: rgba(31, 40, 69, 0.02);
+@media (hover: hover) {
+  .msf__file-label:hover {
+    border-color: var(--color-primary);
+    background: rgba(31, 40, 69, 0.02);
+  }
 }
 
 .msf__file-icon {
@@ -303,9 +309,11 @@
   border-color: var(--color-border-light);
 }
 
-.msf__btn-prev:hover {
-  background: var(--color-bg-light);
-  border-color: var(--color-border-focus);
+@media (hover: hover) {
+  .msf__btn-prev:hover {
+    background: var(--color-bg-light);
+    border-color: var(--color-border-focus);
+  }
 }
 
 /* Success */

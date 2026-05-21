@@ -12,6 +12,7 @@ import Community from './components/Community';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ServiceDetail from './components/ServiceDetail';
 
 import NosotrosPage from './pages/NosotrosPage';
 import ServiciosPage from './pages/ServiciosPage';
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="/servicios" element={<ServiciosPage />} />
+        <Route path="/servicios/:serviceId" element={<ServiceDetail />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
       </Routes>
