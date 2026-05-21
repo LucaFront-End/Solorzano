@@ -113,7 +113,7 @@ export default function Navbar() {
                     <ChevronDown size={14} className={`navbar__dropdown-arrow ${desktopDropdownOpen ? 'rotated' : ''}`} />
                   </button>
 
-                  <div className={`navbar__dropdown ${desktopDropdownOpen ? 'navbar__dropdown--open' : ''}`}>
+                  <div className={`navbar__mega-dropdown ${desktopDropdownOpen ? 'navbar__mega-dropdown--open' : ''}`}>
                     <div className="navbar__dropdown-inner">
                       <div className="navbar__dropdown-column">
                         <h4 className="navbar__dropdown-title">Derecho Laboral</h4>
