@@ -76,7 +76,7 @@ export default function Hero() {
         <div className="hero__col-image">
           <div className="hero__img-wrapper">
             <img
-              src="/images/hero-photo.jpg"
+              src="/images/hero-photo-new.png"
               alt="Solórzano Cerezo y Asociados"
               className="hero__img"
             />
