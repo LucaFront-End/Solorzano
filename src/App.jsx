@@ -18,6 +18,7 @@ import NosotrosPage from './pages/NosotrosPage';
 import ServiciosPage from './pages/ServiciosPage';
 import ContactoPage from './pages/ContactoPage';
 import FormularioPage from './pages/FormularioPage';
+import TerminosCitatoriosPage from './pages/TerminosCitatoriosPage';
 
 function HomePage() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/servicios/:serviceId" element={<ServiceDetail />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
+        <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />
       </Routes>
       <Footer />
       <WhatsAppButton />

@@ -1,0 +1,406 @@
+/* ============================================================
+   TÉRMINOS CITATORIOS — Terms & Conditions Page
+   ============================================================ */
+
+.terminos-page {
+  padding: 80px 0 120px;
+  background: var(--color-bg-light);
+  min-height: 60vh;
+}
+
+/* ── Document Card ────────────────────────────────────── */
+.terminos-page__document {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  padding: 60px 72px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.terminos-page__document::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent),
+    var(--color-primary)
+  );
+}
+
+/* ── Intro Block ──────────────────────────────────────── */
+.terminos-page__intro {
+  text-align: center;
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.terminos-page__intro-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 24px rgba(31, 40, 69, 0.15);
+}
+
+.terminos-page__intro-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--color-accent);
+}
+
+.terminos-page__intro h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+}
+
+.terminos-page__intro p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Section ──────────────────────────────────────────── */
+.terminos-section {
+  margin-bottom: 48px;
+  animation: terminos-fade-in 0.6s ease both;
+}
+
+.terminos-section:last-of-type {
+  margin-bottom: 0;
+}
+
+@keyframes terminos-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminos-section:nth-child(2) { animation-delay: 0.1s; }
+.terminos-section:nth-child(3) { animation-delay: 0.2s; }
+.terminos-section:nth-child(4) { animation-delay: 0.3s; }
+.terminos-section:nth-child(5) { animation-delay: 0.4s; }
+
+/* Section Header */
+.terminos-section__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(196, 165, 89, 0.2);
+}
+
+.terminos-section__number {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(31, 40, 69, 0.12);
+}
+
+.terminos-section__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  letter-spacing: -0.01em;
+}
+
+/* Content */
+.terminos-section__content {
+  padding-left: 56px;
+}
+
+.terminos-section__content p {
+  color: var(--color-text-body);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.terminos-section__content p:last-child {
+  margin-bottom: 0;
+}
+
+/* List */
+.terminos-section__list {
+  margin: 12px 0 20px;
+  padding-left: 0;
+}
+
+.terminos-section__list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--color-text-body);
+  line-height: 1.7;
+}
+
+.terminos-section__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.6;
+}
+
+/* Subsection Title */
+.terminos-section__subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 24px 0 12px;
+}
+
+/* Important Callout */
+.terminos-section__important {
+  background: linear-gradient(135deg, rgba(196, 165, 89, 0.06), rgba(196, 165, 89, 0.02));
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.terminos-section__important-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  margin-bottom: 8px;
+}
+
+.terminos-section__important-label svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--color-accent-dark);
+}
+
+.terminos-section__important p {
+  color: var(--color-text-body);
+  font-size: 0.93rem;
+  margin-bottom: 0;
+}
+
+/* ── Divider ──────────────────────────────────────────── */
+.terminos-page__divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border-light),
+    transparent
+  );
+  margin: 48px 0;
+}
+
+/* ── Acceptance Block ─────────────────────────────────── */
+.terminos-page__acceptance {
+  background: linear-gradient(135deg, rgba(31, 40, 69, 0.03), rgba(196, 165, 89, 0.04));
+  border: 1px solid rgba(31, 40, 69, 0.08);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  margin-top: 48px;
+}
+
+.terminos-page__acceptance-note {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* Checkbox */
+.terminos-page__checkbox-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.terminos-page__checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.terminos-page__checkbox-box {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 6px;
+  border: 2px solid rgba(31, 40, 69, 0.2);
+  background: var(--color-bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease-spring);
+  margin-top: 2px;
+}
+
+.terminos-page__checkbox-input:checked + .terminos-page__checkbox-box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(31, 40, 69, 0.2);
+}
+
+.terminos-page__checkbox-box svg {
+  width: 14px;
+  height: 14px;
+  stroke: white;
+  stroke-width: 3;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.terminos-page__checkbox-input:checked + .terminos-page__checkbox-box svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.terminos-page__checkbox-label {
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Submit Button */
+.terminos-page__submit-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.terminos-page__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-medium);
+  box-shadow: 0 6px 20px rgba(31, 40, 69, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.terminos-page__submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(196, 165, 89, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.terminos-page__submit:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.terminos-page__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(31, 40, 69, 0.25);
+}
+
+.terminos-page__submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.terminos-page__submit svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.terminos-page__submit:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .terminos-page__document {
+    padding: 48px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .terminos-page {
+    padding: 40px 0 80px;
+  }
+
+  .terminos-page__document {
+    padding: 32px 24px;
+    border-radius: var(--radius-md);
+  }
+
+  .terminos-section__header {
+    gap: 12px;
+  }
+
+  .terminos-section__number {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+
+  .terminos-section__content {
+    padding-left: 0;
+  }
+
+  .terminos-page__acceptance {
+    padding: 24px 20px;
+  }
+
+  .terminos-page__submit {
+    width: 100%;
+  }
+}
