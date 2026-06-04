@@ -19,6 +19,7 @@ import ServiciosPage from './pages/ServiciosPage';
 import ContactoPage from './pages/ContactoPage';
 import FormularioPage from './pages/FormularioPage';
 import TerminosCitatoriosPage from './pages/TerminosCitatoriosPage';
+import TicketsDiligenciasPage from './pages/TicketsDiligenciasPage';
 
 function HomePage() {
   return (
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />
+        <Route path="/tickets-de-diligencias-en-despacho-legal-solorzano" element={<TicketsDiligenciasPage />} />
       </Routes>
       <Footer />
       <WhatsAppButton />

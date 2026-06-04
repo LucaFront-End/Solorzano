@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import './TerminosCitatoriosPage.css';
 
 export default function TerminosCitatoriosPage() {
   const [accepted, setAccepted] = useState(false);
+  const navigate = useNavigate();
 
   const handleContinue = () => {
     if (!accepted) return;
-    window.location.href = 'https://www.dsc.mx/tickets-de-diligencias-en-despacho-legal-solorzano';
+    navigate('/tickets-de-diligencias-en-despacho-legal-solorzano');
   };
 
   return (
