@@ -7,7 +7,8 @@ import { siteConfig } from '../data/content';
 import LucideIcon from '../components/LucideIcon';
 import {
   ArrowRight, MessageCircle, CheckCircle2, ChevronRight,
-  Shield, Zap, Award, ArrowUpRight,
+  Shield, Zap, Award, ArrowUpRight, Check, X, ClipboardList,
+  AlertTriangle, RefreshCw, BarChart2, Star, HelpCircle, Activity
 } from 'lucide-react';
 import './IndustriaDetailPage.css';
 
@@ -20,14 +21,27 @@ const reasons = [
 export default function IndustriaDetailPage() {
   const { slug } = useParams();
   const industry = getIndustryBySlug(slug);
-  const challengesRef = useScrollReveal();
-  const servicesRef = useScrollReveal();
-  const whyRef = useScrollReveal();
+  const challengesReveal = useScrollReveal();
+  const servicesReveal = useScrollReveal();
+  const whyReveal = useScrollReveal();
+  const quizReveal = useScrollReveal();
+  
   const progressRef = useRef(null);
   const sectionsRef = useRef([]);
   const [activeSection, setActiveSection] = useState(0);
 
-  // Scroll progress for floating TOC
+  // Overhaul Component States
+  const [dashboardTab, setDashboardTab] = useState('stps'); // stps, litigation, contracts
+  const [activeChallenge, setActiveChallenge] = useState(0);
+  const [activePhase, setActivePhase] = useState(1);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  // Quiz States
+  const [quizStep, setQuizStep] = useState(0); // 0: start, 1, 2, 3: questions, 4: results
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [quizScore, setQuizScore] = useState(100);
+
+  // Floating TOC & Progress Bar Scroll Listener
   useEffect(() => {
     if (!industry) return;
 
@@ -41,7 +55,6 @@ export default function IndustriaDetailPage() {
         }
       });
 
-      // Progress bar
       if (progressRef.current) {
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = Math.min(100, (window.scrollY / docHeight) * 100);
@@ -56,6 +69,10 @@ export default function IndustriaDetailPage() {
   useEffect(() => {
     if (industry) {
       document.title = `${industry.title} — Solórzano Cerezo y Asociados`;
+      // Reset quiz when industry changes
+      setQuizStep(0);
+      setQuizAnswers({});
+      setQuizScore(100);
     }
   }, [industry]);
 
@@ -66,12 +83,84 @@ export default function IndustriaDetailPage() {
     .filter(Boolean);
 
   const otherIndustries = industries.filter(i => i.slug !== slug).slice(0, 3);
+  const tocItems = ['Desafíos', 'Línea de Blindaje', 'Autoevaluación', 'Servicios', 'FAQ'];
 
-  const tocItems = ['Desafíos', 'Servicios', '¿Por qué nosotros?'];
+  // Shielding Phases Data
+  const shieldingPhases = [
+    {
+      phase: 1,
+      title: 'Diagnóstico & Auditoría',
+      icon: 'Search',
+      desc: 'Realizamos una auditoría exhaustiva de tus expedientes de personal, contratos vigentes, REPSE y cumplimiento de normas obligatorias (NOM-035/037) para mapear vacíos legales.',
+      deliverables: ['Matriz de Riesgo Legal', 'Reporte de Hallazgos Críticos', 'Plan de Corrección Urgente']
+    },
+    {
+      phase: 2,
+      title: 'Reestructuración & Blindaje',
+      icon: 'FileText',
+      desc: 'Rediseñamos tus contratos individuales de trabajo, adendas de teletrabajo, convenios de confidencialidad y registramos tu Reglamento Interior de Trabajo ante las autoridades correspondientes.',
+      deliverables: ['Nuevos Contratos Blindados', 'Convenios de IP firmados', 'Reglamento Interior Depositado']
+    },
+    {
+      phase: 3,
+      title: 'Capacitación a Liderazgo',
+      icon: 'Users',
+      desc: 'Capacitamos de forma directa a tus gerentes de planta, coordinadores de RH y supervisores en el levantamiento correcto de actas administrativas, rescisiones y manejo de quejas.',
+      deliverables: ['Taller de Actas Administrativas', 'Protocolo NOM-035 Activado', 'Manual de Despidos sin Conflicto']
+    },
+    {
+      phase: 4,
+      title: 'Defensa Activa SCA',
+      icon: 'Shield',
+      desc: 'Asignamos un equipo permanente para la atención inmediata de citatorios prejudiciales, inspecciones de la STPS y defensa estratégica ante Tribunales Laborales.',
+      deliverables: ['Cobertura de Citatorios 24/7', 'Representación en Juicios', 'Garantía de Paz Laboral']
+    }
+  ];
+
+  // Quiz Handling
+  const handleQuizAnswer = (questionId, value, weight) => {
+    const nextAnswers = { ...quizAnswers, [questionId]: { value, weight } };
+    setQuizAnswers(nextAnswers);
+
+    if (quizStep < industry.quiz.length) {
+      setQuizStep(prev => prev + 1);
+    }
+  };
+
+  const calculateQuizResult = () => {
+    let baseScore = 100;
+    industry.quiz.forEach(q => {
+      const ans = quizAnswers[q.id];
+      if (ans && ans.value === 'No') {
+        baseScore -= q.weight;
+      }
+    });
+    setQuizScore(baseScore);
+    setQuizStep(4); // Show results
+  };
+
+  useEffect(() => {
+    if (quizStep === industry.quiz.length && quizStep > 0) {
+      calculateQuizResult();
+    }
+  }, [quizStep]);
+
+  // Quiz output calculations
+  let quizRiskLevel = 'Bajo';
+  let quizRiskColor = 'var(--color-success)';
+  if (quizScore <= 35) {
+    quizRiskLevel = 'Crítico';
+    quizRiskColor = 'var(--color-error)';
+  } else if (quizScore <= 70) {
+    quizRiskLevel = 'Moderado';
+    quizRiskColor = '#F59E0B'; // yellow
+  }
+
+  const quizWhatsappText = `Hola,%20realicé%20el%20test%20de%20riesgo%20para%20${industry.title}.%20Mi%20nivel%20de%20cumplimiento%20salió%20en%20${quizScore}%%20(Riesgo:%20${quizRiskLevel}).%20Deseo%20conocer%20cómo%20blindar%20mi%20empresa.`;
 
   return (
     <>
-      {/* ── Split Hero ── */}
+      {/* ── Overhauled Hero with Interactive Compliance Dashboard ── */}
       <section className="inddet-hero" style={{ '--accent': industry.color }}>
         <div className="inddet-hero__bg-shapes" aria-hidden="true">
           <div className="inddet-hero__shape inddet-hero__shape--1" />
@@ -91,7 +180,7 @@ export default function IndustriaDetailPage() {
 
             <div className="inddet-hero__badge">
               <LucideIcon name={industry.icon} size={16} strokeWidth={2} />
-              {industry.title}
+              Industria {industry.title}
             </div>
 
             <h1 className="inddet-hero__title">
@@ -108,47 +197,167 @@ export default function IndustriaDetailPage() {
                 className="inddet-hero__cta-primary"
               >
                 <MessageCircle size={20} strokeWidth={2} />
-                Asesoría Gratuita
+                Asesoría Inmediata
               </a>
               <a href="#desafios" className="inddet-hero__cta-secondary">
-                Ver Desafíos
+                Ver Desafíos Críticos
                 <ArrowRight size={16} strokeWidth={2} />
               </a>
             </div>
           </div>
 
+          {/* Interactive Compliance Dashboard Widget */}
           <div className="inddet-hero__visual">
-            <div className="inddet-hero__icon-display">
-              <div className="inddet-hero__icon-ring inddet-hero__icon-ring--outer" />
-              <div className="inddet-hero__icon-ring inddet-hero__icon-ring--inner" />
-              <div className="inddet-hero__icon-center">
-                <LucideIcon name={industry.icon} size={64} strokeWidth={1} />
+            <div className="dashboard-widget">
+              <div className="dashboard-widget__header">
+                <div className="dashboard-widget__header-dots">
+                  <span className="dot-red" />
+                  <span className="dot-yellow" />
+                  <span className="dot-green" />
+                </div>
+                <div className="dashboard-widget__header-title">
+                  <Activity size={12} />
+                  SCA Legal Monitor — {industry.title}
+                </div>
+                <span className="status-live-badge">En Vivo</span>
               </div>
-            </div>
 
-            <div className="inddet-hero__float-stat inddet-hero__float-stat--1">
-              <span className="inddet-hero__float-value">{industry.stats.empresas}</span>
-              <span className="inddet-hero__float-label">Empresas</span>
-            </div>
-            <div className="inddet-hero__float-stat inddet-hero__float-stat--2">
-              <span className="inddet-hero__float-value">{industry.stats.casos}</span>
-              <span className="inddet-hero__float-label">Casos</span>
-            </div>
-            <div className="inddet-hero__float-stat inddet-hero__float-stat--3">
-              <span className="inddet-hero__float-value">{industry.stats.ahorro}</span>
-              <span className="inddet-hero__float-label">Ahorro Anual</span>
+              {/* Tabs list */}
+              <div className="dashboard-widget__tabs">
+                <button
+                  className={`widget-tab-btn ${dashboardTab === 'stps' ? 'is-active' : ''}`}
+                  onClick={() => setDashboardTab('stps')}
+                >
+                  Auditoría STPS
+                </button>
+                <button
+                  className={`widget-tab-btn ${dashboardTab === 'litigation' ? 'is-active' : ''}`}
+                  onClick={() => setDashboardTab('litigation')}
+                >
+                  Costos de Litigio
+                </button>
+                <button
+                  className={`widget-tab-btn ${dashboardTab === 'contracts' ? 'is-active' : ''}`}
+                  onClick={() => setDashboardTab('contracts')}
+                >
+                  Expedientes LFT
+                </button>
+              </div>
+
+              {/* Tab Contents */}
+              <div className="dashboard-widget__body">
+                {dashboardTab === 'stps' && (
+                  <div className="tab-pane">
+                    <div className="progress-item">
+                      <div className="progress-meta">
+                        <span>REPSE Proveedores</span>
+                        <span className="text-success">98% Seguro</span>
+                      </div>
+                      <div className="progress-bar"><div className="progress-fill fill-green" style={{ width: '98%' }} /></div>
+                    </div>
+                    <div className="progress-item">
+                      <div className="progress-meta">
+                        <span>Evaluaciones NOM-035</span>
+                        <span className="text-warn">50% Bajo Riesgo</span>
+                      </div>
+                      <div className="progress-bar"><div className="progress-fill fill-yellow" style={{ width: '50%' }} /></div>
+                    </div>
+                    <div className="progress-item">
+                      <div className="progress-meta">
+                        <span>Seguridad e Higiene</span>
+                        <span className="text-danger">35% Crítico</span>
+                      </div>
+                      <div className="progress-bar"><div className="progress-fill fill-red" style={{ width: '35%' }} /></div>
+                    </div>
+                    <div className="audit-alert-box">
+                      <AlertTriangle size={15} />
+                      <span>SCA Alerta: Requiere revisión urgente en actas de EPP para evitar multas federales.</span>
+                    </div>
+                  </div>
+                )}
+
+                {dashboardTab === 'litigation' && (
+                  <div className="tab-pane">
+                    <div className="chart-preview">
+                      <div className="chart-meta">
+                        <span>Costo de Demandas Acumuladas</span>
+                        <span className="chart-savings">-75% Previsto</span>
+                      </div>
+                      <div className="chart-svg-container">
+                        <svg viewBox="0 0 100 40" className="chart-svg">
+                          {/* Grid lines */}
+                          <line x1="0" y1="10" x2="100" y2="10" stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" />
+                          <line x1="0" y1="25" x2="100" y2="25" stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" />
+                          {/* Path 1: Sin SCA */}
+                          <path d="M0,35 Q20,38 40,20 T80,5 T100,2" fill="none" stroke="var(--color-error)" strokeWidth="1.5" strokeDasharray="3,3" />
+                          {/* Path 2: Con SCA */}
+                          <path d="M0,35 Q20,32 40,28 T80,33 T100,38" fill="none" stroke="var(--color-success)" strokeWidth="2" />
+                        </svg>
+                      </div>
+                      <div className="chart-legend">
+                        <span className="leg-item"><span className="leg-dot bg-red" />Sin SCA</span>
+                        <span className="leg-item"><span className="leg-dot bg-green" />Con Blindaje SCA</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {dashboardTab === 'contracts' && (
+                  <div className="tab-pane">
+                    <div className="folder-status-grid">
+                      <div className="folder-item">
+                        <span className="folder-icon font-success"><CheckCircle2 size={16} /></span>
+                        <div>
+                          <h5 className="folder-title">Contratos Individuales</h5>
+                          <span className="folder-desc">100% Actualizados LFT</span>
+                        </div>
+                      </div>
+                      <div className="folder-item">
+                        <span className="folder-icon font-success"><CheckCircle2 size={16} /></span>
+                        <div>
+                          <h5 className="folder-title">Convenios de IP</h5>
+                          <span className="folder-desc">Firmados con desarrolladores</span>
+                        </div>
+                      </div>
+                      <div className="folder-item">
+                        <span className="folder-icon font-danger"><X size={16} /></span>
+                        <div>
+                          <h5 className="folder-title">Actas de Rescisión</h5>
+                          <span className="folder-desc">Falta firma de testigos</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Floating metrics inside hero widget */}
+              <div className="dashboard-widget__footer">
+                <div className="mini-stat">
+                  <span className="mini-stat-val">{industry.stats.casos}</span>
+                  <span className="mini-stat-lbl">Casos Éxito</span>
+                </div>
+                <div className="mini-stat">
+                  <span className="mini-stat-val">{industry.stats.empresas}</span>
+                  <span className="mini-stat-lbl">Empresas</span>
+                </div>
+                <div className="mini-stat">
+                  <span className="mini-stat-val text-gold">{industry.stats.ahorro}</span>
+                  <span className="mini-stat-lbl">Ahorro Prom.</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Floating TOC ── */}
+      {/* ── Sleek Navigation Sidebar (TOC) ── */}
       <aside className="inddet-toc" ref={progressRef}>
         <div className="inddet-toc__progress" />
         <ul className="inddet-toc__list">
           {tocItems.map((item, i) => (
             <li key={i} className={`inddet-toc__item ${activeSection === i ? 'is-active' : ''}`}>
-              <a href={`#${['desafios', 'servicios-rel', 'por-que'][i]}`}>
+              <a href={`#${['desafios', 'cronograma', 'evaluacion', 'servicios-rel', 'faq'][i]}`}>
                 <span className="inddet-toc__dot" />
                 {item}
               </a>
@@ -157,51 +366,251 @@ export default function IndustriaDetailPage() {
         </ul>
       </aside>
 
-      {/* ── Challenges ── */}
+      {/* ── Section 1: Challenges & Detailed Case Study ── */}
       <section
         className="section inddet-challenges"
         id="desafios"
-        ref={(el) => { challengesRef.current = el; sectionsRef.current[0] = el; }}
+        ref={(el) => { challengesReveal.current = el; sectionsRef.current[0] = el; }}
       >
         <div className="container">
           <div className="inddet-challenges__header reveal">
-            <span className="section-label">Desafíos Legales</span>
+            <span className="section-label">Desafíos & Soluciones</span>
             <h2 className="section-title">
-              Retos de la industria de <span className="text-accent">{industry.title}</span>
+              Retos Críticos del Sector <span className="text-accent">{industry.title}</span>
             </h2>
             <p className="section-subtitle">
-              Estos son los desafíos legales más comunes que enfrentan las empresas de tu sector. Los conocemos bien porque los resolvemos todos los días.
+              Analiza los mayores riesgos operativos de tu sector y descubre cómo los hemos solucionado en casos reales.
             </p>
           </div>
 
-          <div className="inddet-challenges__grid reveal">
-            {industry.challenges.map((ch, i) => (
-              <div className="inddet-challenge" key={i} style={{ '--delay': `${i * 0.1}s` }}>
-                <span className="inddet-challenge__num" aria-hidden="true">0{i + 1}</span>
-                <div className="inddet-challenge__icon">
-                  <LucideIcon name={ch.icon} size={24} strokeWidth={1.5} />
-                </div>
-                <h3 className="inddet-challenge__title">{ch.title}</h3>
-                <p className="inddet-challenge__desc">{ch.desc}</p>
-                <div className="inddet-challenge__accent" aria-hidden="true" />
+          <div className="inddet-challenges__layout reveal">
+            {/* Left: Interactive list of challenges */}
+            <div className="inddet-challenges__list">
+              {industry.challenges.map((ch, i) => (
+                <button
+                  key={i}
+                  className={`challenge-tab-btn ${activeChallenge === i ? 'is-active' : ''}`}
+                  onClick={() => setActiveChallenge(i)}
+                >
+                  <span className="challenge-num">0{i + 1}</span>
+                  <div className="challenge-btn-content">
+                    <h4 className="challenge-title-text">{ch.title}</h4>
+                    <p className="challenge-desc-short">{ch.desc}</p>
+                  </div>
+                  <ChevronRight size={18} className="challenge-arrow" />
+                </button>
+              ))}
+            </div>
+
+            {/* Right: Detailed Case Study Box */}
+            <div className="case-study-box">
+              <div className="case-study-badge">
+                <Award size={13} />
+                Caso de Éxito Documentado
               </div>
-            ))}
+              <h3 className="case-study-title">{industry.caseStudy.title}</h3>
+              
+              <div className="case-study-grid">
+                <div className="case-study-part">
+                  <h4 className="case-study-part-title">
+                    <span className="part-dot bg-red" />
+                    El Desafío
+                  </h4>
+                  <p className="case-study-part-text">{industry.caseStudy.challenge}</p>
+                </div>
+
+                <div className="case-study-part">
+                  <h4 className="case-study-part-title">
+                    <span className="part-dot bg-blue" />
+                    La Estrategia SCA
+                  </h4>
+                  <p className="case-study-part-text">{industry.caseStudy.strategy}</p>
+                </div>
+
+                <div className="case-study-part highlight">
+                  <h4 className="case-study-part-title">
+                    <span className="part-dot bg-green" />
+                    El Resultado
+                  </h4>
+                  <p className="case-study-part-text">{industry.caseStudy.result}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Related Services ── */}
+      {/* ── Section 2: Interactive Shielding Timeline ── */}
       <section
-        className="section section--cream inddet-services"
+        className="section section--white inddet-timeline-sec"
+        id="cronograma"
+        ref={(el) => { sectionsRef.current[1] = el; }}
+      >
+        <div className="container">
+          <div className="inddet-timeline__header reveal">
+            <span className="section-label">Metodología de Trabajo</span>
+            <h2 className="section-title">Cronograma de Blindaje Corporativo</h2>
+            <p className="section-subtitle">
+              Una intervención estructurada en 4 fases diseñadas para llevar a tu empresa de una exposición total a una protección absoluta.
+            </p>
+          </div>
+
+          <div className="inddet-timeline__wrapper reveal">
+            <div className="timeline-steps">
+              {shieldingPhases.map((phase) => (
+                <button
+                  key={phase.phase}
+                  className={`timeline-step-btn ${activePhase === phase.phase ? 'is-active' : ''}`}
+                  onClick={() => setActivePhase(phase.phase)}
+                >
+                  <div className="step-number">{phase.phase}</div>
+                  <span className="step-title">{phase.title}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="timeline-content-card">
+              <div className="timeline-card__icon-wrap">
+                <LucideIcon name={shieldingPhases[activePhase - 1].icon} size={28} strokeWidth={1.5} />
+              </div>
+              <div className="timeline-card__details">
+                <span className="phase-lbl">Fase {activePhase}</span>
+                <h3 className="phase-title">{shieldingPhases[activePhase - 1].title}</h3>
+                <p className="phase-desc">{shieldingPhases[activePhase - 1].desc}</p>
+                
+                <h4 className="deliverables-title">Entregables Clave:</h4>
+                <ul className="deliverables-list">
+                  {shieldingPhases[activePhase - 1].deliverables.map((del, index) => (
+                    <li key={index}>
+                      <CheckCircle2 size={15} className="deliverable-check" />
+                      {del}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 3: Custom Risk Quiz (Interactive Diagnostic) ── */}
+      <section
+        className="section section--cream inddet-quiz-sec"
+        id="evaluacion"
+        ref={(el) => { quizReveal.current = el; sectionsRef.current[2] = el; }}
+      >
+        <div className="container">
+          <div className="quiz-container reveal">
+            {quizStep === 0 && (
+              <div className="quiz-start">
+                <span className="quiz-pre">Diagnóstico Rápido</span>
+                <h2 className="quiz-heading">Autoevaluación de Riesgos Laborales en {industry.title}</h2>
+                <p className="quiz-lead">
+                  Responde 3 preguntas estructuradas específicamente para los riesgos legales vigentes del sector de {industry.title} en México. Al terminar, obtendrás un dictamen inmediato y tu puntaje de blindaje laboral.
+                </p>
+                <button className="btn btn--primary" onClick={() => setQuizStep(1)}>
+                  Comenzar Evaluación
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            )}
+
+            {quizStep > 0 && quizStep <= industry.quiz.length && (
+              <div className="quiz-question-view">
+                <div className="quiz-progress-bar">
+                  <div
+                    className="quiz-progress-fill"
+                    style={{ width: `${(quizStep / industry.quiz.length) * 100}%` }}
+                  />
+                </div>
+                
+                <span className="question-count">Pregunta {quizStep} de {industry.quiz.length}</span>
+                <h3 className="question-text">{industry.quiz[quizStep - 1].question}</h3>
+
+                <div className="quiz-options">
+                  <button
+                    className="quiz-option-btn option-yes"
+                    onClick={() => handleQuizAnswer(industry.quiz[quizStep - 1].id, 'Sí', industry.quiz[quizStep - 1].weight)}
+                  >
+                    <Check size={20} />
+                    <span>Sí, contamos con esto totalmente</span>
+                  </button>
+                  <button
+                    className="quiz-option-btn option-no"
+                    onClick={() => handleQuizAnswer(industry.quiz[quizStep - 1].id, 'No', industry.quiz[quizStep - 1].weight)}
+                  >
+                    <X size={20} />
+                    <span>No cuento con ello / Lo desconozco</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {quizStep === 4 && (
+              <div className="quiz-results">
+                <div className="results-badge" style={{ background: quizRiskColor }}>
+                  Dictamen de Cumplimiento: {quizScore}%
+                </div>
+                <h3 className="results-title">Nivel de Riesgo Corporativo: <span style={{ color: quizRiskColor }}>{quizRiskLevel}</span></h3>
+                
+                <p className="results-desc">
+                  {quizScore === 100 
+                    ? "¡Felicidades! Tu empresa presenta un cumplimiento completo en las áreas auditadas. Te sugerimos auditorías semestrales preventivas para mantenerte alineado a reformas." 
+                    : "Hemos detectado brechas de cumplimiento significativas que exponen a tu empresa a posibles multas de la STPS e indemnizaciones costosas. Te aconsejamos estructurar un plan de blindaje urgente."
+                  }
+                </p>
+
+                <div className="results-breakdown">
+                  <h4 className="breakdown-title">Brechas Detectadas:</h4>
+                  <ul className="breakdown-list">
+                    {industry.quiz.map(q => {
+                      const ans = quizAnswers[q.id];
+                      return (
+                        <li key={q.id} className={ans?.value === 'Sí' ? 'ok' : 'fail'}>
+                          {ans?.value === 'Sí' 
+                            ? <CheckCircle2 size={16} className="text-success" /> 
+                            : <AlertTriangle size={16} className="text-danger" />
+                          }
+                          <span>{q.question.substring(0, 75)}... <strong>({ans?.value === 'Sí' ? 'Cumplido' : 'Pendiente'})</strong></span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                <div className="results-actions">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn--primary"
+                  >
+                    <MessageCircle size={18} />
+                    Consultar Resultados con un Abogado
+                  </a>
+                  <button className="btn btn--outline" onClick={() => setQuizStep(0)}>
+                    <RefreshCw size={16} />
+                    Reiniciar Test
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: Related Services ── */}
+      <section
+        className="section inddet-services"
         id="servicios-rel"
-        ref={(el) => { servicesRef.current = el; sectionsRef.current[1] = el; }}
+        ref={(el) => { servicesReveal.current = el; sectionsRef.current[3] = el; }}
       >
         <div className="container">
           <div className="inddet-services__header reveal">
-            <span className="section-label">Servicios</span>
-            <h2 className="section-title">Servicios Relacionados</h2>
+            <span className="section-label">Portafolio</span>
+            <h2 className="section-title">Servicios Relacionados para {industry.title}</h2>
             <p className="section-subtitle">
-              Estos son los servicios que más aplican a la industria de {industry.title}. Hacé click para conocer los detalles.
+              Estos son los servicios legales específicos del despacho que más demanda y requiere tu sector.
             </p>
           </div>
 
@@ -218,51 +627,61 @@ export default function IndustriaDetailPage() {
               </Link>
             ))}
             <Link to="/servicios" className="inddet-service-chip inddet-service-chip--all">
-              <span>Ver Todos los Servicios</span>
+              <span>Ver Catálogo Completo</span>
               <ArrowRight size={16} strokeWidth={2} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Why Us ── */}
+      {/* ── Section 5: Sector FAQ Accordion ── */}
       <section
-        className="section inddet-why"
-        id="por-que"
-        ref={(el) => { whyRef.current = el; sectionsRef.current[2] = el; }}
+        className="section section--white inddet-faq-sec"
+        id="faq"
+        ref={(el) => { sectionsRef.current[4] = el; }}
       >
         <div className="container">
-          <div className="inddet-why__layout reveal">
-            <div className="inddet-why__text">
-              <span className="section-label">Diferencial</span>
-              <h2 className="section-title">¿Por qué elegirnos para {industry.title}?</h2>
-              <p className="section-subtitle">
-                No somos un despacho generalista. Entendemos los matices de tu industria y hablamos tu mismo idioma operativo.
-              </p>
-            </div>
-            <div className="inddet-why__cards">
-              {reasons.map((r, i) => (
-                <div className="inddet-why__card" key={i} style={{ '--delay': `${i * 0.12}s` }}>
-                  <div className="inddet-why__card-icon">
-                    <r.Icon size={24} strokeWidth={1.5} />
+          <div className="inddet-faq__header reveal">
+            <span className="section-label">Resolución de Dudas</span>
+            <h2 className="section-title">Preguntas Frecuentes del Sector</h2>
+            <p className="section-subtitle">
+              Respuestas rápidas redactadas por nuestros especialistas sobre los conflictos más usuales de {industry.title}.
+            </p>
+          </div>
+
+          <div className="inddet-faq__accordion reveal">
+            {industry.faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`faq-accordion-item ${openFaq === idx ? 'is-open' : ''}`}
+              >
+                <button
+                  type="button"
+                  className="faq-accordion-trigger"
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                >
+                  <span className="faq-question">{faq.q}</span>
+                  <span className="faq-icon-toggle">
+                    <span className="icon-bar icon-bar--h" />
+                    <span className="icon-bar icon-bar--v" />
+                  </span>
+                </button>
+                <div className="faq-accordion-content">
+                  <div className="faq-accordion-content-inner">
+                    <p>{faq.a}</p>
                   </div>
-                  <div>
-                    <h4 className="inddet-why__card-title">{r.title}</h4>
-                    <p className="inddet-why__card-desc">{r.desc}</p>
-                  </div>
-                  <CheckCircle2 size={20} strokeWidth={2} className="inddet-why__card-check" />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Other Industries ── */}
+      {/* ── Other Industries Carousel ── */}
       <section className="section section--cream inddet-others">
         <div className="container">
           <div className="inddet-others__header">
-            <h3 className="inddet-others__title">Otras Industrias</h3>
+            <h3 className="inddet-others__title">Otras Especialidades Sectoriales</h3>
           </div>
           <div className="inddet-others__grid">
             {otherIndustries.map((ind) => (
@@ -278,7 +697,7 @@ export default function IndustriaDetailPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ── Premium Call To Action ── */}
       <section className="inddet-cta" style={{ '--accent': industry.color }}>
         <div className="inddet-cta__pattern" aria-hidden="true" />
         <div className="container inddet-cta__inner">
@@ -287,10 +706,10 @@ export default function IndustriaDetailPage() {
             {industry.title}
           </div>
           <h2 className="inddet-cta__title">
-            ¿Listo para proteger tu empresa de {industry.title.toLowerCase()}?
+            ¿Listo para blindar legalmente tu operación en {industry.title.toLowerCase()}?
           </h2>
           <p className="inddet-cta__subtitle">
-            Primera asesoría gratuita y sin compromiso. Conocemos tu industria y sabemos cómo ayudarte.
+            Evita multas e indemnizaciones infladas. Agenda hoy una primera sesión de consultoría estratégica gratuita y sin compromiso.
           </p>
           <div className="inddet-cta__actions">
             <a
@@ -300,10 +719,10 @@ export default function IndustriaDetailPage() {
               className="inddet-cta__btn inddet-cta__btn--primary"
             >
               <MessageCircle size={20} strokeWidth={2} />
-              Escríbenos por WhatsApp
+              Hablar con un Abogado
             </a>
             <Link to="/contacto" className="inddet-cta__btn inddet-cta__btn--outline">
-              Enviar Mensaje
+              Enviar Correo
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
           </div>
