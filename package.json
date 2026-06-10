@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@wix/blog": "^1.0.614",
+    "@wix/data": "^1.0.472",
+    "@wix/sdk": "^1.21.12",
     "lucide-react": "^1.8.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

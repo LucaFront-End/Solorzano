@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useWixBlog } from '../hooks/useWixBlog';
 import {
   BookOpen, FileText, Users, ArrowUpRight, ArrowRight,
   Sparkles, MessageCircle, Star, Zap, GraduationCap,
@@ -10,63 +11,7 @@ import {
 } from 'lucide-react';
 import './ComunidadPage.css';
 
-// Centralized Blog Posts for density (6 items)
-const blogPosts = [
-  {
-    title: 'Semana laboral de 40 horas en México: qué debe preparar RRHH',
-    excerpt: 'En días recientes se reactivó con fuerza la conversación sobre la reducción de la jornada laboral a 40 horas en México. Te enseñamos a preparar la transición operativa de turnos sin afectar la productividad.',
-    image: 'https://static.wixstatic.com/media/65f9b2_d41d9d70aa2f44898adbbeddd724a11e~mv2.png/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/65f9b2_d41d9d70aa2f44898adbbeddd724a11e~mv2.png',
-    link: 'https://www.dsc.mx/post/semana-laboral-de-40-horas-en-m%C3%A9xico-qu%C3%A9-debe-preparar-rrhh-sin-perder-el-control-operativo',
-    date: 'Abril 2026',
-    category: 'reformas',
-    readTime: '6 min read'
-  },
-  {
-    title: 'La Reducción de la Jornada Laboral: Cómo afrontarla como patrones',
-    excerpt: 'La reforma de reducción laboral transformará la operación de todas las empresas. Analizamos las cláusulas de jornada mixta y nocturna para evitar recargos millonarios.',
-    image: 'https://static.wixstatic.com/media/65f9b2_dc71532cd55e466abbf9208799a46382~mv2.png/v1/fill/w_600,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/65f9b2_dc71532cd55e466abbf9208799a46382~mv2.png',
-    link: 'https://www.dsc.mx/post/la-reducci%C3%B3n-de-la-jornada-laboral-en-m%C3%A9xico-c%C3%B3mo-debemos-afrontarla-como-patrones-o-profesionales',
-    date: 'Diciembre 2025',
-    category: 'reformas',
-    readTime: '8 min read'
-  },
-  {
-    title: 'Guía Completa para el Desahogo de Inspecciones de la STPS',
-    excerpt: '¿Qué hacer si un inspector federal toca tu puerta? Te compartimos los puntos críticos de papelería, seguridad e higiene y la NOM-035 que debes tener al día.',
-    image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80',
-    link: 'https://www.dsc.mx/blog',
-    date: 'Enero 2026',
-    category: 'defensa',
-    readTime: '10 min read'
-  },
-  {
-    title: 'Estrategias de Conciliación Prejudicial ante el CCL',
-    excerpt: 'El Centro de Conciliación es el filtro antes de un juicio largo. Descubre cómo negociar convenios justos de rescisión laboral sin ceder ante demandas extorsivas.',
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80',
-    link: 'https://www.dsc.mx/blog',
-    date: 'Febrero 2026',
-    category: 'defensa',
-    readTime: '5 min read'
-  },
-  {
-    title: 'Implementación de la NOM-037 de Teletrabajo en Startups',
-    excerpt: 'Estructuración de políticas de home office, reembolsos justos de luz e internet, y la prevención del estrés ergonómico según el marco regulatorio vigente.',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-    link: 'https://www.dsc.mx/blog',
-    date: 'Marzo 2026',
-    category: 'rh',
-    readTime: '7 min read'
-  },
-  {
-    title: 'Cálculo de Finiquitos e Indemnizaciones conforme a la LFT',
-    excerpt: 'Diferencia procesal entre renuncia voluntaria y despido injustificado. Cómo calcular los 3 meses de salario constitucional y la prima de antigüedad.',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
-    link: 'https://www.dsc.mx/blog',
-    date: 'Abril 2026',
-    category: 'rh',
-    readTime: '12 min read'
-  }
-];
+
 
 const marqueeItems = [
   'Cursos en Vivo',
@@ -89,10 +34,19 @@ export default function ComunidadPage() {
   
   const [heroVisible, setHeroVisible] = useState(false);
 
-  // Search & Filter State
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('todos');
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+
+  // Dynamic blog posts from Wix
+  const { posts: wixPosts, loading: blogLoading } = useWixBlog({ limit: 12 });
+
+  // Filter posts client-side
+  const filteredPosts = wixPosts.filter(post => {
+    const matchesSearch = !searchQuery ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
+  });
 
   // Resource Downloads States
   const [downloadProgress, setDownloadProgress] = useState({});
@@ -360,27 +314,31 @@ export default function ComunidadPage() {
 
           {/* Grid of posts */}
           <div className="com-blog__grid">
-            {filteredPosts.map((post, i) => (
-              <a
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
+            {blogLoading && (
+              <div className="com-blog__loading">
+                <div className="com-blog__spinner" />
+                <p>Cargando publicaciones...</p>
+              </div>
+            )}
+            {!blogLoading && filteredPosts.map((post, i) => (
+              <Link
+                to={`/blog/${post.slug}`}
                 className={`com-blog__card reveal ${i === 0 ? 'com-blog__card--featured' : ''}`}
-                key={post.title}
+                key={post.id}
                 style={{ '--delay': `${i * 0.08}s` }}
               >
                 <div className="com-blog__card-img">
-                  <img src={post.image} alt={post.title} loading="lazy" />
+                  {post.coverImage
+                    ? <img src={post.coverImage} alt={post.title} loading="lazy" />
+                    : <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1f2845 0%, #2d3c6e 100%)' }} />
+                  }
                   <div className="com-blog__card-overlay" />
                   <span className="com-blog__card-date">
                     <Clock size={12} strokeWidth={2} />
-                    {post.date}
+                    {post.publishedDate}
                   </span>
                 </div>
                 <div className="com-blog__card-body">
-                  <div className="card-category-tag">
-                    {post.category === 'reformas' ? 'Reformas LFT' : post.category === 'rh' ? 'Recursos Humanos' : 'Defensa Legal'}
-                  </div>
                   <h3 className="com-blog__card-title">{post.title}</h3>
                   <p className="com-blog__card-excerpt">{post.excerpt}</p>
                   <div className="com-blog__card-footer">
@@ -388,16 +346,15 @@ export default function ComunidadPage() {
                       Leer artículo
                       <ArrowUpRight size={16} strokeWidth={2} />
                     </span>
-                    <span className="read-time">{post.readTime}</span>
+                    <span className="read-time">{post.readingTime}</span>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
-            {filteredPosts.length === 0 && (
+            {!blogLoading && filteredPosts.length === 0 && (
               <div className="no-posts-found">
-                <AlertTriangle size={36} />
                 <h3>No se encontraron publicaciones</h3>
-                <p>Prueba buscando con palabras clave diferentes o cambiando la categoría seleccionada.</p>
+                <p>Prueba buscando con palabras clave diferentes.</p>
               </div>
             )}
           </div>

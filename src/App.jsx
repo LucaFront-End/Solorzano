@@ -24,6 +24,7 @@ import TicketsDiligenciasPage from './pages/TicketsDiligenciasPage';
 import IndustriasPage from './pages/IndustriasPage';
 import IndustriaDetailPage from './pages/IndustriaDetailPage';
 import ComunidadPage from './pages/ComunidadPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 function HomePage() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
         <Route path="/industrias" element={<IndustriasPage />} />
         <Route path="/industrias/:slug" element={<IndustriaDetailPage />} />
         <Route path="/comunidad" element={<ComunidadPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />

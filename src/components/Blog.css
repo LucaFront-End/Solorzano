@@ -5,7 +5,7 @@
 
 .blog__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
 }
 
@@ -18,6 +18,7 @@
   transition: all var(--transition-medium);
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 }
 
 .blog__card:hover {
@@ -29,6 +30,7 @@
   position: relative;
   height: 220px;
   overflow: hidden;
+  background: var(--color-bg-cream);
 }
 
 .blog__card-img img {
@@ -36,6 +38,12 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s var(--ease-out-expo);
+}
+
+.blog__card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-bg-cream) 0%, #dde3ed 100%);
 }
 
 .blog__card:hover .blog__card-img img {
@@ -53,6 +61,7 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: #fff;
+  text-transform: capitalize;
 }
 
 .blog__card-body {
@@ -63,14 +72,14 @@
 }
 
 .blog__card-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--color-text-dark);
   margin-bottom: 12px;
   line-height: 1.4;
 }
 
 .blog__card-excerpt {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--color-text-body);
   line-height: 1.7;
   margin-bottom: 20px;
@@ -97,6 +106,47 @@
   color: var(--color-primary);
 }
 
+/* Loading */
+.blog__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 0;
+  color: var(--color-text-muted);
+}
+
+.blog__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border-light);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: blog-spin 0.8s linear infinite;
+}
+
+@keyframes blog-spin {
+  to { transform: rotate(360deg); }
+}
+
+.blog__error {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-text-muted);
+}
+
+.blog__footer {
+  text-align: center;
+  margin-top: 48px;
+}
+
+@media (max-width: 1024px) {
+  .blog__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .blog__grid {
     grid-template-columns: 1fr;
@@ -104,6 +154,7 @@
   }
 
   .blog__card-img {
-    height: 180px;
+    height: 200px;
   }
 }
+

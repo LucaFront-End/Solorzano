@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getServiceBySlug, cmsServices } from '../data/cmsServices';
+import { useWixServices } from '../hooks/useWixServices';
 import { siteConfig } from '../data/content';
 import LucideIcon from './LucideIcon';
 import './CMSServiceDetail.css';
@@ -8,7 +8,8 @@ import './CMSServiceDetail.css';
 export default function CMSServiceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const service = getServiceBySlug(slug);
+  const { services, loading, error, getBySlug } = useWixServices();
+  const service = getBySlug(slug);
 
   // Dynamic page title
   useEffect(() => {
@@ -23,6 +24,16 @@ export default function CMSServiceDetail() {
       document.title = `${siteConfig.name} — Derecho Laboral y Mercantil`;
     };
   }, [service]);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, paddingTop: 120 }}>
+        <div style={{ width: 40, height: 40, border: '3px solid #e2e8f0', borderTopColor: 'var(--color-primary)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+        <p style={{ color: 'var(--color-text-muted)' }}>Cargando servicio...</p>
+      </div>
+    );
+  }
 
   // 404
   if (!service) {
@@ -95,7 +106,7 @@ export default function CMSServiceDetail() {
   };
 
   // Get related services (same category, exclude current)
-  const related = cmsServices
+  const related = services
     .filter(s => s.category === service.category && s.slug !== service.slug && s.isComplete && s.appearsOnPage)
     .slice(0, 3);
 
