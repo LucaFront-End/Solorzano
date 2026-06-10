@@ -1,22 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { siteConfig, navLinks } from '../data/content';
-import { ChevronDown } from 'lucide-react';
+import { cmsCategories } from '../data/cmsServices';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import LucideIcon from './LucideIcon';
 import './Navbar.css';
 
-const servicesDropdown = {
-  laboral: [
-    { label: 'Contratos Laborales', href: '/servicios/contratos', desc: 'Contratos individuales, colectivos y reglamentos' },
-    { label: 'Defensa ante Demandas', href: '/servicios/demandas', desc: 'Defensa patronal y representación judicial' },
-    { label: 'Inspecciones STPS', href: '/servicios/inspecciones-laborales', desc: 'Acompañamiento y cumplimiento normativo' }
-  ],
-  mercantil: [
-    { label: 'Gestión Corporativa', href: '/servicios/gestion-corporativa', desc: 'Actas de asamblea y libros societarios' },
-    { label: 'Contratos Comerciales', href: '/servicios/asesoria-documental', desc: 'Compraventa, arrendamiento y NDAs' },
-    { label: 'Representación Legal', href: '/servicios/representacion-legal', desc: 'Litigio civil y cobro de pagarés' },
-    { label: 'Mediación y Negociación', href: '/servicios/mediacion-negociacion', desc: 'Solución alternativa de conflictos' }
-  ]
-};
+// Build dropdown data from CMS: 3 categories × 4 services + ver más
+const DROPDOWN_MAX_ITEMS = 4;
+const dropdownCategories = cmsCategories.map(cat => ({
+  category: cat.category,
+  icon: cat.icon,
+  items: cat.items.filter(s => s.isComplete).slice(0, DROPDOWN_MAX_ITEMS).map(s => ({
+    label: s.title,
+    href: `/servicios-derecho/${s.slug}`,
+    desc: s.excerpt ? s.excerpt.substring(0, 60) + (s.excerpt.length > 60 ? '…' : '') : '',
+  })),
+  totalCount: cat.items.length,
+  hasMore: cat.items.length > DROPDOWN_MAX_ITEMS,
+}));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -114,33 +116,35 @@ export default function Navbar() {
                   </button>
 
                   <div className={`navbar__mega-dropdown ${desktopDropdownOpen ? 'navbar__mega-dropdown--open' : ''}`}>
-                    <div className="navbar__dropdown-inner">
-                      <div className="navbar__dropdown-column">
-                        <h4 className="navbar__dropdown-title">Derecho Laboral</h4>
-                        <ul className="navbar__dropdown-list">
-                          {servicesDropdown.laboral.map((item) => (
-                            <li key={item.href}>
-                              <Link to={item.href} className="navbar__dropdown-link" onClick={() => setDesktopDropdownOpen(false)}>
-                                <span className="navbar__dropdown-link-title">{item.label}</span>
-                                <span className="navbar__dropdown-link-desc">{item.desc}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="navbar__dropdown-column">
-                        <h4 className="navbar__dropdown-title">Derecho Mercantil</h4>
-                        <ul className="navbar__dropdown-list">
-                          {servicesDropdown.mercantil.map((item) => (
-                            <li key={item.href}>
-                              <Link to={item.href} className="navbar__dropdown-link" onClick={() => setDesktopDropdownOpen(false)}>
-                                <span className="navbar__dropdown-link-title">{item.label}</span>
-                                <span className="navbar__dropdown-link-desc">{item.desc}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="navbar__dropdown-inner navbar__dropdown-inner--3col">
+                      {dropdownCategories.map((cat) => (
+                        <div className="navbar__dropdown-column" key={cat.category}>
+                          <h4 className="navbar__dropdown-title">
+                            <LucideIcon name={cat.icon} size={14} />
+                            {cat.category}
+                          </h4>
+                          <ul className="navbar__dropdown-list">
+                            {cat.items.map((item) => (
+                              <li key={item.href}>
+                                <Link to={item.href} className="navbar__dropdown-link" onClick={() => setDesktopDropdownOpen(false)}>
+                                  <span className="navbar__dropdown-link-title">{item.label}</span>
+                                  <span className="navbar__dropdown-link-desc">{item.desc}</span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                          {cat.hasMore && (
+                            <Link
+                              to="/servicios"
+                              className="navbar__dropdown-more"
+                              onClick={() => setDesktopDropdownOpen(false)}
+                            >
+                              Ver todos ({cat.totalCount})
+                              <ArrowRight size={12} strokeWidth={2.5} />
+                            </Link>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </li>
@@ -216,26 +220,25 @@ export default function Navbar() {
                   </button>
                   
                   <div className={`navbar__mobile-accordion ${mobileDropdownOpen ? 'navbar__mobile-accordion--open' : ''}`}>
-                    <div className="navbar__mobile-accordion-section">
-                      <span className="navbar__mobile-accordion-category">Derecho Laboral</span>
-                      <ul>
-                        {servicesDropdown.laboral.map((item) => (
-                          <li key={item.href}>
-                            <Link to={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="navbar__mobile-accordion-section">
-                      <span className="navbar__mobile-accordion-category">Derecho Mercantil</span>
-                      <ul>
-                        {servicesDropdown.mercantil.map((item) => (
-                          <li key={item.href}>
-                            <Link to={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {dropdownCategories.map((cat) => (
+                      <div className="navbar__mobile-accordion-section" key={cat.category}>
+                        <span className="navbar__mobile-accordion-category">{cat.category}</span>
+                        <ul>
+                          {cat.items.map((item) => (
+                            <li key={item.href}>
+                              <Link to={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
+                            </li>
+                          ))}
+                          {cat.hasMore && (
+                            <li>
+                              <Link to="/servicios" className="navbar__mobile-more" onClick={() => setMenuOpen(false)}>
+                                Ver más →
+                              </Link>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 </li>
               );
