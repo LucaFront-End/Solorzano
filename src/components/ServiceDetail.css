@@ -453,29 +453,35 @@
   }
 
   .service-detail__hero {
-    padding: 130px 0 60px; /* Offset 70px for mobile navbar */
+    padding: 120px 0 48px;
   }
 
   .service-detail__content {
-    padding: 60px 0;
+    padding: 48px 0;
   }
 
   .service-detail__sticky-card {
     padding: 24px 20px;
   }
 
+  .service-detail__nav-bar {
+    padding: 12px 0;
+    font-size: 0.82rem;
+  }
+
   .service-detail__nav-inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
   }
 
   .service-detail__footer-actions {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
 
   .service-detail__footer-actions .btn {
     width: 100%;
   }
 }
+

@@ -286,6 +286,44 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
 
 @media (max-width: 768px) {
   :root {
-    --section-padding: 70px;
+    --section-padding: 56px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .section-label {
+    font-size: 0.72rem;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+  
+  .section-label::before {
+    width: 20px;
+  }
+  
+  .section-title {
+    margin-bottom: 16px;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  
+  .btn {
+    padding: 13px 28px;
+    font-size: 0.88rem;
+    gap: 8px;
+  }
+  
+  h2 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+  }
+  
+  h3 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
   }
 }
+

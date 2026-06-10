@@ -168,16 +168,40 @@
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .cta-banner__inner {
-    padding: 80px 24px;
+    padding: 64px 20px;
+  }
+
+  .cta-banner__badge {
+    font-size: 0.72rem;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+  }
+
+  .cta-banner__title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    margin-bottom: 16px;
+  }
+
+  .cta-banner__subtitle {
+    font-size: 0.92rem;
+    margin-bottom: 32px;
   }
 
   .cta-banner__actions {
     flex-direction: column;
     width: 100%;
-    max-width: 360px;
+    max-width: 320px;
+    gap: 10px;
   }
 
   .cta-banner__btn {
     width: 100%;
+    padding: 16px 24px;
+    font-size: 0.92rem;
+  }
+  
+  .cta-banner__note {
+    font-size: 0.75rem;
   }
 }
+

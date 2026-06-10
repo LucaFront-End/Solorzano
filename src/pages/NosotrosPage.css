@@ -343,8 +343,133 @@
 }
 
 @media (max-width: 768px) {
-  .nos-values__grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-  .nos-stats-bar { margin-top: -20px; }
-  .nos-stats-bar__inner { padding: 24px; }
-  .nos-stat__value { font-size: 1.8rem; }
+  .nos-stats-bar {
+    margin-top: -20px;
+  }
+
+  .nos-stats-bar__inner {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .nos-stat {
+    padding: 0 20px;
+  }
+
+  .nos-stat__value {
+    font-size: 1.6rem;
+  }
+
+  .nos-stat__label {
+    font-size: 0.75rem;
+  }
+
+  .nos-method__header {
+    margin-bottom: 32px;
+  }
+
+  .nos-method__card {
+    padding: 32px 24px;
+    border-radius: var(--radius-lg);
+  }
+
+  .nos-method__card-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+  }
+
+  .nos-method__card-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .nos-method__card-desc {
+    font-size: 0.88rem;
+  }
+
+  .nos-method__grid {
+    margin-bottom: 32px;
+  }
+
+  .nos-method__quote {
+    font-size: 1rem;
+    padding: 24px 28px 24px 36px;
+  }
+
+  .nos-timeline__header {
+    margin-bottom: 32px;
+  }
+
+  .nos-timeline__track {
+    padding-left: 32px;
+  }
+
+  .nos-timeline__item {
+    padding-bottom: 36px;
+  }
+
+  .nos-timeline__dot {
+    left: -26px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .nos-timeline__year {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+  }
+
+  .nos-timeline__title {
+    font-size: 1.1rem;
+  }
+
+  .nos-timeline__desc {
+    font-size: 0.88rem;
+  }
+
+  .nos-values__header {
+    margin-bottom: 32px;
+  }
+
+  .nos-values__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 12px;
+  }
+
+  .nos-values__card {
+    padding: 28px 22px;
+    border-radius: var(--radius-lg);
+  }
+
+  .nos-values__card-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 14px;
+  }
+
+  .nos-values__card-title {
+    font-size: 1rem;
+  }
+
+  .nos-values__card-desc {
+    font-size: 0.85rem;
+  }
+
+  .nos-coverage__header {
+    margin-bottom: 32px;
+  }
+
+  .nos-coverage__city {
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+
+  .nos-coverage__grid {
+    gap: 10px;
+  }
 }
+
