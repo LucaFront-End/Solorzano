@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { fullServicesCatalog, mercantileContent, siteConfig } from '../data/content';
+import { Link } from 'react-router-dom';
+import { mercantileContent, siteConfig } from '../data/content';
+import { cmsCategories } from '../data/cmsServices';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import LucideIcon from '../components/LucideIcon';
 import PageHero from '../components/PageHero';
@@ -31,16 +33,21 @@ function ServiceCategory({ cat, index, isOpen, onToggle }) {
       <div className="svc-cat__body">
         <div className="svc-cat__items">
           {cat.items.map((item, i) => (
-            <div className="svc-item" key={i}>
+            <Link
+              to={`/servicios-derecho/${item.slug}`}
+              className="svc-item svc-item--link"
+              key={item.id || i}
+            >
               <div className="svc-item__content">
                 <h4 className="svc-item__title">{item.title}</h4>
-                <p className="svc-item__desc">{item.description}</p>
+                <p className="svc-item__desc">
+                  {item.excerpt || 'Contáctanos para más información sobre este servicio.'}
+                </p>
               </div>
-              <div className="svc-item__location">
-                <MapPin size={14} strokeWidth={2} />
-                <span>{item.location}</span>
+              <div className="svc-item__arrow">
+                <ArrowRight size={16} strokeWidth={2} />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -73,7 +80,7 @@ export default function ServiciosPage() {
           </div>
 
           <div className="svc-catalog__list reveal">
-            {fullServicesCatalog.map((cat, i) => (
+            {cmsCategories.map((cat, i) => (
               <ServiceCategory
                 key={i}
                 cat={cat}

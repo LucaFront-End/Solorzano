@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ServiceDetail from './components/ServiceDetail';
+import CMSServiceDetail from './components/CMSServiceDetail';
 
 import NosotrosPage from './pages/NosotrosPage';
 import ServiciosPage from './pages/ServiciosPage';
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="/servicios" element={<ServiciosPage />} />
         <Route path="/servicios/:serviceId" element={<ServiceDetail />} />
+        <Route path="/servicios-derecho/:slug" element={<CMSServiceDetail />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />
