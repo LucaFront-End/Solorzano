@@ -202,75 +202,101 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Overlay */}
-      <div className={`navbar__mobile ${menuOpen ? 'navbar__mobile--open' : ''}`}>
-        <ul className="navbar__mobile-links">
+      {/* Mobile Drawer Backdrop */}
+      {menuOpen && (
+        <div className="navbar__backdrop" onClick={() => setMenuOpen(false)} />
+      )}
+
+      {/* Mobile Bottom-Sheet Drawer */}
+      <div className={`navbar__drawer ${menuOpen ? 'navbar__drawer--open' : ''}`}>
+        {/* Drag handle */}
+        <div className="navbar__drawer-handle" />
+
+        {/* Main links */}
+        <nav className="navbar__drawer-nav">
           {navLinks.map((link, i) => {
             if (link.label === 'Servicios') {
               return (
-                <li key="Servicios" style={{ animationDelay: `${i * 0.06}s` }} className="navbar__mobile-item--has-dropdown">
-                  <button 
-                    className={`navbar__mobile-link--dropdown-trigger ${mobileDropdownOpen ? 'active' : ''}`}
+                <div key="Servicios" className="navbar__drawer-section">
+                  <button
+                    className={`navbar__drawer-item navbar__drawer-item--accordion ${mobileDropdownOpen ? 'navbar__drawer-item--open' : ''}`}
                     onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
                   >
-                    Servicios
-                    <ChevronDown size={18} className={`navbar__dropdown-arrow ${mobileDropdownOpen ? 'rotated' : ''}`} />
+                    <span className="navbar__drawer-item-label">Servicios</span>
+                    <ChevronDown size={16} className="navbar__drawer-chevron" />
                   </button>
-                  
-                  <div className={`navbar__mobile-accordion ${mobileDropdownOpen ? 'navbar__mobile-accordion--open' : ''}`}>
+                  <div className={`navbar__drawer-accordion ${mobileDropdownOpen ? 'navbar__drawer-accordion--open' : ''}`}>
                     {dropdownCategories.map((cat) => (
-                      <div className="navbar__mobile-accordion-section" key={cat.category}>
-                        <span className="navbar__mobile-accordion-category">{cat.category}</span>
-                        <ul>
-                          {cat.items.map((item) => (
-                            <li key={item.href}>
-                              <Link to={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
-                            </li>
-                          ))}
-                          {cat.hasMore && (
-                            <li>
-                              <Link to="/servicios" className="navbar__mobile-more" onClick={() => setMenuOpen(false)}>
-                                Ver más →
-                              </Link>
-                            </li>
-                          )}
-                        </ul>
+                      <div key={cat.category} className="navbar__drawer-cat">
+                        <span className="navbar__drawer-cat-label">{cat.category}</span>
+                        {cat.items.map((item) => (
+                          <Link
+                            key={item.href}
+                            to={item.href}
+                            className="navbar__drawer-subitem"
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                        {cat.hasMore && (
+                          <Link to="/servicios" className="navbar__drawer-subitem navbar__drawer-subitem--more" onClick={() => setMenuOpen(false)}>
+                            Ver todos los servicios →
+                          </Link>
+                        )}
                       </div>
                     ))}
                   </div>
-                </li>
+                </div>
               );
             }
 
-            return link.children ? (
-              <li key={link.label} style={{ animationDelay: `${i * 0.06}s` }} className="navbar__mobile-dropdown">
-                <span className="navbar__mobile-group-label">{link.label}</span>
-                {link.children.map((child) => (
-                  <a
-                    key={child.href}
-                    href={child.href}
-                    className="navbar__mobile-sub-link"
-                    onClick={(e) => { e.preventDefault(); handleNav(child.href); }}
-                  >
-                    {child.label}
-                  </a>
-                ))}
-              </li>
-            ) : (
-              <li key={link.href} style={{ animationDelay: `${i * 0.06}s` }}>
-                <a href={link.href} onClick={(e) => { e.preventDefault(); handleNav(link.href); }}>
-                  {link.label}
-                </a>
-              </li>
+            if (link.children) {
+              return (
+                <div key={link.label} className="navbar__drawer-section navbar__drawer-section--group">
+                  <span className="navbar__drawer-section-label">{link.label}</span>
+                  {link.children.map((child) => (
+                    <a
+                      key={child.href}
+                      href={child.href}
+                      className="navbar__drawer-subitem"
+                      onClick={(e) => { e.preventDefault(); handleNav(child.href); }}
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              );
+            }
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="navbar__drawer-item"
+                onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
+              >
+                <span className="navbar__drawer-item-label">{link.label}</span>
+                <ArrowRight size={16} className="navbar__drawer-arrow" />
+              </a>
             );
           })}
-        </ul>
-        <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ marginTop: '32px', marginBottom: '40px' }}>
-          Agenda una Asesoría
-        </a>
-        <div className="navbar__mobile-footer">
-          <p className="navbar__mobile-footer-text">© {new Date().getFullYear()} Solórzano Cerezo y Asociados</p>
-          <a href={`mailto:${siteConfig.email}`} className="navbar__mobile-footer-email">{siteConfig.email}</a>
+        </nav>
+
+        {/* CTA */}
+        <div className="navbar__drawer-cta">
+          <a
+            href={siteConfig.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar__drawer-cta-btn"
+            onClick={() => setMenuOpen(false)}
+          >
+            Agenda una Asesoría
+          </a>
+          <a href={`tel:${siteConfig.phone}`} className="navbar__drawer-phone">
+            {siteConfig.phone}
+          </a>
         </div>
       </div>
     </nav>
