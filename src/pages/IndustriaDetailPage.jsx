@@ -387,25 +387,62 @@ export default function IndustriaDetailPage() {
           </div>
 
           <div className="inddet-challenges__layout reveal">
-            {/* Left: Interactive list of challenges */}
+            {/* Left: Interactive list of challenges with inline mobile accordion */}
             <div className="inddet-challenges__list">
               {industry.challenges.map((ch, i) => (
-                <button
-                  key={i}
-                  className={`challenge-tab-btn ${activeChallenge === i ? 'is-active' : ''}`}
-                  onClick={() => setActiveChallenge(i)}
-                >
-                  <span className="challenge-num">0{i + 1}</span>
-                  <div className="challenge-btn-content">
-                    <h4 className="challenge-title-text">{ch.title}</h4>
-                    <p className="challenge-desc-short">{ch.desc}</p>
+                <div key={i} className="challenge-item-group">
+                  <button
+                    className={`challenge-tab-btn ${activeChallenge === i ? 'is-active' : ''}`}
+                    onClick={() => setActiveChallenge(activeChallenge === i ? -1 : i)}
+                  >
+                    <span className="challenge-num">0{i + 1}</span>
+                    <div className="challenge-btn-content">
+                      <h4 className="challenge-title-text">{ch.title}</h4>
+                      <p className="challenge-desc-short">{ch.desc}</p>
+                    </div>
+                    <ChevronRight size={18} className="challenge-arrow" />
+                  </button>
+
+                  <div className={`challenge-mobile-accordion ${activeChallenge === i ? 'is-open' : ''}`}>
+                    <div className="case-study-badge">
+                      <Award size={13} />
+                      Caso de Éxito Documentado
+                    </div>
+                    <h3 className="case-study-title" style={{ fontSize: '1.15rem', marginTop: '12px', marginBottom: '16px' }}>
+                      {ch.caseStudy.title}
+                    </h3>
+                    
+                    <div className="case-study-grid">
+                      <div className="case-study-part">
+                        <h4 className="case-study-part-title">
+                          <span className="part-dot bg-red" />
+                          El Desafío
+                        </h4>
+                        <p className="case-study-part-text">{ch.caseStudy.challenge}</p>
+                      </div>
+
+                      <div className="case-study-part">
+                        <h4 className="case-study-part-title">
+                          <span className="part-dot bg-blue" />
+                          La Estrategia SCA
+                        </h4>
+                        <p className="case-study-part-text">{ch.caseStudy.strategy}</p>
+                      </div>
+
+                      <div className="case-study-part highlight">
+                        <h4 className="case-study-part-title">
+                          <span className="part-dot bg-green" />
+                          El Resultado
+                        </h4>
+                        <p className="case-study-part-text">{ch.caseStudy.result}</p>
+                      </div>
+                    </div>
                   </div>
-                  <ChevronRight size={18} className="challenge-arrow" />
-                </button>
+                </div>
               ))}
             </div>
 
-            {/* Right: Detailed Case Study Box */}
+            {/* Right: Detailed Case Study Box (Desktop Only) */}
             <div className="case-study-box">
               <div className="case-study-badge">
                 <Award size={13} />
@@ -459,7 +496,8 @@ export default function IndustriaDetailPage() {
           </div>
 
           <div className="inddet-timeline__wrapper reveal">
-            <div className="timeline-steps">
+            {/* Desktop Timeline Layout (TOC & single card) */}
+            <div className="timeline-steps desktop-only">
               {shieldingPhases.map((phase) => (
                 <button
                   key={phase.phase}
@@ -472,18 +510,18 @@ export default function IndustriaDetailPage() {
               ))}
             </div>
 
-            <div className="timeline-content-card">
+            <div className="timeline-content-card desktop-only">
               <div className="timeline-card__icon-wrap">
-                <LucideIcon name={shieldingPhases[activePhase - 1].icon} size={28} strokeWidth={1.5} />
+                <LucideIcon name={shieldingPhases[activePhase - 1]?.icon || 'Search'} size={28} strokeWidth={1.5} />
               </div>
               <div className="timeline-card__details">
                 <span className="phase-lbl">Fase {activePhase}</span>
-                <h3 className="phase-title">{shieldingPhases[activePhase - 1].title}</h3>
-                <p className="phase-desc">{shieldingPhases[activePhase - 1].desc}</p>
+                <h3 className="phase-title">{shieldingPhases[activePhase - 1]?.title}</h3>
+                <p className="phase-desc">{shieldingPhases[activePhase - 1]?.desc}</p>
                 
                 <h4 className="deliverables-title">Entregables Clave:</h4>
                 <ul className="deliverables-list">
-                  {shieldingPhases[activePhase - 1].deliverables.map((del, index) => (
+                  {shieldingPhases[activePhase - 1]?.deliverables.map((del, index) => (
                     <li key={index}>
                       <CheckCircle2 size={15} className="deliverable-check" />
                       {del}
@@ -491,6 +529,41 @@ export default function IndustriaDetailPage() {
                   ))}
                 </ul>
               </div>
+            </div>
+
+            {/* Mobile Timeline Layout (Vertical connected tree) */}
+            <div className="mobile-only mobile-timeline">
+              <div className="mobile-timeline__line" />
+              {shieldingPhases.map((phase) => {
+                const isActive = activePhase === phase.phase;
+                return (
+                  <div key={phase.phase} className={`mobile-timeline__step ${isActive ? 'is-active' : ''}`}>
+                    <button 
+                      className="mobile-timeline__trigger"
+                      onClick={() => setActivePhase(isActive ? 0 : phase.phase)}
+                    >
+                      <div className="mobile-timeline__number">
+                        {phase.phase}
+                        {isActive && <span className="mobile-timeline__ping" />}
+                      </div>
+                      <span className="mobile-timeline__title">{phase.title}</span>
+                    </button>
+
+                    <div className={`mobile-timeline__content ${isActive ? 'is-open' : ''}`}>
+                      <p className="phase-desc" style={{ marginBottom: '16px', fontSize: '0.92rem' }}>{phase.desc}</p>
+                      <h4 className="deliverables-title" style={{ fontSize: '0.85rem', marginBottom: '10px' }}>Entregables Clave:</h4>
+                      <ul className="deliverables-list">
+                        {phase.deliverables.map((del, index) => (
+                          <li key={index}>
+                            <CheckCircle2 size={15} className="deliverable-check" />
+                            {del}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -528,13 +528,14 @@
 .navbar__mobile {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 15, 0.96);
-  backdrop-filter: blur(30px);
+  background: radial-gradient(circle at 80% 10%, rgba(196, 165, 89, 0.09) 0%, rgba(10, 10, 18, 0.98) 75%);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 100px;
+  padding: 120px 24px 48px;
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
@@ -630,4 +631,36 @@
   .navbar__hamburger {
     display: flex;
   }
+}
+
+/* Mobile Menu Footer */
+.navbar__mobile-footer {
+  margin-top: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 280px;
+}
+
+.navbar__mobile-footer-text {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.navbar__mobile-footer-email {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+}
+
+.navbar__mobile-footer-email:hover {
+  color: #fff;
 }

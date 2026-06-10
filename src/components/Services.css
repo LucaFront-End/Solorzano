@@ -183,8 +183,25 @@
 }
 
 @media (max-width: 768px) {
+  .services__cards {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 10px 4px 24px;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .services__cards::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
   .services__card {
-    padding: 24px;
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+    padding: 28px 24px;
   }
   
   .services__card-icon {

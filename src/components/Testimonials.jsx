@@ -8,6 +8,8 @@ const STARS = 5;
 export default function Testimonials() {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   const sectionRef = useScrollReveal();
   const items = testimonialsContent.items;
 
@@ -27,6 +29,30 @@ export default function Testimonials() {
     setActive((prev) => (prev - 1 + items.length) % items.length);
   };
 
+  // Touch handlers for swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      handleNext();
+    } else if (isRightSwipe) {
+      handlePrev();
+    }
+  };
+
   return (
     <section className="section section--navy testimonials" id="testimonios" ref={sectionRef}>
       <div className="container">
@@ -40,6 +66,9 @@ export default function Testimonials() {
           className="testimonials__carousel reveal reveal-delay-1"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
           
           <div className="testimonials__track">

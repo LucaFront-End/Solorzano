@@ -265,9 +265,13 @@ export default function Navbar() {
             );
           })}
         </ul>
-        <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ marginTop: '32px' }}>
+        <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ marginTop: '32px', marginBottom: '40px' }}>
           Agenda una Asesoría
         </a>
+        <div className="navbar__mobile-footer">
+          <p className="navbar__mobile-footer-text">© {new Date().getFullYear()} Solórzano Cerezo y Asociados</p>
+          <a href={`mailto:${siteConfig.email}`} className="navbar__mobile-footer-email">{siteConfig.email}</a>
+        </div>
       </div>
     </nav>
   );
