@@ -384,18 +384,8 @@ export default function IndustriasPage() {
             Soluciones Corporativas Especializadas
           </div>
 
-          <h1 className="ind-hero__title">
-            {'Industrias que '.split('').map((char, i) => (
-              <span key={i} className="ind-hero__char" style={{ '--char-delay': `${i * 0.03}s` }}>
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
-            <br />
-            {'Blindamos Legalmente'.split('').map((char, i) => (
-              <span key={`b-${i}`} className="ind-hero__char ind-hero__char--accent" style={{ '--char-delay': `${(i + 15) * 0.03}s` }}>
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
+          <h1 className="ind-hero__title reveal">
+            Industrias que <span className="text-accent">Blindamos Legalmente</span>
           </h1>
 
           <p className="ind-hero__subtitle reveal">

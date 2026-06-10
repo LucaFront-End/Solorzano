@@ -268,21 +268,8 @@ export default function ComunidadPage() {
               Centro de Aprendizaje & Skool Hub
             </div>
 
-            <h1 className="com-hero__title">
-              <span className="com-hero__title-line">
-                {'Nuestra '.split('').map((c, i) => (
-                  <span key={i} className="com-hero__char" style={{ '--cd': `${i * 0.04}s` }}>
-                    {c === ' ' ? '\u00A0' : c}
-                  </span>
-                ))}
-              </span>
-              <span className="com-hero__title-line">
-                {'Comunidad'.split('').map((c, i) => (
-                  <span key={i} className="com-hero__char com-hero__char--accent" style={{ '--cd': `${(i + 10) * 0.04}s` }}>
-                    {c === ' ' ? '\u00A0' : c}
-                  </span>
-                ))}
-              </span>
+            <h1 className="com-hero__title reveal">
+              Nuestra <span className="text-accent">Comunidad</span>
             </h1>
 
             <p className="com-hero__subtitle reveal">
