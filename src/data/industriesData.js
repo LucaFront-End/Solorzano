@@ -11,22 +11,56 @@ export const industries = [
     icon: 'Factory',
     description: 'Protección legal integral para empresas del sector manufacturero: desde contratos colectivos hasta inspecciones laborales y cumplimiento normativo en plantas de producción.',
     heroDesc: 'El sector manufacturero enfrenta retos únicos: turnos rotativos, riesgos laborales, subcontratación y sindicatos. Nuestro equipo especializado te protege en cada frente.',
-    challenges: [
-      { title: 'Subcontratación y Outsourcing', desc: 'La reforma de subcontratación requiere un cumplimiento estricto. Te asesoramos para mantener tu operación legal y eficiente.', icon: 'Users' },
-      { title: 'Inspecciones STPS', desc: 'Preparamos tu planta para auditorías e inspecciones federales, evitando multas de hasta $500,000 MXN.', icon: 'ClipboardCheck' },
-      { title: 'Contratos Colectivos', desc: 'Negociación, revisión y depósito de contratos colectivos de trabajo ante el Centro Federal de Conciliación.', icon: 'FileSignature' },
-      { title: 'Accidentes Laborales', desc: 'Protocolos de respuesta inmediata y gestión de siniestros ante IMSS y autoridades laborales.', icon: 'ShieldAlert' },
-    ],
     relatedServiceSlugs: ['convenios-laborales', 'contratos-laborales', 'inspeccion-stps', 'nom-035'],
     stats: { empresas: '120+', casos: '800+', ahorro: '$2.5M' },
     color: '#3B82F6',
     dashboardMetrics: { compliance: 58, risk: 85, savings: 350000, activeSuits: 14 },
-    caseStudy: {
-      title: 'Legitimación de Contrato Colectivo e Inspección STPS',
-      challenge: 'Una planta automotriz con 350 trabajadores enfrentaba una multa inminente de la STPS por esquemas de subcontratación cruzada y un sindicato independiente agresivo amenazaba con huelga por desacuerdo de contrato.',
-      strategy: 'SCA reestructuró los contratos de servicios especializados adecuándolos al REPSE, lideró la legitimación del Contrato Colectivo ante el Centro Federal Laboral y capacitó a supervisores en la NOM-035 para mitigar riesgos psicosociales.',
-      result: 'Se cancelaron las multas de la STPS por completo, se firmó el contrato de paz laboral con el sindicato y se generó un ahorro de $1.2 millones de pesos en pasivos laborales recalculados legalmente.'
-    },
+    challenges: [
+      {
+        title: 'Subcontratación y Outsourcing',
+        desc: 'La reforma de subcontratación requiere un cumplimiento estricto. Te asesoramos para mantener tu operación legal y eficiente.',
+        icon: 'Users',
+        caseStudy: {
+          title: 'Regularización de Personal bajo REPSE',
+          challenge: 'Una planta automotriz con 350 trabajadores subcontrataba mantenimiento especializado, arriesgando multas por carecer del registro REPSE vigente de sus proveedores.',
+          strategy: 'SCA auditó a todos los proveedores, reestructuró los contratos de servicios especializados y aseguró el registro REPSE del 100% de la cadena.',
+          result: 'Cero multas aplicadas en inspección federal y deslinde del 100% de responsabilidad solidaria.'
+        }
+      },
+      {
+        title: 'Inspecciones STPS',
+        desc: 'Preparamos tu planta para auditorías e inspecciones federales, evitando multas de hasta $500,000 MXN.',
+        icon: 'ClipboardCheck',
+        caseStudy: {
+          title: 'Solución Inmediata de Inspección de Planta',
+          challenge: 'Una planta metalmecánica recibió una orden de inspección extraordinaria de seguridad e higiene por parte de la STPS, amenazando con clausuras por falta de actas.',
+          strategy: 'SCA integró las comisiones mixtas, ordenó los expedientes de entrega de EPP y representó a la firma durante el desahogo de la inspección.',
+          result: 'Se solventó el 100% de observaciones sin sanciones económicas ni suspensiones de actividades.'
+        }
+      },
+      {
+        title: 'Contratos Colectivos',
+        desc: 'Negociación, revisión y depósito de contratos colectivos de trabajo ante el Centro Federal de Conciliación.',
+        icon: 'FileSignature',
+        caseStudy: {
+          title: 'Mediación Sindical y Paz Laboral',
+          challenge: 'Un sindicato independiente amenazó con emplazar a huelga en una fábrica textil por desacuerdos en la legitimación del Contrato Colectivo.',
+          strategy: 'El equipo de SCA medió en la consulta del voto libre y secreto y renegoció las condiciones salariales en apego al Centro Federal Laboral.',
+          result: 'Ratificación del contrato con el 88% de aprobación de los trabajadores y continuidad total de la operación.'
+        }
+      },
+      {
+        title: 'Accidentes Laborales',
+        desc: 'Protocolos de respuesta inmediata y gestión de siniestros ante IMSS y autoridades laborales.',
+        icon: 'ShieldAlert',
+        caseStudy: {
+          title: 'Deslinde de Prima de Riesgo por Accidente',
+          challenge: 'Un operador de montacargas sufrió una fractura grave en planta, y el IMSS catalogó de forma errónea el incidente incrementando la prima de riesgo.',
+          strategy: 'SCA demostró ante el IMSS la negligencia inexcusable del trabajador al violar protocolos de seguridad vial de la planta debidamente firmados.',
+          result: 'Cancelación de la multa patronal y mantenimiento de la prima de riesgo original, ahorrando $450k MXN.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Cómo afecta la reforma de subcontratación (REPSE) a las maquiladoras?', a: 'La reforma exige que cualquier proveedor que suministre personal o servicios especializados cuente con registro activo y cumpla sus obligaciones fiscales. SCA audita a tus contratistas de forma bimensual para evitar multas de responsabilidad solidaria.' },
       { q: '¿Qué multas aplica la STPS por incumplir normas de seguridad en planta?', a: 'Las multas de la STPS oscilan de 50 a 5,000 UMAS (hasta $518,000 MXN) por cada infracción individual. Realizar auditorías preventivas con SCA te garantiza solventar cualquier observación antes de que llegue el inspector.' },
@@ -57,22 +91,56 @@ export const industries = [
     icon: 'ShoppingBag',
     description: 'Soluciones legales para cadenas comerciales, tiendas departamentales y comercios: alta rotación, contratos por temporada y protección ante demandas laborales.',
     heroDesc: 'El retail opera con márgenes ajustados y alta rotación de personal. Una demanda laboral mal gestionada puede costar más que la operación de todo un mes.',
-    challenges: [
-      { title: 'Alta Rotación de Personal', desc: 'Diseñamos procesos de desvinculación eficientes que minimizan riesgos legales y costos de finiquito.', icon: 'UserMinus' },
-      { title: 'Contratos por Temporada', desc: 'Elaboración de contratos de trabajo por temporada y eventuales que cumplan con la LFT vigente.', icon: 'Calendar' },
-      { title: 'Demandas por Despido', desc: 'Representación experta ante Centros de Conciliación y Tribunales Laborales en casos de despido injustificado.', icon: 'Scale' },
-      { title: 'Jornadas y Horas Extra', desc: 'Auditoría de esquemas de jornada laboral para evitar contingencias por horas extra no pagadas.', icon: 'Clock' },
-    ],
     relatedServiceSlugs: ['convenios-laborales', 'desvinculacion-laboral', 'contratos-laborales'],
     stats: { empresas: '85+', casos: '600+', ahorro: '$1.8M' },
     color: '#8B5CF6',
     dashboardMetrics: { compliance: 65, risk: 78, savings: 220000, activeSuits: 28 },
-    caseStudy: {
-      title: 'Blindaje ante Rotación Masiva y Demandas en Cadena',
-      challenge: 'Una cadena de zapaterías con 12 sucursales sufría una tasa de rotación de personal del 110% anual, acumulando 15 demandas individuales por supuestas horas extra infladas y despidos injustificados.',
-      strategy: 'Implementamos contratos de temporada digitalizados, instalamos sistemas biométricos de registro de entrada y salida certificados legalmente, y realizamos convenios de terminación voluntaria estructurados en el Centro de Conciliación.',
-      result: 'Se redujo el costo promedio de liquidaciones en un 60%, 12 juicios abiertos se cerraron mediante convenios razonables y se eliminaron las demandas por horas extra gracias a los controles biométricos validados.'
-    },
+    challenges: [
+      {
+        title: 'Alta Rotación de Personal',
+        desc: 'Diseñamos procesos de desvinculación eficientes que minimizan riesgos legales y costos de finiquito.',
+        icon: 'UserMinus',
+        caseStudy: {
+          title: 'Mitigación de Demandas por Separación',
+          challenge: 'Una cadena de supermercados con rotación del 110% anual acumulaba juicios por supuestos despidos injustificados de cajeros.',
+          strategy: 'SCA estandarizó actas de entrega-recepción de finiquito ratificadas voluntariamente ante el Centro de Conciliación.',
+          result: 'Reducción del costo de liquidación en un 60% y terminación de controversias sin demandas posteriores.'
+        }
+      },
+      {
+        title: 'Contratos por Temporada',
+        desc: 'Elaboración de contratos de trabajo por temporada y eventuales que cumplan con la LFT vigente.',
+        icon: 'Calendar',
+        caseStudy: {
+          title: 'Esquema Eventual para Ventas Navideñas',
+          challenge: 'Una tienda de moda contrató 80 promotores para fin de año; al concluir, 15 reclamaron indemnización por antigüedad.',
+          strategy: 'Redactamos contratos individuales de temporada y eventuales con objeto específico y duración delimitada en la LFT.',
+          result: 'Desestimación de reclamaciones por término natural de contrato sin costo de indemnización de ley.'
+        }
+      },
+      {
+        title: 'Demandas por Despido',
+        desc: 'Representación experta ante Centros de Conciliación y Tribunales Laborales en casos de despido injustificado.',
+        icon: 'Scale',
+        caseStudy: {
+          title: 'Defensa en Juicio de Cajero por Faltantes',
+          challenge: 'Un cajero despedido por robo de efectivo demandó indemnización alegando despido injustificado y cobro de horas extra.',
+          strategy: 'SCA representó a la firma en el Tribunal Laboral exhibiendo las bitácoras de arqueo y grabaciones firmadas con protocolo de pérdida de confianza.',
+          result: 'Absolución total de indemnización constitucional por despido justificado acreditado.'
+        }
+      },
+      {
+        title: 'Jornadas y Horas Extra',
+        desc: 'Auditoría de esquemas de jornada laboral para evitar contingencias por horas extra no pagadas.',
+        icon: 'Clock',
+        caseStudy: {
+          title: 'Control Biométrico de Asistencia Exigible',
+          challenge: 'Un ex-empleado de almacén demandó el pago de 15 horas extra semanales acumuladas durante dos años de trabajo.',
+          strategy: 'Acreditamos la jornada real del trabajador mediante registros biométricos semanales firmados de conformidad.',
+          result: 'Absolución del reclamo de horas extra, ahorrando más de $150k MXN en indemnizaciones.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Cómo probar la jornada laboral real de un vendedor o cajero?', a: 'El registro de asistencia firmado o biométrico certificado es la única prueba admisible. SCA audita tus bitácoras de asistencia para garantizar que cumplan con los requisitos procesales en juicio.' },
       { q: '¿Los empleados comisionistas tienen derecho al pago de comisiones en el aguinaldo?', a: 'Sí. El aguinaldo y las prestaciones de comisionistas deben calcularse basándose en el promedio de ingresos obtenidos en el último año de servicios. SCA estructura tus contratos para regular este cálculo.' },
@@ -103,22 +171,56 @@ export const industries = [
     icon: 'Monitor',
     description: 'Marco legal moderno para startups, SaaS y empresas tech: trabajo remoto, propiedad intelectual, esquemas de compensación variable y stock options.',
     heroDesc: 'Las empresas de tecnología operan en un marco legal que no fue diseñado para ellas. Desde home office hasta equity, cada decisión laboral requiere asesoría especializada.',
-    challenges: [
-      { title: 'Trabajo Remoto (Home Office)', desc: 'Implementación de la NOM-037 y contratos de teletrabajo que cumplan con todas las obligaciones patronales.', icon: 'Laptop' },
-      { title: 'Propiedad Intelectual', desc: 'Cláusulas de asignación de IP, acuerdos de confidencialidad y protección de código fuente desarrollado por empleados.', icon: 'Lock' },
-      { title: 'Compensación Variable', desc: 'Esquemas de bonos, comisiones y stock options estructurados para minimizar contingencias laborales.', icon: 'TrendingUp' },
-      { title: 'Contratistas vs Empleados', desc: 'Análisis de riesgo de esquemas de contratación con freelancers para evitar reclasificación laboral.', icon: 'UserCheck' },
-    ],
     relatedServiceSlugs: ['contratos-laborales', 'nom-035', 'convenios-laborales'],
     stats: { empresas: '60+', casos: '300+', ahorro: '$900K' },
     color: '#06B6D4',
     dashboardMetrics: { compliance: 72, risk: 45, savings: 150000, activeSuits: 3 },
-    caseStudy: {
-      title: 'Protección de IP y Esquemas de Compensación de Software',
-      challenge: 'Una startup de software sufrió la salida conflictiva de su desarrollador principal, quien amenazaba con demandar exigiendo la copropiedad del código fuente y el pago retroactivo de horas extra ilimitadas por home office.',
-      strategy: 'SCA asumió la defensa demostrando la validez del contrato laboral con asignación de Propiedad Intelectual, la adenda firmada de la NOM-037 regulando el Home Office y reestructurando el plan de compensación de stock options.',
-      result: 'El ex-desarrollador desistió del litigio sobre el código fuente al ver el blindaje contractual y el juicio laboral se concilió rápidamente por una fracción menor de lo demandado.'
-    },
+    challenges: [
+      {
+        title: 'Trabajo Remoto (Home Office)',
+        desc: 'Implementación de la NOM-037 y contratos de teletrabajo que cumplan con todas las obligaciones patronales.',
+        icon: 'Laptop',
+        caseStudy: {
+          title: 'Implementación de NOM-037 Remota',
+          challenge: 'Un SaaS con 50 programadores en trabajo remoto carecía de adendas NOM-037 y arriesgaba multas de la STPS.',
+          strategy: 'SCA redactó e implementó las adendas de teletrabajo regulando costos de internet y checklist de salud en el hogar.',
+          result: 'Cumplimiento normativo del 100% verificado en auditoría preventiva interna.'
+        }
+      },
+      {
+        title: 'Propiedad Intelectual',
+        desc: 'Cláusulas de asignación de IP, acuerdos de confidencialidad y protección de código fuente desarrollado por empleados.',
+        icon: 'Lock',
+        caseStudy: {
+          title: 'Blindaje de Código de Desarrolladores',
+          challenge: 'Un desarrollador renunció para lanzar una app clon, alegando ser dueño del código fuente por no firmar cesión específica.',
+          strategy: 'SCA exhibió el contrato individual de trabajo con cláusulas de propiedad industrial y cesión de derechos patrimoniales conforme a la Ley de Derechos de Autor.',
+          result: 'Bloqueo legal del clon y resguardo completo del código fuente como propiedad exclusiva de la empresa.'
+        }
+      },
+      {
+        title: 'Compensación Variable',
+        desc: 'Esquemas de bonos, comisiones y stock options estructurados para minimizar contingencias laborales.',
+        icon: 'TrendingUp',
+        caseStudy: {
+          title: 'Regulación de Stock Options y Bonos',
+          challenge: 'Un director de ventas demandó que sus bonos variables integraran su salario base para el cálculo de liquidación.',
+          strategy: 'SCA estructuró un plan de incentivos variable ligado a metas comerciales de forma independiente al contrato laboral.',
+          result: 'Cálculo de finiquito aprobado conforme al salario diario ordinario, evitando pasivos inflados.'
+        }
+      },
+      {
+        title: 'Contratistas vs Empleados',
+        desc: 'Análisis de riesgo de esquemas de contratación con freelancers para evitar reclasificación laboral.',
+        icon: 'UserCheck',
+        caseStudy: {
+          title: 'Defensa ante Reclasificación de Freelancer',
+          challenge: 'Un consultor externo contratado por honorarios demandó alegando una relación laboral subordinada para exigir aguinaldo y seguridad social.',
+          strategy: 'Demostramos la autonomía técnica del contratista mediante órdenes de compra, facturación propia e inexistencia de horario fijo.',
+          result: 'Sentencia favorable del Tribunal reconociendo la naturaleza puramente mercantil de la relación.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Qué gastos del Home Office debe pagar obligatoriamente el patrón?', a: 'De acuerdo con la NOM-037, se debe cubrir proporcionalmente la electricidad, los costos de internet y proporcionar las herramientas necesarias (computadora, silla ergonómica). SCA redacta tus convenios de teletrabajo para regular esto.' },
       { q: '¿Cómo proteger el código fuente y patentes creadas por empleados?', a: 'La ley establece que el patrón es propietario si se pactó en el contrato. SCA inserta cláusulas de asignación de propiedad industrial y derechos de autor irrenunciables adaptadas a la ley mexicana.' },
@@ -149,22 +251,56 @@ export const industries = [
     icon: 'Hotel',
     description: 'Protección legal para hoteles, restaurantes y servicios turísticos: propinas, jornadas especiales, temporalidad y sindicatos del sector.',
     heroDesc: 'La hospitalidad combina jornadas irregulares, propinas, temporalidad alta y sindicatos activos. Cada uno de estos factores es un riesgo legal que sabemos manejar.',
-    challenges: [
-      { title: 'Propinas y Salario Integrado', desc: 'Cálculo correcto del salario diario integrado incluyendo propinas, fondo de ahorro y prestaciones especiales.', icon: 'Coins' },
-      { title: 'Jornadas Especiales', desc: 'Estructuración legal de jornadas continuas, mixtas y nocturnas cumpliendo con la LFT.', icon: 'Sun' },
-      { title: 'Personal de Temporada', desc: 'Contratos por obra determinada y por temporada con finiquitos calculados correctamente.', icon: 'Umbrella' },
-      { title: 'Sindicatos del Sector', desc: 'Negociación con sindicatos de la industria hotelera y restaurantera, revisiones contractuales.', icon: 'Handshake' },
-    ],
     relatedServiceSlugs: ['convenios-laborales', 'desvinculacion-laboral', 'contratos-laborales'],
     stats: { empresas: '45+', casos: '350+', ahorro: '$1.2M' },
     color: '#F59E0B',
     dashboardMetrics: { compliance: 50, risk: 82, savings: 290000, activeSuits: 18 },
-    caseStudy: {
-      title: 'Regularización de Propinas y Paz Sindical en Hotelería',
-      challenge: 'Un grupo hotelero con 3 propiedades sufría amenazas constantes de emplazamiento a huelga por sindicatos locales que disputaban la titularidad de los contratos colectivos y la fórmula de reparto de propinas.',
-      strategy: 'SCA asumió la representación legal frente a los sindicatos ante el Centro Federal, formalizó un tabulador transparente de propinas y capacitó al personal directivo en mediación de conflictos colectivos.',
-      result: 'Se logró la firma de contratos de paz sindical por 3 años, se reguló la distribución de propinas bajo lineamientos de la LFT y se eliminaron las reclamaciones por despidos no negociados.'
-    },
+    challenges: [
+      {
+        title: 'Propinas y Salario Integrado',
+        desc: 'Cálculo correcto del salario diario integrado incluyendo propinas, fondo de ahorro y prestaciones especiales.',
+        icon: 'Coins',
+        caseStudy: {
+          title: 'Regulación de Propinas en Restaurante',
+          challenge: 'Un restaurante fue demandado por meseros que exigían el 30% de propinas como parte integrada de su salario de indemnización.',
+          strategy: 'SCA redactó un reglamento de propinas transparente depositado ante el Centro Laboral, desglosando la comisión.',
+          result: 'Se determinó el cálculo de indemnización con base en el salario ordinario tabulado, evitando sobrecostos.'
+        }
+      },
+      {
+        title: 'Jornadas Especiales',
+        desc: 'Estructuración legal de jornadas continuas, mixtas y nocturnas cumpliendo con la LFT.',
+        icon: 'Sun',
+        caseStudy: {
+          title: 'Turnos Rotativos en Hotelería',
+          challenge: 'Una red de hoteles enfrentaba reclamos por jornadas nocturnas de camaristas sin el descanso compensatorio LFT.',
+          strategy: 'Estructuramos un calendario de jornadas mixtas rotativas firmadas de conformidad en el reglamento interior.',
+          result: 'Cero demandas de personal operativo por inconformidad de horario y orden laboral.'
+        }
+      },
+      {
+        title: 'Personal de Temporada',
+        desc: 'Contratos por obra determinada y por temporada con finiquitos calculados correctamente.',
+        icon: 'Umbrella',
+        caseStudy: {
+          title: 'Contratación Eventual para Temporada Alta',
+          challenge: 'Un hotel de playa contrató 45 meseros para semana santa; 8 demandaron por despido al terminar el periodo.',
+          strategy: 'SCA sustentó la validez del contrato por tiempo determinado ligado a la ocupación turística estacional.',
+          result: 'Conciliación del 100% con finiquitos proporcionales sin cobro de indemnizaciones constitucionales.'
+        }
+      },
+      {
+        title: 'Sindicatos del Sector',
+        desc: 'Negociación con sindicatos de la industria hotelera y restaurantera, revisiones contractuales.',
+        icon: 'Handshake',
+        caseStudy: {
+          title: 'Negociación de Contrato Colectivo Hotelero',
+          challenge: 'Un sindicato de la construcción bloqueó la entrada de un nuevo hotel exigiendo firmar contrato de protección.',
+          strategy: 'SCA representó al hotel en la consulta del voto libre ante el Centro Laboral para elegir libremente al sindicato titular.',
+          result: 'Establecimiento del sindicato mayoritario real y firma del Contrato de Paz Laboral por 2 años.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Las propinas integran el salario diario para indemnizaciones?', a: 'Sí. La LFT determina que las propinas son parte del salario. Si no están tabuladas en el contrato, se calcula un 30% adicional sobre el salario base en juicios. SCA te ayuda a crear un reglamento de propinas transparente.' },
       { q: '¿Cómo regularizar las jornadas de trabajo rotativas y mixtas en restaurantes?', a: 'Las jornadas mixtas no deben exceder las 7.5 horas. El excedente cuenta como tiempo extra. Recomendamos implementar calendarios de turnos acordados por escrito mensualmente.' },
@@ -195,22 +331,56 @@ export const industries = [
     icon: 'HardHat',
     description: 'Asesoría legal especializada para constructoras y desarrolladoras: seguridad en obra, subcontratistas, contratos por obra determinada y accidentes laborales.',
     heroDesc: 'La construcción es uno de los sectores con mayor riesgo laboral en México. La prevención legal no es opcional, es una inversión que salva empresas.',
-    challenges: [
-      { title: 'Seguridad en Obra', desc: 'Protocolos de seguridad, equipamiento obligatorio y gestión de riesgos conforme a normas STPS.', icon: 'Shield' },
-      { title: 'Subcontratistas', desc: 'Estructura legal de relaciones con subcontratistas que evita responsabilidad solidaria tras la reforma.', icon: 'GitBranch' },
-      { title: 'Contratos por Obra', desc: 'Contratos por obra determinada que se extinguen legalmente al terminar el proyecto sin generar antigüedad acumulada.', icon: 'FileText' },
-      { title: 'Accidentes y Siniestros', desc: 'Protocolo de respuesta inmediata ante accidentes laborales, gestión ante IMSS y defensa penal si aplica.', icon: 'AlertTriangle' },
-    ],
     relatedServiceSlugs: ['contratos-laborales', 'inspeccion-stps', 'convenios-laborales'],
     stats: { empresas: '55+', casos: '450+', ahorro: '$1.5M' },
     color: '#EF4444',
     dashboardMetrics: { compliance: 42, risk: 90, savings: 410000, activeSuits: 22 },
-    caseStudy: {
-      title: 'Accidente de Obra Grave y Prevención de Responsabilidad Solidaria',
-      challenge: 'Un subcontratista en una obra residencial de 14 niveles sufrió la caída de un andamio que lesionó gravemente a 2 trabajadores sin afiliación activa al IMSS. La constructora principal fue demandada como patrón solidario.',
-      strategy: 'SCA asumió la representación inmediata en obra, coordinó con la fiscalía y peritos, demostró que el subcontratista incumplió contratos de seguridad y gestionó los finiquitos directos con deslinde civil.',
-      result: 'Se levantó la clausura de la obra en 3 días, la constructora principal fue absuelta de responsabilidad penal y solidaria, y se redujo la contingencia civil en un 80% mediante mediación.'
-    },
+    challenges: [
+      {
+        title: 'Seguridad en Obra',
+        desc: 'Protocolos de seguridad, equipamiento obligatorio y gestión de riesgos conforme a normas STPS.',
+        icon: 'Shield',
+        caseStudy: {
+          title: 'Auditoría STPS de Seguridad en Obra',
+          challenge: 'La STPS ordenó inspección extraordinaria de seguridad en obra de 12 niveles, arriesgando clausura por falta de arneses.',
+          strategy: 'SCA estructuró de urgencia el plan de seguridad, actas de EPP y bitácoras de capacitación DC-3.',
+          result: 'Aprobación de la inspección sin multas y continuidad total de la obra.'
+        }
+      },
+      {
+        title: 'Subcontratistas',
+        desc: 'Estructura legal de relaciones con subcontratistas que evita responsabilidad solidaria tras la reforma.',
+        icon: 'GitBranch',
+        caseStudy: {
+          title: 'Responsabilidad Solidaria con Subcontratista',
+          challenge: 'Un subcontratista de yesería quebró dejando a 14 pintores sin sueldo; estos demandaron a la constructora principal.',
+          strategy: 'SCA acreditó los reportes mensuales de cumplimiento fiscal y REPSE que obligaban al subcontratista como patrón directo.',
+          result: 'El Tribunal absolvió a la constructora principal al demostrar la debida diligencia de supervisión REPSE.'
+        }
+      },
+      {
+        title: 'Contratos por Obra',
+        desc: 'Contratos por obra determinada que se extinguen legalmente al terminar el proyecto sin generar antigüedad acumulada.',
+        icon: 'FileText',
+        caseStudy: {
+          title: 'Terminación Natural de Obra Civil',
+          challenge: 'Al terminar la cimentación de un edificio, 20 fierreros demandaron indemnización de 3 meses por despido.',
+          strategy: 'Exhibimos contratos individuales por obra determinada detallando la cimentación y dirección específica de la obra.',
+          result: 'Absolución de indemnizaciones; el Tribunal reconoció la extinción natural de la relación laboral.'
+        }
+      },
+      {
+        title: 'Accidentes y Siniestros',
+        desc: 'Protocolo de respuesta inmediata ante accidentes laborales, gestión ante IMSS y defensa penal si aplica.',
+        icon: 'AlertTriangle',
+        caseStudy: {
+          title: 'Atención Inmediata por Caída de Altura',
+          challenge: 'Un albañil sufrió una caída de 4 metros sin arnés en obra, resultando en hospitalización inmediata y riesgo penal.',
+          strategy: 'SCA acudió al sitio en 60 minutos, atendió a peritos de la fiscalía y demostró que el trabajador rechazó usar el arnés provisto.',
+          result: 'Deslinde de responsabilidad penal patronal y mantenimiento de la obra sin multas civiles de la STPS.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Qué obligaciones tiene una constructora con el IMSS bajo el SIROC?', a: 'El SIROC obliga a registrar las obras de construcción y los trabajadores asociados. Omitir reportes parciales o totales resulta en auditorías agresivas y multas. SCA asesora en el cumplimiento de estas obligaciones.' },
       { q: '¿Cómo evitar que las demandas de trabajadores de subcontratistas afecten a mi constructora?', a: 'Debes exigir mensualmente el registro REPSE del subcontratista, las opiniones de cumplimiento del SAT e IMSS, y los comprobantes de pago de cuotas obrero-patronales del personal asignado.' },
@@ -241,22 +411,56 @@ export const industries = [
     icon: 'Heart',
     description: 'Marco legal para hospitales, clínicas, laboratorios y farmacéuticas: guardias médicas, jornadas especiales, capacitación obligatoria y responsabilidad profesional.',
     heroDesc: 'El sector salud opera bajo regulaciones estrictas y jornadas extenuantes. Un error en la gestión laboral puede afectar no solo tu operación, sino la vida de personas.',
-    challenges: [
-      { title: 'Guardias y Jornadas', desc: 'Estructura legal de guardias médicas, jornadas de 24 horas y descansos obligatorios conforme a la LFT.', icon: 'Clock' },
-      { title: 'Capacitación Obligatoria', desc: 'Programas de capacitación que cumplen con requisitos de la STPS y organismos reguladores del sector.', icon: 'GraduationCap' },
-      { title: 'Responsabilidad Profesional', desc: 'Protección ante demandas de negligencia y estructura de contratos con prestadores de servicios médicos.', icon: 'Stethoscope' },
-      { title: 'Sindicatos del Sector Salud', desc: 'Negociación y cumplimiento de contratos colectivos con sindicatos de trabajadores de la salud.', icon: 'Users' },
-    ],
     relatedServiceSlugs: ['contratos-laborales', 'nom-035', 'convenios-laborales'],
     stats: { empresas: '40+', casos: '250+', ahorro: '$800K' },
     color: '#10B981',
     dashboardMetrics: { compliance: 68, risk: 60, savings: 180000, activeSuits: 5 },
-    caseStudy: {
-      title: 'Reestructuración de Jornadas y Guardias de Enfermería',
-      challenge: 'Una red de clínicas hospitalarias enfrentaba 5 demandas simultáneas de enfermeros generales que alegaban el impago de guardias nocturnas y horas extra generadas por la entrega de turno de 30 minutos diarios.',
-      strategy: 'SCA reformuló los contratos de trabajo detallando la compensación de turnos mixtos, formalizó políticas firmadas de entrega de turno y ratificó convenios de conformidad de jornada ante el Centro Laboral.',
-      result: 'Se desestimaron 4 demandas laborales al acreditarse el registro de asistencia firmado y se reestructuró la nómina del personal médico y de enfermería, reduciendo pasivos por horas extra en un 75%.'
-    },
+    challenges: [
+      {
+        title: 'Guardias y Jornadas',
+        desc: 'Estructura legal de guardias médicas, jornadas de 24 horas y descansos obligatorios conforme a la LFT.',
+        icon: 'Clock',
+        caseStudy: {
+          title: 'Regulación de Guardias de 24 Horas',
+          challenge: 'Clínica privada fue demandada por 4 médicos residentes reclamando horas extra no computadas en guardias nocturnas.',
+          strategy: 'SCA diseñó adendas laborales regulando el tiempo de guardia con periodos compensatorios de descanso firmados.',
+          result: 'Absolución total en conciliación y reestructuración legal de turnos hospitalarios.'
+        }
+      },
+      {
+        title: 'Capacitación Obligatoria',
+        desc: 'Programas de capacitación que cumplen con requisitos de la STPS y organismos reguladores del sector.',
+        icon: 'GraduationCap',
+        caseStudy: {
+          title: 'Acreditación STPS en Hospital de Especialidades',
+          challenge: 'Inspección de la STPS detectó falta de actas de capacitación de enfermería en manejo de residuos biológicos (RPBI).',
+          strategy: 'SCA coordinó la expedición y registro de las constancias de habilidades DC-3 e integró la comisión mixta.',
+          result: 'Cierre del acta de inspección con cumplimiento acreditado del 100%.'
+        }
+      },
+      {
+        title: 'Responsabilidad Profesional',
+        desc: 'Protección ante demandas de negligencia y estructura de contratos con prestadores de servicios médicos.',
+        icon: 'Stethoscope',
+        caseStudy: {
+          title: 'Defensa Penal de Médico por Impericia',
+          challenge: 'Un cirujano fue demandado por homicidio culposo en cirugía; los familiares exigían indemnización solidaria al hospital.',
+          strategy: 'SCA asumió la defensa penal del médico y civil del hospital, demostrando apego total a la Lex Artis médica.',
+          result: 'Absolución penal del médico y deslinde total del hospital de indemnizaciones civiles extracontractuales.'
+        }
+      },
+      {
+        title: 'Sindicatos del Sector Salud',
+        desc: 'Negociación y cumplimiento de contratos colectivos con sindicatos de trabajadores de la salud.',
+        icon: 'Users',
+        caseStudy: {
+          title: 'Negociación Colectiva con Sindicato de Enfermería',
+          challenge: 'Sindicato de salud emplazó a huelga a una clínica por supuestas violaciones de seguridad en laboratorio.',
+          strategy: 'SCA negoció directamente con el sindicato ante el Centro Laboral, acordando mejoras en equipo de protección.',
+          result: 'Desistimiento de huelga firmado y paz laboral asegurada para la clínica.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Cómo deben computarse las guardias de 24 horas bajo la LFT?', a: 'La jornada ordinaria no debe rebasar las 8 horas diarias de promedio semanal. Las guardias deben estar catalogadas como jornadas especiales con días de descanso compensatorios obligatorios regulados contractualmente.' },
       { q: '¿Qué riesgo legal representa un médico contratado bajo el esquema de honorarios?', a: 'Si el médico cumple guardias obligatorias en el hospital, recibe órdenes directas de directores y utiliza material clínico provisto por el hospital, es un empleado formal y puede demandar prestaciones de ley.' },
@@ -287,22 +491,56 @@ export const industries = [
     icon: 'BookOpen',
     description: 'Protección legal para instituciones educativas: contratos docentes, vacaciones especiales, esquemas de tiempo parcial y cumplimiento ante la SEP.',
     heroDesc: 'Las instituciones educativas tienen regímenes laborales especiales. Desde contratos por ciclo escolar hasta prestaciones docentes, cada detalle importa.',
-    challenges: [
-      { title: 'Contratos Docentes', desc: 'Contratos especiales para personal docente por ciclo escolar, con cálculos correctos de vacaciones y aguinaldo.', icon: 'PenTool' },
-      { title: 'Vacaciones Especiales', desc: 'Gestión legal de periodos vacacionales extendidos y su impacto en salario y prestaciones.', icon: 'Calendar' },
-      { title: 'Personal Administrativo', desc: 'Diferenciación legal entre personal docente y administrativo con esquemas de contratación adecuados.', icon: 'Briefcase' },
-      { title: 'Cumplimiento SEP/STPS', desc: 'Doble cumplimiento regulatorio ante la Secretaría de Educación y la Secretaría del Trabajo.', icon: 'CheckSquare' },
-    ],
     relatedServiceSlugs: ['contratos-laborales', 'convenios-laborales', 'nom-035'],
     stats: { empresas: '35+', casos: '200+', ahorro: '$600K' },
     color: '#6366F1',
     dashboardMetrics: { compliance: 70, risk: 55, savings: 130000, activeSuits: 4 },
-    caseStudy: {
-      title: 'Regularización de Nómina Docente y Ciclos Lectivos',
-      challenge: 'Un colegio privado de nivel bachillerato enfrentaba reclamos colectivos de 12 profesores que trabajaban bajo honorarios asimilables, exigiendo antigüedad de vacaciones, prima vacacional y seguridad social IMSS retroactivos.',
-      strategy: 'SCA reestructuró la contratación bajo el régimen especial de contratos por tiempo determinado ligados al ciclo escolar de la SEP, regularizó sus prestaciones proporcionales y formalizó convenios de conformidad laboral.',
-      result: 'Se evitó un estallido de demandas masivas, se regularizó la nómina docente en un esquema 100% legal que permite liquidaciones naturales al término del ciclo, y se conciliaron reclamos previos con un ahorro de $450,000 MXN.'
-    },
+    challenges: [
+      {
+        title: 'Contratos Docentes',
+        desc: 'Contratos especiales para personal docente por ciclo escolar, con cálculos correctos de vacaciones y aguinaldo.',
+        icon: 'PenTool',
+        caseStudy: {
+          title: 'Regularización de Ciclo Escolar Docente',
+          challenge: 'Un colegio privado enfrentaba demandas de 10 profesores por honorarios asimilables reclamando antigüedad e IMSS.',
+          strategy: 'SCA reestructuró los contratos a un esquema de tiempo determinado ligado al ciclo escolar de la SEP.',
+          result: 'Regularización de nómina y desistimiento de reclamos previos con un convenio mutuo.'
+        }
+      },
+      {
+        title: 'Vacaciones Especiales',
+        desc: 'Gestión legal de periodos vacacionales extendidos y su impacto en salario y prestaciones.',
+        icon: 'Calendar',
+        caseStudy: {
+          title: 'Cálculo de Prima Vacacional Docente',
+          challenge: 'Un docente de tiempo completo demandó el pago de vacaciones no gozadas durante los periodos de receso escolar.',
+          strategy: 'Demostramos que los periodos de receso escolar contaban legalmente como vacaciones pagadas conforme al contrato colectivo.',
+          result: 'Absolución total del pago retroactivo de vacaciones y orden administrativo escolar.'
+        }
+      },
+      {
+        title: 'Personal Administrativo',
+        desc: 'Diferenciación legal entre personal docente y administrativo con esquemas de contratación adecuados.',
+        icon: 'Briefcase',
+        caseStudy: {
+          title: 'Diferenciación de Contratos Administrativos',
+          challenge: 'Prefectos y secretarias reclamaban el mismo esquema vacacional extendido que el personal docente de la escuela.',
+          strategy: 'SCA delimitó en el reglamento interior las diferencias de funciones y jornadas entre docentes y administrativos.',
+          result: 'Validación legal del reglamento y fin de las disputas internas de personal.'
+        }
+      },
+      {
+        title: 'Cumplimiento SEP/STPS',
+        desc: 'Doble cumplimiento regulatorio ante la Secretaría de Educación y la Secretaría del Trabajo.',
+        icon: 'CheckSquare',
+        caseStudy: {
+          title: 'Auditoría Cruzada SEP y STPS',
+          challenge: 'Un colegio enfrentaba riesgo de revocación de RVOE por observaciones de la SEP combinadas con inspecciones de la STPS.',
+          strategy: 'SCA unificó las carpetas de cumplimiento laboral y escolar, acreditando las comisiones obligatorias.',
+          result: 'Mantenimiento del RVOE y solventación total ante la delegación del trabajo.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Es legal dar de baja a los profesores al terminar el ciclo escolar de la SEP?', a: 'Sí, mediante contratos especiales de tiempo determinado justificados por el ciclo lectivo lectivo oficial. Al terminar el ciclo, la relación laboral concluye naturalmente pagando las prestaciones devengadas.' },
       { q: '¿Cómo calcular las vacaciones proporcionales de docentes por hora clase?', a: 'Los docentes por hora clase acumulan antigüedad. Sus vacaciones y aguinaldo deben pagarse en proporción directa a las horas impartidas. SCA implementa calculadoras de nómina docente automatizadas.' },
@@ -333,22 +571,56 @@ export const industries = [
     icon: 'Truck',
     description: 'Soluciones legales para empresas de transporte, logística y distribución: operadores de autotransporte, jornadas discontinuas, permisos SCT y accidentes viales.',
     heroDesc: 'El transporte y la logística mueven a México. Pero sus retos laborales —operadores, jornadas y accidentes— requieren un equipo legal que conozca el sector a fondo.',
-    challenges: [
-      { title: 'Operadores y Choferes', desc: 'Contratos especiales para operadores de autotransporte con jornadas discontinuas y viáticos.', icon: 'CarFront' },
-      { title: 'Accidentes Viales', desc: 'Protocolo de respuesta inmediata ante accidentes, gestión ante aseguradoras y defensa penal del operador.', icon: 'AlertTriangle' },
-      { title: 'Jornadas Discontinuas', desc: 'Estructura legal de jornadas especiales para operadores de transporte conforme al Reglamento de Autotransporte.', icon: 'Route' },
-      { title: 'Permisos y Regulación SCT', desc: 'Cumplimiento de obligaciones laborales derivadas de permisos de la Secretaría de Comunicaciones y Transportes.', icon: 'FileCheck' },
-    ],
     relatedServiceSlugs: ['contratos-laborales', 'convenios-laborales', 'desvinculacion-laboral'],
     stats: { empresas: '50+', casos: '400+', ahorro: '$1.3M' },
     color: '#F97316',
     dashboardMetrics: { compliance: 45, risk: 87, savings: 380000, activeSuits: 19 },
-    caseStudy: {
-      title: 'Defensa Penal de Operador y Salvaguarda de Unidades',
-      challenge: 'Un operador de tractocamión de una empresa logística colisionó en autopista federal causando un deceso. El chofer fue detenido penalmente y las autoridades retuvieron el camión y su remolque, amenazando la operación comercial.',
-      strategy: 'El equipo de defensa de SCA asistió penalmente al operador en menos de 90 minutos, obtuvo su libertad bajo fianza, negoció la liberación física de la unidad y deslindó a la transportista de responsabilidad solidaria.',
-      result: 'Se recuperó el tractocamión en 48 horas previniendo pérdidas por demora de entrega de $600,000 MXN y el juicio del operador se condujo bajo amparo penal exitosamente.'
-    },
+    challenges: [
+      {
+        title: 'Operadores y Choferes',
+        desc: 'Contratos especiales para operadores de autotransporte con jornadas discontinuas y viáticos.',
+        icon: 'CarFront',
+        caseStudy: {
+          title: 'Contratación de Choferes de Carga Federal',
+          challenge: 'Una empresa transportista sufría demandas de choferes alegando despido injustificado tras no reportar bitácoras de viaje.',
+          strategy: 'SCA implementó contratos individuales detallando viáticos y la rescisión por omisión de bitácoras oficiales.',
+          result: 'Sentencias favorables en juicio al acreditarse la falta de probidad por abandono de ruta.'
+        }
+      },
+      {
+        title: 'Accidentes Viales',
+        desc: 'Protocolo de respuesta inmediata ante accidentes, gestión ante aseguradoras y defensa penal del operador.',
+        icon: 'AlertTriangle',
+        caseStudy: {
+          title: 'Atención de Accidente con Pérdida Humana',
+          challenge: 'Un chofer de tractocamión colisionó en autopista federal; la fiscalía detuvo la unidad con mercancía perecedera.',
+          strategy: 'La defensa legal de SCA liberó al chofer bajo fianza y recuperó la unidad y carga en menos de 48 horas.',
+          result: 'Evitación de pérdidas de carga por $800k MXN y deslinde patronal de responsabilidad penal.'
+        }
+      },
+      {
+        title: 'Jornadas Discontinuas',
+        desc: 'Estructura legal de jornadas especiales para operadores de transporte conforme al Reglamento de Autotransporte.',
+        icon: 'Route',
+        caseStudy: {
+          title: 'Regulación de Tiempos de Espera',
+          challenge: 'Un ex-chofer demandó el cobro de horas extra acumuladas durante los tiempos de carga y descarga en aduana.',
+          strategy: 'Acreditamos la jornada discontinua regulada en la LFT de autotransporte, con viáticos pagados por espera.',
+          result: 'El Tribunal absolvió el pago de horas extra extraordinarias al reconocer la naturaleza del transporte.'
+        }
+      },
+      {
+        title: 'Permisos y Regulación SCT',
+        desc: 'Cumplimiento de obligaciones laborales derivadas de permisos de la Secretaría de Comunicaciones y Transportes.',
+        icon: 'FileCheck',
+        caseStudy: {
+          title: 'Defensa ante Revocación de Permiso SCT',
+          challenge: 'La SCT inició proceso de revocación de permiso de carga por operador detectado conduciendo sin licencia federal vigente.',
+          strategy: 'SCA interpuso recurso administrativo demostrando que el operador falsificó el documento y la firma ejerció debida diligencia.',
+          result: 'Mantenimiento de la licencia de transporte activa y multa mínima de deslinde patronal.'
+        }
+      }
+    ],
     faqs: [
       { q: '¿Cómo regular legalmente las jornadas discontinuas de choferes federales?', a: 'La LFT contempla un capítulo especial para autotransporte. Se permite pactar salario por viaje o kilometraje, pero es indispensable contar con bitácoras de horas de conducción firmadas por el chofer.' },
       { q: '¿Cómo rescindir justificadamente a un operador que da positivo en antidoping?', a: 'Se debe realizar la prueba bajo un laboratorio clínico autorizado por la SCT/STPS, levantar el acta administrativa de rescisión con presencia de testigos y dar aviso al sindicato o notificar individualmente.' },
@@ -372,7 +644,7 @@ export const industries = [
         weight: 30
       }
     ]
-  },
+  }
 ];
 
 /**

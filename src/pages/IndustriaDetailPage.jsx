@@ -79,6 +79,8 @@ export default function IndustriaDetailPage() {
 
   if (!industry) return <Navigate to="/industrias" replace />;
 
+  const activeCaseStudy = industry.challenges[activeChallenge]?.caseStudy || industry.challenges[0]?.caseStudy;
+
   const relatedServices = industry.relatedServiceSlugs
     .map(s => getServiceBySlug(s))
     .filter(Boolean);
@@ -409,7 +411,7 @@ export default function IndustriaDetailPage() {
                 <Award size={13} />
                 Caso de Éxito Documentado
               </div>
-              <h3 className="case-study-title">{industry.caseStudy.title}</h3>
+              <h3 className="case-study-title">{activeCaseStudy.title}</h3>
               
               <div className="case-study-grid">
                 <div className="case-study-part">
@@ -417,7 +419,7 @@ export default function IndustriaDetailPage() {
                     <span className="part-dot bg-red" />
                     El Desafío
                   </h4>
-                  <p className="case-study-part-text">{industry.caseStudy.challenge}</p>
+                  <p className="case-study-part-text">{activeCaseStudy.challenge}</p>
                 </div>
 
                 <div className="case-study-part">
@@ -425,7 +427,7 @@ export default function IndustriaDetailPage() {
                     <span className="part-dot bg-blue" />
                     La Estrategia SCA
                   </h4>
-                  <p className="case-study-part-text">{industry.caseStudy.strategy}</p>
+                  <p className="case-study-part-text">{activeCaseStudy.strategy}</p>
                 </div>
 
                 <div className="case-study-part highlight">
@@ -433,7 +435,7 @@ export default function IndustriaDetailPage() {
                     <span className="part-dot bg-green" />
                     El Resultado
                   </h4>
-                  <p className="case-study-part-text">{industry.caseStudy.result}</p>
+                  <p className="case-study-part-text">{activeCaseStudy.result}</p>
                 </div>
               </div>
             </div>

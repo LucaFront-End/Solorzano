@@ -5,7 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useCountUp } from '../hooks/useCountUp';
 import LucideIcon from '../components/LucideIcon';
 import CTABanner from '../components/CTABanner';
-import ParticleCanvas from '../components/ParticleCanvas';
+import PageHero from '../components/PageHero';
 import {
   ArrowRight, Building2, Users, MapPin, Calculator, ShieldAlert,
   Percent, TrendingDown, HelpCircle, CheckCircle, Smartphone, Flame,
@@ -363,36 +363,12 @@ export default function IndustriasPage() {
 
   return (
     <>
-      {/* ── Immersive Hero ── */}
-      <section className={`ind-hero ${heroVisible ? 'is-visible' : ''}`} ref={heroRef}>
-        <div className="ind-hero__grid-pattern" aria-hidden="true" />
-        <ParticleCanvas />
-        <div className="ind-hero__orb ind-hero__orb--1" aria-hidden="true" />
-        <div className="ind-hero__orb ind-hero__orb--2" aria-hidden="true" />
-
-        <div className="container ind-hero__content">
-          <nav className="ind-hero__breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">Inicio</Link>
-            <span className="ind-hero__breadcrumb-sep">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </span>
-            <span>Industrias</span>
-          </nav>
-
-          <div className="ind-hero__badge reveal">
-            <Building2 size={14} strokeWidth={2} />
-            Soluciones Corporativas Especializadas
-          </div>
-
-          <h1 className="ind-hero__title reveal">
-            Industrias que <span className="text-accent">Blindamos Legalmente</span>
-          </h1>
-
-          <p className="ind-hero__subtitle reveal">
-            Asesoría estratégica en derecho laboral, inspecciones y relaciones colectivas adaptada a la naturaleza de operación de cada sector industrial de México.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Cobertura Sectorial"
+        title="Industrias que Blindamos Legalmente"
+        subtitle="Asesoría estratégica en derecho laboral, inspecciones y relaciones colectivas adaptada a la naturaleza de operación de cada sector industrial de México."
+        breadcrumb="Industrias"
+      />
 
       {/* ── Stats Bar ── */}
       <section className="ind-stats-bar">
