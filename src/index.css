@@ -286,44 +286,49 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
 
 @media (max-width: 768px) {
   :root {
-    --section-padding: 56px;
+    --section-padding: 48px;
   }
   
   .container {
-    padding: 0 20px;
+    padding: 0 16px;
   }
   
   .section-label {
-    font-size: 0.72rem;
-    margin-bottom: 14px;
-    gap: 8px;
+    font-size: 0.7rem;
+    margin-bottom: 12px;
+    gap: 6px;
+    letter-spacing: 0.08em;
   }
   
   .section-label::before {
-    width: 20px;
+    width: 16px;
   }
   
   .section-title {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    line-height: 1.15;
   }
   
   .section-subtitle {
     font-size: 0.95rem;
-    line-height: 1.65;
+    line-height: 1.6;
   }
   
   .btn {
-    padding: 13px 28px;
-    font-size: 0.88rem;
-    gap: 8px;
+    padding: 16px 24px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    justify-content: center;
   }
   
   h2 {
-    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-size: clamp(1.8rem, 8vw, 2.2rem);
   }
   
   h3 {
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-size: clamp(1.3rem, 5vw, 1.5rem);
   }
 }
+
 

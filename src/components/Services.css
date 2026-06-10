@@ -182,48 +182,93 @@
   }
 }
 
+/* ── NATIVE APP MOBILE OVERHAUL ── */
 @media (max-width: 768px) {
   .services__cards {
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
+    background: var(--color-bg-white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border-light);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
   }
 
   .services__card {
-    padding: 24px 20px;
+    padding: 20px 24px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--color-border-light);
+    background: transparent;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "icon title link";
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+  
+  .services__card:last-child {
+    border-bottom: none;
   }
   
   .services__card-header {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-area: icon;
+  }
+  
+  .services__card-number {
+    display: none;
   }
   
   .services__card-icon {
     width: 48px;
     height: 48px;
-    font-size: 1.6rem;
-    border-radius: var(--radius-md);
-  }
-  
-  .services__card-number {
-    font-size: 2rem;
+    background: var(--color-bg-cream);
+    margin: 0;
   }
   
   .services__card-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
+    margin: 0;
+    grid-area: title;
   }
   
-  .services__card-desc {
-    font-size: 0.95rem;
+  /* Hide verbose content for a clean list view */
+  .services__card-desc,
+  .services__card-list {
+    display: none;
+  }
+  
+  .services__card-link {
+    grid-area: link;
+    font-size: 0; /* Hide text, keep only icon */
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+  
+  /* Make the entire row tappable */
+  .services__card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  
+  .services__card-link svg {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+  }
+
+  .services__header {
     margin-bottom: 16px;
   }
-  
-  .services__card-list {
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .services__card-list li {
-    font-size: 0.88rem;
+
+  .services__cta {
+    width: 100%;
+    justify-content: center;
   }
 }
+

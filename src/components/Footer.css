@@ -125,72 +125,92 @@
   text-decoration: underline;
 }
 
+/* ── NATIVE APP MOBILE OVERHAUL ── */
 @media (max-width: 768px) {
   .footer {
-    padding: 56px 0 24px;
+    padding: 64px 0 32px;
   }
 
   .footer__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    margin-bottom: 32px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
   }
   
   .footer__brand {
-    grid-column: 1 / -1;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-border-dark);
   }
   
   .footer__brand-desc {
-    max-width: 320px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
   }
   
+  .footer__col {
+    align-items: flex-start;
+  }
+
   .footer__col-title {
-    font-size: 0.78rem;
-    margin-bottom: 14px;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    color: var(--color-text-white);
   }
   
-  .footer__col li,
-  .footer__col a,
-  .footer__col span {
-    font-size: 0.82rem;
+  .footer__col ul {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .footer__col li {
+    width: 100%;
+  }
+
+  /* Make links look like app list items */
+  .footer__col a {
+    display: block;
+    padding: 10px 0;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer__col li:last-child a {
+    border-bottom: none;
   }
   
   .footer__social {
-    justify-content: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+    gap: 20px;
+  }
+
+  .footer__social a {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.02);
   }
 
   .footer__bottom {
-    padding-top: 24px;
+    padding-top: 32px;
   }
 
   .footer__disclaimer {
-    font-size: 0.7rem;
-    margin-bottom: 16px;
+    font-size: 0.75rem;
+    margin-bottom: 24px;
+    text-align: left;
   }
 
   .footer__bottom-row {
     flex-direction: column;
-    gap: 6px;
-    text-align: center;
-    font-size: 0.75rem;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    font-size: 0.8rem;
   }
 }
 
-@media (max-width: 480px) {
-  .footer__grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .footer__col {
-    align-items: center;
-  }
-  
-  .footer__col ul {
-    align-items: center;
-  }
-}
 

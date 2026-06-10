@@ -398,50 +398,62 @@ a.ctc-info__card:hover .ctc-info__icon {
   .ctc-form-grid { grid-template-columns: 1fr; }
 }
 
+/* ── NATIVE APP MOBILE OVERHAUL ── */
 @media (max-width: 768px) {
   .ctc-info__grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .ctc-info {
     margin-top: -30px;
+    padding: 0 16px;
+    background: transparent;
   }
 
   .ctc-info__card {
-    padding: 24px 20px;
-    gap: 12px;
+    padding: 16px;
+    gap: 8px;
     border-radius: var(--radius-lg);
+    border: none;
+    background: var(--color-bg-white);
+    box-shadow: var(--shadow-sm);
   }
 
   .ctc-info__icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 4px;
   }
 
   .ctc-info__label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .ctc-info__value {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
+  /* Form flows with the page, no outer card */
   .ctc-form {
-    padding: 28px 20px;
-    border-radius: var(--radius-lg);
+    padding: 32px 16px 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   .ctc-form__header {
     margin-bottom: 24px;
+    text-align: left;
   }
 
   .ctc-form__header h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .ctc-form__header p {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
 
   .ctc-form__row {
@@ -455,21 +467,32 @@ a.ctc-info__card:hover .ctc-info__icon {
   }
 
   .ctc-field span {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
   }
 
   .ctc-field input,
   .ctc-field select,
   .ctc-field textarea {
-    padding: 12px 16px;
-    font-size: 0.92rem;
+    padding: 14px 16px;
+    font-size: 1rem;
+    background: var(--color-bg-cream);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
   }
 
   .ctc-form__submit {
     width: 100%;
     justify-content: center;
-    padding: 14px 24px;
-    font-size: 0.9rem;
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-radius: var(--radius-full);
+    margin-top: 16px;
+  }
+
+  .ctc-sidebar {
+    padding: 0 16px;
+    margin-top: 32px;
   }
 
   .ctc-wa-card {
@@ -495,6 +518,8 @@ a.ctc-info__card:hover .ctc-info__icon {
   .ctc-trust {
     padding: 28px 24px;
     border-radius: var(--radius-lg);
+    background: var(--color-bg-cream);
+    border: none;
   }
 
   .ctc-trust h4 {
@@ -502,22 +527,37 @@ a.ctc-info__card:hover .ctc-info__icon {
   }
 
   .ctc-trust__item {
-    font-size: 0.82rem;
-    padding: 8px 0;
+    font-size: 0.85rem;
+    padding: 10px 0;
+    border-color: rgba(0,0,0,0.05);
   }
 
   .ctc-faq__header {
     margin-bottom: 32px;
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  .ctc-faq__list {
+    padding: 0 16px;
+  }
+
+  .ctc-faq__item {
+    border: none;
+    border-bottom: 1px solid var(--color-border-light);
+    border-radius: 0;
+    background: transparent;
   }
 
   .ctc-faq__question {
-    padding: 16px 18px;
-    font-size: 0.92rem;
+    padding: 20px 0;
+    font-size: 1rem;
   }
 
   .ctc-faq__answer p {
-    padding: 0 18px 16px;
-    font-size: 0.85rem;
+    padding: 0 0 24px;
+    font-size: 0.95rem;
   }
 }
+
 
