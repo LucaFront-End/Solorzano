@@ -41,6 +41,12 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+    setMobileDropdownOpen(false);
+  }, [location.pathname]);
+
   // Close dropdown on outside click
   useEffect(() => {
     const onClick = (e) => {

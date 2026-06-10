@@ -687,6 +687,13 @@
   }
 }
 
+@media (min-width: 1025px) {
+  .navbar__drawer,
+  .navbar__backdrop {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .navbar__links,
   .navbar__actions {
@@ -697,4 +704,5 @@
     display: flex;
   }
 }
+
 
