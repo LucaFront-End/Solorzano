@@ -83,7 +83,9 @@ export default function ComunidadPage() {
   const heroRef = useScrollReveal();
   const blogRef = useScrollReveal();
   const featRef = useScrollReveal();
-  const skoolRef = useScrollReveal();
+  const simulatorRef = useScrollReveal();
+  const eventsRef = useScrollReveal();
+  const ctaRef = useScrollReveal();
   
   const [heroVisible, setHeroVisible] = useState(false);
 
@@ -503,7 +505,7 @@ export default function ComunidadPage() {
       </section>
 
       {/* ── Section 3: Interactive Skool Classroom Preview ── */}
-      <section className="section com-classroom-simulator" ref={skoolRef}>
+      <section className="section com-classroom-simulator" ref={simulatorRef}>
         <div className="container">
           <div className="simulator-header reveal">
             <span className="section-label">Plataforma Educativa</span>
@@ -599,7 +601,7 @@ export default function ComunidadPage() {
       </section>
 
       {/* ── Section 4: Upcoming Event Calendar ── */}
-      <section className="section section--cream com-events-sec">
+      <section className="section section--cream com-events-sec" ref={eventsRef}>
         <div className="container">
           <div className="events-sec-header reveal">
             <span className="section-label">Agenda en Vivo</span>
@@ -670,7 +672,7 @@ export default function ComunidadPage() {
       </section>
 
       {/* ── Skool CTA Hero ── */}
-      <section className="com-skool-cta" ref={skoolRef}>
+      <section className="com-skool-cta" ref={ctaRef}>
         <div className="com-skool-cta__pattern" aria-hidden="true" />
         <div className="com-skool-cta__orb com-skool-cta__orb--1" aria-hidden="true" />
         <div className="com-skool-cta__orb com-skool-cta__orb--2" aria-hidden="true" />

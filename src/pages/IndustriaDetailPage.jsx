@@ -22,9 +22,10 @@ export default function IndustriaDetailPage() {
   const { slug } = useParams();
   const industry = getIndustryBySlug(slug);
   const challengesReveal = useScrollReveal();
-  const servicesReveal = useScrollReveal();
-  const whyReveal = useScrollReveal();
+  const timelineReveal = useScrollReveal();
   const quizReveal = useScrollReveal();
+  const servicesReveal = useScrollReveal();
+  const faqReveal = useScrollReveal();
   
   const progressRef = useRef(null);
   const sectionsRef = useRef([]);
@@ -444,7 +445,7 @@ export default function IndustriaDetailPage() {
       <section
         className="section section--white inddet-timeline-sec"
         id="cronograma"
-        ref={(el) => { sectionsRef.current[1] = el; }}
+        ref={(el) => { timelineReveal.current = el; sectionsRef.current[1] = el; }}
       >
         <div className="container">
           <div className="inddet-timeline__header reveal">
@@ -638,7 +639,7 @@ export default function IndustriaDetailPage() {
       <section
         className="section section--white inddet-faq-sec"
         id="faq"
-        ref={(el) => { sectionsRef.current[4] = el; }}
+        ref={(el) => { faqReveal.current = el; sectionsRef.current[4] = el; }}
       >
         <div className="container">
           <div className="inddet-faq__header reveal">
