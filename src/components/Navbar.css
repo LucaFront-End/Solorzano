@@ -418,7 +418,20 @@
   cursor: pointer;
   background: none;
   border: none;
-  font: inherit;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.navbar__mobile-link--dropdown-trigger:hover,
+.navbar__mobile-links a:hover {
+  color: var(--color-accent);
 }
 
 .navbar__mobile-accordion {
@@ -447,11 +460,12 @@
 }
 
 .navbar__mobile-accordion-category {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--color-accent);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
 }
 
 .navbar__mobile-accordion-section ul {
@@ -462,10 +476,10 @@
 }
 
 .navbar__mobile-accordion-section a {
-  font-size: 1.05rem !important;
+  font-size: 0.95rem !important;
   font-weight: 500 !important;
-  color: rgba(255, 255, 255, 0.6) !important;
-  padding: 6px 16px !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 8px 16px !important;
   display: inline-block !important;
 }
 
@@ -476,7 +490,7 @@
 .navbar__mobile-more {
   color: var(--color-accent) !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
 }
 
 /* Hamburger */
@@ -535,7 +549,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 120px 24px 48px;
+  padding: 100px 24px 48px;
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
@@ -570,17 +584,13 @@
 
 .navbar__mobile-links a {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
   padding: 10px 24px;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
   display: inline-block;
-}
-
-.navbar__mobile-links a:hover {
-  color: var(--color-accent);
 }
 
 /* Mobile Dropdown */
@@ -594,19 +604,19 @@
 
 .navbar__mobile-group-label {
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--color-accent);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   padding: 12px 24px 4px;
 }
 
 .navbar__mobile-sub-link {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   padding: 8px 24px;
   transition: all var(--transition-fast);
 }
