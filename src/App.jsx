@@ -21,6 +21,9 @@ import ContactoPage from './pages/ContactoPage';
 import FormularioPage from './pages/FormularioPage';
 import TerminosCitatoriosPage from './pages/TerminosCitatoriosPage';
 import TicketsDiligenciasPage from './pages/TicketsDiligenciasPage';
+import IndustriasPage from './pages/IndustriasPage';
+import IndustriaDetailPage from './pages/IndustriaDetailPage';
+import ComunidadPage from './pages/ComunidadPage';
 
 function HomePage() {
   return (
@@ -49,6 +52,9 @@ export default function App() {
         <Route path="/servicios" element={<ServiciosPage />} />
         <Route path="/servicios/:serviceId" element={<ServiceDetail />} />
         <Route path="/servicios-derecho/:slug" element={<CMSServiceDetail />} />
+        <Route path="/industrias" element={<IndustriasPage />} />
+        <Route path="/industrias/:slug" element={<IndustriaDetailPage />} />
+        <Route path="/comunidad" element={<ComunidadPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />

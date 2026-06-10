@@ -34,7 +34,7 @@ export const navLinks = [
       { label: 'Solicitud de Finiquitos', href: '/formularios/solicitud-de-finiquitos' },
     ],
   },
-  { label: 'Comunidad', href: '/#comunidad' },
+  { label: 'Comunidad', href: '/comunidad' },
   { label: 'Contacto', href: '/contacto' },
 ];
 
