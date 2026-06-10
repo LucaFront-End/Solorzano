@@ -14,7 +14,6 @@ const dropdownCategories = cmsCategories.map(cat => ({
   items: cat.items.filter(s => s.isComplete).slice(0, DROPDOWN_MAX_ITEMS).map(s => ({
     label: s.title,
     href: `/servicios-derecho/${s.slug}`,
-    desc: s.excerpt ? s.excerpt.substring(0, 60) + (s.excerpt.length > 60 ? '…' : '') : '',
   })),
   totalCount: cat.items.length,
   hasMore: cat.items.length > DROPDOWN_MAX_ITEMS,
@@ -128,7 +127,6 @@ export default function Navbar() {
                               <li key={item.href}>
                                 <Link to={item.href} className="navbar__dropdown-link" onClick={() => setDesktopDropdownOpen(false)}>
                                   <span className="navbar__dropdown-link-title">{item.label}</span>
-                                  <span className="navbar__dropdown-link-desc">{item.desc}</span>
                                 </Link>
                               </li>
                             ))}
