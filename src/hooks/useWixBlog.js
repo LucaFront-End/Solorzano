@@ -55,7 +55,7 @@ export function useWixPost(slug) {
     wixClient.posts.getPostBySlug(slug)
       .then((res) => {
         if (cancelled) return;
-        setPost(normalizePosts(res));
+        setPost(normalizePosts(res.post || res));
       })
       .catch((err) => {
         if (cancelled) return;
@@ -73,15 +73,28 @@ export function useWixPost(slug) {
 }
 
 function normalizePosts(p) {
+  // Extract cover image from wix:image:// URI string
+  let coverImage = '';
+  const wixImageUri = p.media?.wixMedia?.image;
+  if (typeof wixImageUri === 'string' && wixImageUri.startsWith('wix:image://')) {
+    // Format: wix:image://v1/{imageId}/{filename}#params
+    const match = wixImageUri.match(/wix:image:\/\/v1\/([^/]+)/);
+    if (match) {
+      coverImage = `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_800,h_533,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
+    }
+  } else if (typeof wixImageUri === 'string' && wixImageUri.startsWith('http')) {
+    coverImage = wixImageUri;
+  } else if (p.coverImage) {
+    coverImage = p.coverImage;
+  }
+
   return {
     id: p._id,
     title: p.title || '',
     slug: p.slug || '',
     excerpt: p.excerpt || p.title || '',
     content: p.richContent || null,
-    coverImage: p.media?.wixMedia?.image?.url
-      ? `https://static.wixstatic.com/media/${p.media.wixMedia.image.url.replace('wix:image://v1/', '').split('/')[0]}/v1/fill/w_800,h_533,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`
-      : (p.heroImage || ''),
+    coverImage,
     publishedDate: p.firstPublishedDate
       ? new Date(p.firstPublishedDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })
       : '',
@@ -91,3 +104,4 @@ function normalizePosts(p) {
     wixUrl: p.url || '',
   };
 }
+

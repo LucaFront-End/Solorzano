@@ -69,20 +69,17 @@ export default function BlogPostPage() {
           <main className="blog-post__main">
             <p className="blog-post__excerpt">{post.excerpt}</p>
 
-            {/* If content is available render it, otherwise redirect to Wix */}
-            {post.wixUrl ? (
-              <div className="blog-post__redirect-notice">
-                <p>Para leer el artículo completo, visita nuestro blog oficial.</p>
-                <a
-                  href={post.wixUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn--primary"
-                >
-                  Leer artículo completo →
-                </a>
-              </div>
-            ) : null}
+            <div className="blog-post__redirect-notice">
+              <p>Para leer el artículo completo con todos los detalles, visita nuestro blog.</p>
+              <a
+                href={post.wixUrl || `https://www.dsc.mx/post/${post.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--primary"
+              >
+                Leer artículo completo →
+              </a>
+            </div>
           </main>
 
           {/* Sidebar CTA */}
