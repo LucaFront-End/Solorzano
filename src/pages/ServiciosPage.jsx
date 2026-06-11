@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mercantileContent, siteConfig } from '../data/content';
-import { cmsCategories } from '../data/cmsServices';
+import { useWixServices } from '../hooks/useWixServices';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import LucideIcon from '../components/LucideIcon';
 import PageHero from '../components/PageHero';
@@ -57,6 +57,7 @@ function ServiceCategory({ cat, index, isOpen, onToggle }) {
 
 export default function ServiciosPage() {
   const [openCat, setOpenCat] = useState(0);
+  const { categories: cmsCategories, loading } = useWixServices();
   const catRef = useScrollReveal();
   const mercRef = useScrollReveal();
   const procRef = useScrollReveal();
