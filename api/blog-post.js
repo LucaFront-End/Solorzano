@@ -1,39 +1,33 @@
 /**
  * Vercel Serverless Function — /api/blog-post
- * Proxies Wix Blog getPostBySlug server-side to avoid CORS restrictions.
+ * Uses the @wix/sdk directly in Node.js (no CORS restriction server-side).
+ * Fetches a single post with RICH_CONTENT and converts it to HTML.
  * Query params: ?slug=mi-articulo
  */
+import { createClient, OAuthStrategy } from '@wix/sdk';
+import { posts } from '@wix/blog';
 
-const WIX_CLIENT_ID = '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e';
-const WIX_TOKEN_URL = 'https://www.wixapis.com/oauth2/token';
+const wixClient = createClient({
+  modules: { posts },
+  auth: OAuthStrategy({
+    clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
+  }),
+});
 
-async function getWixToken() {
-  const res = await fetch(WIX_TOKEN_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      clientId: WIX_CLIENT_ID,
-      grantType: 'anonymous',
-    }),
-  });
-  if (!res.ok) throw new Error(`Token fetch failed: ${res.status}`);
-  const data = await res.json();
-  return data.access_token;
-}
-
-function resolveWixImageSrc(wixUri) {
-  if (!wixUri) return '';
-  if (typeof wixUri === 'string' && wixUri.startsWith('wix:image://')) {
-    const match = wixUri.match(/wix:image:\/\/v1\/([^/]+)/);
+/* ── Image helpers ── */
+function resolveWixImageSrc(uri) {
+  if (!uri) return '';
+  if (typeof uri === 'string' && uri.startsWith('wix:image://')) {
+    const match = uri.match(/wix:image:\/\/v1\/([^/]+)/);
     if (match) {
       return `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_900,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
     }
   }
-  if (typeof wixUri === 'string' && wixUri.startsWith('http')) return wixUri;
+  if (typeof uri === 'string' && uri.startsWith('http')) return uri;
   return '';
 }
 
-/** Converts a Wix Ricos richContent document to clean HTML */
+/* ── Ricos → HTML renderer ── */
 function ricosToHtml(doc) {
   if (!doc || !Array.isArray(doc.nodes)) return '';
   return doc.nodes.map(nodeToHtml).filter(Boolean).join('\n');
@@ -82,8 +76,7 @@ function nodeToHtml(node) {
       const td = node.textData || {};
       let text = escapeHtml(td.text || '');
       if (!text) return '';
-      const decorations = td.decorations || [];
-      for (const dec of decorations) {
+      for (const dec of (td.decorations || [])) {
         if (dec.type === 'BOLD') text = `<strong>${text}</strong>`;
         if (dec.type === 'ITALIC') text = `<em>${text}</em>`;
         if (dec.type === 'UNDERLINE') text = `<u>${text}</u>`;
@@ -95,8 +88,7 @@ function nodeToHtml(node) {
         if (dec.type === 'LINK' && dec.linkData?.link?.url) {
           const url = dec.linkData.link.url;
           const target = dec.linkData.link.target === 'BLANK'
-            ? ' target="_blank" rel="noopener noreferrer"'
-            : '';
+            ? ' target="_blank" rel="noopener noreferrer"' : '';
           text = `<a href="${url}"${target}>${text}</a>`;
         }
       }
@@ -115,6 +107,7 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+/* ── Post normalizer ── */
 function normalizePost(p) {
   let coverImage = '';
   const wixImageUri = p.media?.wixMedia?.image;
@@ -129,7 +122,10 @@ function normalizePost(p) {
     contentHtml: p.richContent ? ricosToHtml(p.richContent) : '',
     coverImage,
     publishedDate: p.firstPublishedDate
-      ? new Date(p.firstPublishedDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })
+      ? new Date(p.firstPublishedDate).toLocaleDateString('es-MX', {
+          month: 'long',
+          year: 'numeric',
+        })
       : '',
     readingTime: p.minutesToRead ? `${p.minutesToRead} min` : '5 min',
     categories: p.categoryIds || [],
@@ -138,6 +134,7 @@ function normalizePost(p) {
   };
 }
 
+/* ── Handler ── */
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -147,25 +144,12 @@ export default async function handler(req, res) {
   if (!slug) return res.status(400).json({ error: 'Missing slug' });
 
   try {
-    const token = await getWixToken();
+    const result = await wixClient.posts.getPostBySlug(slug, {
+      fieldsets: ['RICH_CONTENT'],
+    });
 
-    const wixRes = await fetch(
-      `https://www.wixapis.com/blog/v3/posts/slugs/${encodeURIComponent(slug)}?fieldsets=RICH_CONTENT`,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    if (!wixRes.ok) {
-      const text = await wixRes.text();
-      throw new Error(`Wix API error ${wixRes.status}: ${text}`);
-    }
-
-    const data = await wixRes.json();
-    const post = normalizePost(data.post || data);
+    const raw = result.post || result;
+    const post = normalizePost(raw);
     res.status(200).json({ post });
   } catch (err) {
     console.error('[api/blog-post]', err);
