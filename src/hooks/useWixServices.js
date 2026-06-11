@@ -13,7 +13,7 @@ import {
   getServiceBySlug as csvGetBySlug,
 } from '../data/cmsServices';
 
-const COLLECTION_ID = 'Servicios Derecho Solorzano';
+const COLLECTION_ID = 'ServiciosDerechoSolorzano';
 
 // Category icon mapping (Lucide icon names)
 const categoryIcons = {
@@ -77,17 +77,21 @@ function parseSteps(f) {
 }
 
 function normalizeService(item) {
+  // Wix SDK returns flat items (no nested .data property)
   const f = item.data || item;
-  const serviceName = f.servicio || f.titulo || '';
+  const serviceName = f.servicio || f.title || f.titulo || '';
   const slug = f.slug || generateSlug(serviceName);
-  const category = f['categor\u00eda'] || f.categoría || f.categoria || '';
-  const excerpt = f.excerptCorto || f['excerpt corto'] || '';
-  const description = f.descricpionAmplia || f['descricpi\u00f3n amplia'] || f['descricpión amplia'] || '';
-  const whyCrucial = f.porqueEsCrucialParaTuEmpresa || f['porque es crucial para tu empresa'] || '';
-  const includesRaw = f.queIncluye || f['que incluye'] || '';
+  // Wix CMS uses 'categora' (no accent) as the field name
+  const category = f.categora || f.categoría || f.categoria || '';
+  const excerpt = f.excerptCorto || '';
+  // Wix CMS uses 'descricpinAmplia' (typo in CMS, no 'o')
+  const description = f.descricpinAmplia || f.descricpionAmplia || '';
+  const whyCrucial = f.porqueEsCrucialParaTuEmpresa || '';
+  // Wix CMS uses 'richtext' for the "que incluye" bullets
+  const includesRaw = f.richtext || f.queIncluye || '';
 
   return {
-    id: item._id || f._id || '',
+    id: f._id || item._id || '',
     slug,
     title: serviceName,
     category,
@@ -96,17 +100,19 @@ function normalizeService(item) {
     description: stripHTML(description),
     whyCrucial: stripHTML(whyCrucial),
     includes: parseIncludes(includesRaw),
-    processIntro: stripHTML(f.nuestroProceso || f['nuestro proceso'] || ''),
+    processIntro: stripHTML(f.nuestroProceso || ''),
     steps: parseSteps(f),
-    whatsappUrl: f.urlDeWhatsApp || f['url de whatsapp'] || '',
-    imageUrl: transformWixImageUrl(f.imagenServicio || f['imagen servicio'] || ''),
+    whatsappUrl: f.urlDeWhatsApp || '',
+    imageUrl: transformWixImageUrl(f.imagenServicio || ''),
+    // Wix CMS uses 'apareceEnPgina' (no accent)
     appearsOnPage:
-      (f.apareceEnPagina || f['aparece en p\u00e1gina'] || f['aparece en página'] || '')
+      (f.apareceEnPgina || f.apareceEnPagina || '')
         .toString().toUpperCase() === 'SI' ||
+      f.apareceEnPgina === true ||
       f.apareceEnPagina === true,
     isComplete: !!(excerpt && description),
-    seoTitle: f.tituloDeSeo || f['titulo de seo'] || '',
-    seoDescription: f.metaDescripcionDeSEO || f['meta descripcion de seo'] || '',
+    seoTitle: f.tituloDeSeo || '',
+    seoDescription: f.metaDescripcionDeSEO || '',
   };
 }
 
@@ -119,13 +125,15 @@ export function useWixServices() {
   useEffect(() => {
     let cancelled = false;
 
+    // Wix SDK v2: use .query(collectionId).limit(n).find()
     wixClient.items
-      .queryDataItems({ dataCollectionId: COLLECTION_ID })
+      .query(COLLECTION_ID)
       .limit(100)
       .find()
       .then((res) => {
         if (cancelled) return;
-        const normalized = res.items
+        const rawItems = res.items || res._items || [];
+        const normalized = rawItems
           .map(normalizeService)
           .filter(s => s.title);
 
@@ -134,7 +142,6 @@ export function useWixServices() {
           setSource('wix');
           console.log(`[useWixServices] ✅ Loaded ${normalized.length} services from Wix CMS`);
         } else {
-          // Wix returned empty — keep CSV fallback
           console.warn('[useWixServices] Wix returned 0 items, using CSV fallback');
           setSource('csv');
         }
@@ -144,7 +151,6 @@ export function useWixServices() {
         if (!cancelled) {
           setError(err);
           setSource('csv');
-          // services already initialized with csvServices
         }
       })
       .finally(() => {
