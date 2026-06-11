@@ -97,16 +97,7 @@ export default function ComunidadPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Search & Filter Logic
-  useEffect(() => {
-    const result = blogPosts.filter(post => {
-      const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = activeCategory === 'todos' || post.category === activeCategory;
-      return matchesSearch && matchesCategory;
-    });
-    setFilteredPosts(result);
-  }, [searchQuery, activeCategory]);
+
 
   useEffect(() => {
     document.title = 'Comunidad de Relaciones Laborales — Solórzano Cerezo';
