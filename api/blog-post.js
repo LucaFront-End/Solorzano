@@ -7,20 +7,22 @@
 import { createClient, OAuthStrategy } from '@wix/sdk';
 import { posts } from '@wix/blog';
 
-const wixClient = createClient({
-  modules: { posts },
-  auth: OAuthStrategy({
-    clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
-  }),
-});
+function makeWixClient() {
+  return createClient({
+    modules: { posts },
+    auth: OAuthStrategy({
+      clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
+    }),
+  });
+}
 
-/* ── Image helpers ── */
 function resolveWixImageSrc(uri) {
   if (!uri) return '';
   if (typeof uri === 'string' && uri.startsWith('wix:image://')) {
     const match = uri.match(/wix:image:\/\/v1\/([^/]+)/);
     if (match) {
-      return `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_900,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
+      // Must include both w_ and h_ for Wixstatic v1/fill to work correctly
+      return `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_1200,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
     }
   }
   if (typeof uri === 'string' && uri.startsWith('http')) return uri;
@@ -142,6 +144,9 @@ export default async function handler(req, res) {
 
   const { slug } = req.query;
   if (!slug) return res.status(400).json({ error: 'Missing slug' });
+
+  // Create a fresh client per request to avoid stale auth state in warm instances
+  const wixClient = makeWixClient();
 
   try {
     const result = await wixClient.posts.getPostBySlug(slug, {

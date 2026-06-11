@@ -6,12 +6,14 @@
 import { createClient, OAuthStrategy } from '@wix/sdk';
 import { posts } from '@wix/blog';
 
-const wixClient = createClient({
-  modules: { posts },
-  auth: OAuthStrategy({
-    clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
-  }),
-});
+function makeWixClient() {
+  return createClient({
+    modules: { posts },
+    auth: OAuthStrategy({
+      clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
+    }),
+  });
+}
 
 function resolveWixImageSrc(uri) {
   if (!uri) return '';
@@ -57,6 +59,7 @@ export default async function handler(req, res) {
 
   try {
     const limit = Math.min(Number(req.query.limit) || 6, 50);
+    const wixClient = makeWixClient();
 
     const result = await wixClient.posts
       .queryPosts()
