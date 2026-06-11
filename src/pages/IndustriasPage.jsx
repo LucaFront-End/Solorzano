@@ -359,7 +359,7 @@ export default function IndustriasPage() {
   }
 
   // Prepopulate WhatsApp text
-  const whatsappUrl = `https://wa.link/2xc5mr?text=Hola,%20realicé%20la%20evaluación%20de%20riesgo%20laboral%20para%20mi%20empresa%20en%20el%20sector%20de%20${calcSector}.%20Mi%20riesgo%20salió%20como%20${nivelRiesgo}%20(${scoreRiesgo}%)%20con%20un%20costo%20contingencia%20de%20$${costoEstimado.toLocaleString()}%20MXN.%20Me%20interesa%20saber%20cómo%20puedo%20blindarme.`;
+  const whatsappUrl = `https://wa.me/525537408757?text=Hola,%20realicé%20la%20evaluación%20de%20riesgo%20laboral%20para%20mi%20empresa%20en%20el%20sector%20de%20${calcSector}.%20Mi%20riesgo%20salió%20como%20${nivelRiesgo}%20(${scoreRiesgo}%)%20con%20un%20costo%20contingencia%20de%20$${costoEstimado.toLocaleString()}%20MXN.%20Me%20interesa%20saber%20cómo%20puedo%20blindarme.`;
 
   return (
     <>

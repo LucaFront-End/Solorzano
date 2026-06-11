@@ -48,7 +48,7 @@
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-text-dark);
+  color: #4A90D9;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 20px;
@@ -156,7 +156,7 @@
   .footer__col-title {
     font-size: 0.85rem;
     margin-bottom: 16px;
-    color: var(--color-text-white);
+    color: #4A90D9;
   }
   
   .footer__col ul {

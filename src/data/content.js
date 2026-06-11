@@ -8,7 +8,7 @@ export const siteConfig = {
   shortName: 'DSC',
   phone: '55 3740 8757',
   email: 'contacto@dsc.mx',
-  whatsapp: 'https://wa.link/2xc5mr',
+  whatsapp: 'https://wa.me/525537408757',
   address: 'Calle Gral. Juan Cano 87, San Miguel Chapultepec II, 11850 Ciudad de México, CDMX',
   mapsLink: 'https://maps.app.goo.gl/CLLKMEZnRk3wy4ix5',
   social: {
