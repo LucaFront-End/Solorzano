@@ -52,7 +52,7 @@ export function useWixPost(slug) {
     setLoading(true);
     setError(null);
 
-    wixClient.posts.getPostBySlug(slug)
+    wixClient.posts.getPostBySlug(slug, { fieldsets: ['RICH_CONTENT'] })
       .then((res) => {
         if (cancelled) return;
         setPost(normalizePosts(res.post || res));
@@ -93,7 +93,7 @@ function normalizePosts(p) {
     title: p.title || '',
     slug: p.slug || '',
     excerpt: p.excerpt || p.title || '',
-    content: p.richContent || null,
+    contentHtml: p.richContent ? ricosToHtml(p.richContent) : '',
     coverImage,
     publishedDate: p.firstPublishedDate
       ? new Date(p.firstPublishedDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })
@@ -103,5 +103,103 @@ function normalizePosts(p) {
     url: `/blog/${p.slug}`,
     wixUrl: p.url || '',
   };
+}
+
+/**
+ * ricosToHtml — converts a Wix Ricos document (richContent JSON) to clean HTML.
+ * Handles: paragraphs, headings, lists, blockquotes, code, dividers, images, links.
+ */
+function ricosToHtml(doc) {
+  if (!doc || !Array.isArray(doc.nodes)) return '';
+  return doc.nodes.map(nodeToHtml).filter(Boolean).join('\n');
+}
+
+function nodeToHtml(node) {
+  if (!node) return '';
+  const { type, nodes = [] } = node;
+
+  const innerHtml = () => nodes.map(nodeToHtml).join('');
+
+  switch (type) {
+    case 'PARAGRAPH': {
+      const text = innerHtml();
+      if (!text.trim()) return '<br />';
+      return `<p>${text}</p>`;
+    }
+    case 'HEADING': {
+      const level = node.headingData?.level || 2;
+      const tag = `h${Math.min(6, Math.max(1, level))}`;
+      return `<${tag}>${innerHtml()}</${tag}>`;
+    }
+    case 'BULLET_LIST':
+      return `<ul>${nodes.map(n => `<li>${(n.nodes || []).map(nodeToHtml).join('')}</li>`).join('')}</ul>`;
+    case 'ORDERED_LIST':
+      return `<ol>${nodes.map(n => `<li>${(n.nodes || []).map(nodeToHtml).join('')}</li>`).join('')}</ol>`;
+    case 'LIST_ITEM':
+      return innerHtml();
+    case 'BLOCKQUOTE':
+      return `<blockquote>${innerHtml()}</blockquote>`;
+    case 'CODE_BLOCK':
+      return `<pre><code>${innerHtml()}</code></pre>`;
+    case 'DIVIDER':
+      return '<hr />';
+    case 'IMAGE': {
+      // Wix image nodes use imageData.image.src (which may be a wix:image:// URI)
+      const imgData = node.imageData?.image || {};
+      const srcRaw = imgData.src?.url || imgData.src || '';
+      const src = resolveWixImageSrc(srcRaw);
+      if (!src) return '';
+      const alt = imgData.altText || node.imageData?.altText || '';
+      const caption = node.imageData?.caption
+        ? `<figcaption>${escapeHtml(node.imageData.caption)}</figcaption>`
+        : '';
+      return `<figure><img src="${src}" alt="${escapeHtml(alt)}" loading="lazy" />${caption}</figure>`;
+    }
+    case 'TEXT': {
+      // Wix TEXT nodes carry content in textData
+      const td = node.textData || {};
+      let text = escapeHtml(td.text || '');
+      if (!text) return '';
+      const decorations = td.decorations || [];
+      for (const dec of decorations) {
+        if (dec.type === 'BOLD') text = `<strong>${text}</strong>`;
+        if (dec.type === 'ITALIC') text = `<em>${text}</em>`;
+        if (dec.type === 'UNDERLINE') text = `<u>${text}</u>`;
+        if (dec.type === 'STRIKETHROUGH') text = `<s>${text}</s>`;
+        if (dec.type === 'COLOR') {
+          const color = dec.colorData?.foreground;
+          if (color) text = `<span style="color:${color}">${text}</span>`;
+        }
+        if (dec.type === 'LINK' && dec.linkData?.link?.url) {
+          const url = dec.linkData.link.url;
+          const target = dec.linkData.link.target === 'BLANK'
+            ? ' target="_blank" rel="noopener noreferrer"'
+            : '';
+          text = `<a href="${url}"${target}>${text}</a>`;
+        }
+      }
+      return text;
+    }
+    default:
+      return innerHtml() || '';
+  }
+}
+
+function resolveWixImageSrc(src) {
+  if (!src) return '';
+  if (typeof src === 'string' && src.startsWith('wix:image://')) {
+    const match = src.match(/wix:image:\/\/v1\/([^/]+)/);
+    if (match) return `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_900,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
+  }
+  if (typeof src === 'string' && src.startsWith('http')) return src;
+  return '';
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
