@@ -1,0 +1,321 @@
+/* ══════════════════════════════════════════════
+   ZONAS INDEX PAGE — Hub de landings CMS
+   ══════════════════════════════════════════════ */
+
+/* ── Hero ── */
+.zi-hero {
+  padding: 140px 0 70px;
+  background: var(--color-bg-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.zi-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(74, 144, 217, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(74, 144, 217, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.zi-hero-inner {
+  text-align: center;
+  position: relative;
+}
+
+.zi-hero-label {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(74, 144, 217, 0.08);
+  border: 1px solid rgba(74, 144, 217, 0.18);
+  padding: 6px 20px;
+  border-radius: var(--radius-full);
+  margin-bottom: 28px;
+}
+
+.zi-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.zi-hero-title em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+.zi-hero-sub {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Grid section ── */
+.zi-grid-section {
+  padding: 60px 0 100px;
+  background: var(--color-bg-dark);
+}
+
+.zi-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.zi-grid-count {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.zi-grid-count strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ── Cards grid ── */
+.zi-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ── Card ── */
+.zi-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.zi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4A90D9, #6DB3F8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.zi-card:hover {
+  border-color: rgba(74, 144, 217, 0.3);
+  background: rgba(74, 144, 217, 0.04);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.zi-card:hover::before {
+  opacity: 1;
+}
+
+/* Card header */
+.zi-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.zi-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(74, 144, 217, 0.1);
+  border: 1px solid rgba(74, 144, 217, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #4A90D9;
+}
+
+.zi-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.zi-card-zona {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.zi-card-title {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Card body */
+.zi-card-excerpt {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card actions */
+.zi-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.zi-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 16px;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-md);
+  transition: all 0.25s ease;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.zi-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.zi-btn--page {
+  background: var(--color-accent);
+  color: #fff;
+  border: 1.5px solid var(--color-accent);
+}
+
+.zi-btn--page:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.zi-btn--wa {
+  background: #25d366;
+  color: #fff;
+  border: 1.5px solid #25d366;
+}
+
+.zi-btn--wa:hover {
+  background: #1fb855;
+  border-color: #1fb855;
+  transform: translateY(-1px);
+}
+
+/* ── Loading ── */
+.zi-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+.zi-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: #4A90D9;
+  border-radius: 50%;
+  animation: ziSpin 0.7s linear infinite;
+}
+
+@keyframes ziSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Empty ── */
+.zi-empty {
+  text-align: center;
+  padding: 100px 0;
+  color: var(--color-text-muted);
+}
+
+.zi-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.zi-empty p {
+  font-size: 1rem;
+}
+
+/* ── Reveal animations ── */
+.zi-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.zi-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.zi-stagger {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.zi-stagger.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .zi-hero {
+    padding: 110px 0 50px;
+  }
+
+  .zi-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .zi-card {
+    padding: 22px 20px;
+  }
+
+  .zi-card-actions {
+    flex-direction: column;
+  }
+}
