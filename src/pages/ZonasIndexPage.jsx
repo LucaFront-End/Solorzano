@@ -106,14 +106,16 @@ export default function ZonasIndexPage() {
                         </svg>
                       </div>
                       <div>
-                        <h2 className="zi-card-zona">{page.zona || page.title}</h2>
-                        <span className="zi-card-title">{page.title}</span>
+                        <h2 className="zi-card-zona">{page.zona}</h2>
+                        {page.title !== page.zona && (
+                          <span className="zi-card-title">{page.title}</span>
+                        )}
                       </div>
                     </div>
 
-                    {/* Excerpt */}
-                    {page.excerpt && (
-                      <p className="zi-card-excerpt">{page.excerpt}</p>
+                    {/* Descripcion from CMS */}
+                    {page.descripcion && (
+                      <p className="zi-card-excerpt">{page.descripcion}</p>
                     )}
 
                     {/* Actions */}
