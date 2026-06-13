@@ -8,8 +8,10 @@ export default function CTABanner({
   title = '¿Listo para proteger tu empresa?',
   subtitle = 'Primera asesoría gratuita y sin compromiso. Nuestro equipo está listo para ayudarte.',
   showContactLink = true,
+  whatsappUrl,
 }) {
   const ref = useScrollReveal();
+  const waUrl = whatsappUrl || siteConfig.whatsapp;
 
   return (
     <section className="cta-banner" ref={ref}>
@@ -30,7 +32,7 @@ export default function CTABanner({
 
           <div className="cta-banner__actions">
             <a
-              href={siteConfig.whatsapp}
+              href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="cta-banner__btn cta-banner__btn--whatsapp"

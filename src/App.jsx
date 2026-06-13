@@ -26,6 +26,7 @@ import IndustriaDetailPage from './pages/IndustriaDetailPage';
 import ComunidadPage from './pages/ComunidadPage';
 import BlogPostPage from './pages/BlogPostPage';
 import ZonasIndexPage from './pages/ZonasIndexPage';
+import ZonaLandingPage from './pages/ZonaLandingPage';
 
 function HomePage() {
   return (
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/comunidad" element={<ComunidadPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/zonas" element={<ZonasIndexPage />} />
+        <Route path="/asesoria-legal-para-agencias/:slug" element={<ZonaLandingPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />

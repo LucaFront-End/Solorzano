@@ -1,0 +1,171 @@
+/* ══════════════════════════════════════════════
+   ZONA LANDING PAGE — /asesoria-legal-para-agencias/:slug
+   ══════════════════════════════════════════════ */
+
+/* Loading */
+.zona-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-dark);
+}
+
+.zona-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: zona-spin 0.8s linear infinite;
+}
+
+@keyframes zona-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Hero ── */
+.zona-hero {
+  padding: 130px 0 80px;
+  background: var(--color-bg-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.zona-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%, rgba(74, 144, 217, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(74, 144, 217, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.zona-hero__inner {
+  position: relative;
+  max-width: 760px;
+}
+
+/* Breadcrumb */
+.zona-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.zona-breadcrumb a {
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.zona-breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.zona-breadcrumb span:not(:last-child) {
+  opacity: 0.4;
+}
+
+/* Label */
+.zona-label {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(74, 144, 217, 0.08);
+  border: 1px solid rgba(74, 144, 217, 0.2);
+  padding: 5px 16px;
+  border-radius: var(--radius-full);
+  margin-bottom: 22px;
+}
+
+/* Title — from CMS */
+.zona-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+/* Excerpt — from CMS */
+.zona-excerpt {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+/* CTAs */
+.zona-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.zona-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.zona-btn--wa {
+  background: #25D366;
+  color: #fff;
+}
+
+.zona-btn--wa:hover {
+  background: #1fb855;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+}
+
+.zona-btn--phone {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border-dark);
+}
+
+.zona-btn--phone:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .zona-hero {
+    padding: 110px 0 56px;
+  }
+
+  .zona-title {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
+  .zona-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .zona-btn {
+    justify-content: center;
+  }
+}
