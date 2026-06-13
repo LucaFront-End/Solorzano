@@ -1,11 +1,13 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { siteConfig, navLinks } from '../data/content';
+import { useWixCities } from '../hooks/useWixCities';
 import './Footer.css';
 
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const { cities, loading } = useWixCities();
 
   const handleNav = (e, href) => {
     if (href.startsWith('#')) {
@@ -23,8 +25,35 @@ export default function Footer() {
     }
   };
 
+  /* Duplicate list for seamless marquee loop */
+  const marqueeItems = [...cities, ...cities];
+
   return (
     <footer className="footer">
+      {/* ── Zonas de cobertura — marquee ── */}
+      <div className="footer__zones">
+        <div className="footer__zones-header container container--wide">
+          <span className="footer__zones-label">Cobertura Nacional</span>
+          <span className="footer__zones-count">
+            {loading ? '…' : `${cities.length} ciudades`}
+          </span>
+        </div>
+
+        <div className="footer__zones-marquee-wrap">
+          <div className="footer__zones-marquee">
+            <div className="footer__zones-track" style={{ animationDuration: `${Math.max(18, cities.length * 1.5)}s` }}>
+              {marqueeItems.map((city, i) => (
+                <span className="footer__zones-item" key={`${city.id}-${i}`}>
+                  <span className="footer__zones-dot">⚖</span>
+                  {city.nombre}
+                  {city.estado ? `, ${city.estado}` : ''}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container container--wide">
         <div className="footer__grid">
           {/* Brand */}
@@ -52,12 +81,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Cities */}
+          {/* Cities — dynamic */}
           <div className="footer__col">
             <h4 className="footer__col-title">Ciudades</h4>
             <ul>
-              {siteConfig.cities.map((city) => (
-                <li key={city}><span>{city}</span></li>
+              {cities.map((city) => (
+                <li key={city.id}>
+                  <span>
+                    {city.nombre}
+                    {city.estado ? <small className="footer__city-state">, {city.estado}</small> : null}
+                  </span>
+                </li>
               ))}
             </ul>
           </div>
