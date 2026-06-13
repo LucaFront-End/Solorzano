@@ -3,14 +3,15 @@
  * Fetches landing pages from Wix CMS collection "EstadosPaginas".
  * No fallback data — returns empty array if CMS is unavailable.
  *
- * Field mapping (adjust keys to match actual Wix CMS field names):
- *   title         → page title
- *   zona          → zone/city name
- *   slug          → URL slug
- *   excerpt       → card description
- *   tituloDeSeo   → <title> tag
+ * Expected CMS fields (all optional — renders what's there):
+ *   title           → hero title / page title
+ *   zona / estado   → zone/city name (label)
+ *   descripcion     → hero description / excerpt
+ *   imagen / imagenHero / coverImage → hero background image (wix:image URI or URL)
+ *   slug            → URL slug
+ *   tituloDeSeo     → <title> tag
  *   metadescripcion → <meta description>
- *   urlDeWhatsapp → WhatsApp CTA link
+ *   urlDeWhatsapp   → WhatsApp CTA link
  */
 import { wixClient } from '../lib/wixClient';
 
@@ -25,15 +26,33 @@ function slugify(text) {
     .replace(/(^-|-$)/g, '');
 }
 
+
+function resolveWixImage(raw, w = 1200, h = 800) {
+  if (!raw) return '';
+  if (raw.startsWith('http')) return raw;
+  // wix:image://v1/{mediaId}/{filename}
+  const match = raw.match(/wix:image:\/\/v1\/([^/]+)/);
+  if (!match) return '';
+  return `https://static.wixstatic.com/media/${match[1]}/v1/fill/w_${w},h_${h},al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/image.jpg`;
+}
+
 function mapCmsItem(item) {
   // Wix SDK returns items flat (no .data wrapper in v2)
   const f = item.data || item;
   const title = f.title || f.titulo || '';
+
+  // Image — try every common field name the client might use
+  const rawImage =
+    f.imagen || f.imagenHero || f.imagenDeFondo || f.coverImage ||
+    f.heroImage || f.imagenPrincipal || f.image || '';
+
   return {
     id:              f._id || item._id || '',
     title,
-    zona:            f.zona || f.estado || f.ciudad || '',
-    excerpt:         f.excerpt || f.excerptCorto || f.descripcion || '',
+    zona:            f.zona || f.estado || f.ciudad || f.zone || '',
+    // Hero description — prefer long desc, fall back to excerpt
+    descripcion:     f.descripcion || f.excerpt || f.excerptCorto || f.subtitulo || '',
+    imageUrl:        resolveWixImage(rawImage),
     seoTitle:        f.tituloDeSeo || f.seoTitle || '',
     metaDescription: f.metadescripcion || f.metaDescripcion || f.metaDescripcionDeSEO || '',
     whatsappUrl:     f.urlDeWhatsapp || f.urlDeWhatsApp || f.whatsapp || f.linkWhatsapp || '',
