@@ -1,20 +1,11 @@
-import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { siteConfig, navLinks } from '../data/content';
-import { fetchLandingZonas } from '../data/landingZonas';
 import './Footer.css';
 
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const [zonas, setZonas] = useState([]);
-
-  useEffect(() => {
-    fetchLandingZonas()
-      .then(setZonas)
-      .catch(() => {});
-  }, []);
 
   const handleNav = (e, href) => {
     if (href.startsWith('#')) {
@@ -58,22 +49,12 @@ export default function Footer() {
                   )}
                 </li>
               ))}
+              {/* Zonas hub */}
+              <li>
+                <Link to="/zonas">Zonas de Servicio</Link>
+              </li>
             </ul>
           </div>
-
-          {/* Zonas — dynamic from CMS */}
-          {zonas.length > 0 && (
-            <div className="footer__col">
-              <h4 className="footer__col-title">Zonas</h4>
-              <ul>
-                {zonas.map((z) => (
-                  <li key={z.id || z.slug}>
-                    <Link to={`/${z.slug}`}>{z.zona || z.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
           {/* Contact */}
           <div className="footer__col">
