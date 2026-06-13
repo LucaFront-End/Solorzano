@@ -32,11 +32,11 @@ function mapCmsItem(item) {
   return {
     id:              f._id || item._id || '',
     title,
-    zona:            f.zona || '',
-    excerpt:         f.excerpt || f.excerptCorto || '',
+    zona:            f.zona || f.estado || f.ciudad || '',
+    excerpt:         f.excerpt || f.excerptCorto || f.descripcion || '',
     seoTitle:        f.tituloDeSeo || f.seoTitle || '',
     metaDescription: f.metadescripcion || f.metaDescripcion || f.metaDescripcionDeSEO || '',
-    whatsappUrl:     f.urlDeWhatsapp || f.urlDeWhatsApp || '',
+    whatsappUrl:     f.urlDeWhatsapp || f.urlDeWhatsApp || f.whatsapp || f.linkWhatsapp || '',
     slug:            f.slug || slugify(title),
   };
 }
