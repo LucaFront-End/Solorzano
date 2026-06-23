@@ -1,6 +1,10 @@
 {
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap?type=index" },
+    { "source": "/sitemap-pages.xml", "destination": "/api/sitemap?type=pages" },
+    { "source": "/sitemap-ciudades.xml", "destination": "/api/sitemap?type=ciudades" },
+    { "source": "/sitemap-servicios.xml", "destination": "/api/sitemap?type=servicios" },
+    { "source": "/sitemap-blog.xml", "destination": "/api/sitemap?type=blog" },
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
