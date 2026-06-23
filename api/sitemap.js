@@ -127,7 +127,7 @@ export default async function handler(req, res) {
           const f = item.data || item;
           return {
             slug: f.slug || '',
-            updated: f._updatedDate || f._createdDate || new Date().toISOString(),
+            updated: new Date(f._updatedDate || f._createdDate || new Date()).toISOString(),
           };
         })
         .filter((c) => c.slug);
@@ -166,7 +166,7 @@ export default async function handler(req, res) {
           const serviceName = f.servicio || f.title || f.titulo || '';
           return {
             slug: f.slug || generateSlug(serviceName),
-            updated: f._updatedDate || f._createdDate || new Date().toISOString(),
+            updated: new Date(f._updatedDate || f._createdDate || new Date()).toISOString(),
           };
         })
         .filter((s) => s.slug);
