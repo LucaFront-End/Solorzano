@@ -242,15 +242,7 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error('[sitemap] Error generating sitemap type:', type, err);
-    // Fallback minimal sitemap index or set
-    const fallback = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${SITE_URL}/</loc>
-    <lastmod>${today}</lastmod>
-    <priority>1.0</priority>
-  </url>
-</urlset>`;
-    return res.status(200).send(fallback);
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.status(500).send(`Error [${type}]: ${err.message}\nStack: ${err.stack}`);
   }
 }
