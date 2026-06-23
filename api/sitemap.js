@@ -1,19 +1,10 @@
-import { createClient, ApiKeyStrategy, OAuthStrategy } from '@wix/sdk';
+import { createClient, OAuthStrategy } from '@wix/sdk';
 import { items } from '@wix/data';
 import { posts } from '@wix/blog';
 
-// Wix Client for CMS Data items
+// Wix Client for CMS Data items and Blog posts
 const wixClient = createClient({
-  modules: { items },
-  auth: ApiKeyStrategy({
-    siteId: '1880dc88-4674-4fc5-94a0-5511256f1665',
-    apiKey: process.env.WIX_API_KEY || '',
-  }),
-});
-
-// Wix Client for Blog posts
-const blogWixClient = createClient({
-  modules: { posts },
+  modules: { items, posts },
   auth: OAuthStrategy({
     clientId: '5b3b46bd-5bd9-4cea-b2b3-ee7aa5fab57e',
   }),
@@ -203,7 +194,7 @@ export default async function handler(req, res) {
     // 5. BLOG SUB-SITEMAP (Wix Blog Posts)
     // ══════════════════════════════════════════════════════════════
     if (type === 'blog') {
-      const result = await blogWixClient.posts
+      const result = await wixClient.posts
         .queryPosts()
         .limit(100)
         .descending('firstPublishedDate')
