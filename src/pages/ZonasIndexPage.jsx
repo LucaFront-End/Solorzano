@@ -53,14 +53,14 @@ export default function ZonasIndexPage() {
   return (
     <div className="zones-index-page" ref={pageRef}>
 
-      <title>Zonas de Servicio | Solórzano Cerezo y Asociados</title>
+      <title>Ciudades de Servicio | Solórzano Cerezo y Asociados</title>
 
       {/* ═══ HERO ═══ */}
       <section className="zi-hero">
         <div className="container zi-hero-inner zi-reveal">
-          <span className="zi-hero-label zi-stagger">Zonas de servicio</span>
+          <span className="zi-hero-label zi-stagger">Ciudades de servicio</span>
           <h1 className="zi-hero-title zi-stagger">
-            Asesoría legal en <em>tu zona</em>
+            Asesoría legal en <em>tu ciudad</em>
           </h1>
           <p className="zi-hero-sub zi-stagger">
             Atendemos empresas en todo México. Encuentra tu ciudad y conoce
@@ -86,7 +86,7 @@ export default function ZonasIndexPage() {
             <>
               <div className="zi-grid-header zi-reveal">
                 <span className="zi-grid-count">
-                  <strong>{pages.length}</strong> zonas de servicio disponibles
+                  <strong>{pages.length}</strong> ciudades de servicio disponibles
                 </span>
               </div>
 
@@ -120,12 +120,12 @@ export default function ZonasIndexPage() {
 
                     {/* Actions */}
                     <div className="zi-card-actions">
-                      <Link to={`/asesoria-legal-para-agencias/${page.slug}`} className="zi-btn zi-btn--page">
+                      <Link to={`/ciudades/${page.slug}`} className="zi-btn zi-btn--page">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <line x1="5" y1="12" x2="19" y2="12" />
                           <polyline points="12 5 19 12 12 19" />
                         </svg>
-                        Ver zona
+                        Ver ciudad
                       </Link>
                       {page.whatsappUrl && (
                         <a

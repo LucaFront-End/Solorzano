@@ -8,7 +8,7 @@ export const siteConfig = {
   shortName: 'DSC',
   phone: '55 3740 8757',
   email: 'contacto@dsc.mx',
-  whatsapp: 'https://wa.me/525537408757',
+  whatsapp: 'https://wa.me/525537408757?text=SW-%20Hola%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20de%20sus%20servicios%20de%20Derecho%20Laboral',
   address: 'Calle Gral. Juan Cano 87, San Miguel Chapultepec II, 11850 Ciudad de México, CDMX',
   mapsLink: 'https://maps.app.goo.gl/CLLKMEZnRk3wy4ix5',
   social: {
@@ -41,8 +41,8 @@ export const navLinks = [
 
 export const heroContent = {
   tag: '⚖️ Derecho Laboral & Mercantil',
-  title: 'Los Expertos en Derecho',
-  typewriterWords: ['Laboral', 'Mercantil', 'Corporativo', 'Empresarial'],
+  title: 'Los Expertos en Derecho Laboral',
+  typewriterWords: ['Mercantil', 'Corporativo', 'Empresarial'],
   subtitle: 'La prevención es la mejor defensa. Nuestro equipo te asesora para evitar conflictos legales y proteger tu patrimonio.',
   ctaPrimary: 'Contactar Ahora',
   ctaSecondary: 'Conocer Servicios',
@@ -228,7 +228,7 @@ export const blogContent = {
 export const contactContent = {
   title: '¡Tu primer paso hacia una solución legal!',
   subtitle: '¿Tienes preguntas sobre derecho laboral o mercantil? ¡Contáctanos! Nuestra primera asesoría es gratuita y sin compromiso.',
-  services: ['Derecho Laboral', 'Derecho Mercantil'],
+  services: ['Citatorio o Demanda', 'Contratos Laborales', 'Reglamento Interior de Trabajo', 'Inspecciones Laborales'],
 };
 
 export const entidadesFederativas = [

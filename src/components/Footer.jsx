@@ -51,7 +51,7 @@ export default function Footer() {
               ))}
               {/* Zonas hub */}
               <li>
-                <Link to="/zonas">Zonas de Servicio</Link>
+                <Link to="/ciudades">Ciudades de Servicio</Link>
               </li>
             </ul>
           </div>

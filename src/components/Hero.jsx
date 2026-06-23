@@ -39,7 +39,7 @@ export default function Hero() {
               <span className="hero__word">Los Expertos</span>
             </span>
             <span className="hero__line">
-              <span className="hero__word hero__word--2">en Derecho</span>
+              <span className="hero__word hero__word--2">en Derecho Laboral</span>
             </span>
             <span className="hero__line">
               <span className="hero__word hero__word--3">

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { siteConfig, contactContent } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { wixClient } from '../lib/wixClient';
 import PageHero from '../components/PageHero';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 import './ContactoPage.css';
 
 const contactCards = [
@@ -40,13 +41,28 @@ export default function ContactoPage() {
   const faqRef = useScrollReveal();
   const [formData, setFormData] = useState({ nombre: '', empresa: '', puesto: '', telefono: '', email: '', servicio: '', mensaje: '' });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Contact form:', formData);
-    setSent(true);
-    setTimeout(() => setSent(false), 5000);
+    setSending(true);
+    setError(null);
+    try {
+      await wixClient.items.insert('FormulariosContacto', {
+        ...formData,
+        origen: 'contacto',
+        fechaEnvio: new Date().toISOString(),
+      });
+      setSent(true);
+      setFormData({ nombre: '', empresa: '', puesto: '', telefono: '', email: '', servicio: '', mensaje: '' });
+    } catch (err) {
+      console.error('[ContactoPage] Wix CMS error:', err);
+      setError('No se pudo enviar. Intenta de nuevo o contáctanos por WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -132,10 +148,14 @@ export default function ContactoPage() {
                     <span>Tu mensaje</span>
                     <textarea name="mensaje" placeholder="Cuéntanos tu situación..." value={formData.mensaje} onChange={handleChange} rows={5} />
                   </label>
-                  <button type="submit" className="ctc-form__submit">
-                    <span>Enviar Mensaje</span>
-                    <Send size={18} strokeWidth={2} />
+                  <button type="submit" className="ctc-form__submit" disabled={sending}>
+                    {sending ? (
+                      <><Loader2 size={18} className="spin" /> <span>Enviando...</span></>
+                    ) : (
+                      <><span>Enviar Mensaje</span> <Send size={18} strokeWidth={2} /></>
+                    )}
                   </button>
+                  {error && <p style={{ color: 'var(--color-error)', fontSize: '0.9rem', marginTop: 8 }}>{error}</p>}
                 </>
               )}
             </form>

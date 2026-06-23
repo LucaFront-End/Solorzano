@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { contactContent, siteConfig } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
+import { wixClient } from '../lib/wixClient';
+import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import './Contact.css';
 
 const contactInfo = [
@@ -14,14 +15,29 @@ export default function Contact() {
   const sectionRef = useScrollReveal();
   const [formData, setFormData] = useState({ nombre: '', telefono: '', email: '', servicio: '', mensaje: '' });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Contact form:', formData);
-    setSent(true);
-    setTimeout(() => setSent(false), 5000);
+    setSending(true);
+    setError(null);
+    try {
+      await wixClient.items.insert('FormulariosContacto', {
+        ...formData,
+        origen: 'home',
+        fechaEnvio: new Date().toISOString(),
+      });
+      setSent(true);
+      setFormData({ nombre: '', telefono: '', email: '', servicio: '', mensaje: '' });
+    } catch (err) {
+      console.error('[Contact] Wix CMS error:', err);
+      setError('No se pudo enviar. Intenta de nuevo o contáctanos por WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -143,10 +159,14 @@ export default function Contact() {
                   <textarea name="mensaje" placeholder="Cuéntanos tu situación..." className="contact__input contact__textarea" value={formData.mensaje} onChange={handleChange} rows={4} />
                 </label>
 
-                <button type="submit" className="contact__submit">
-                  <span>Enviar Mensaje</span>
-                  <Send size={18} strokeWidth={2} />
+                <button type="submit" className="contact__submit" disabled={sending}>
+                  {sending ? (
+                    <><Loader2 size={18} className="spin" /> <span>Enviando...</span></>
+                  ) : (
+                    <><span>Enviar Mensaje</span> <Send size={18} strokeWidth={2} /></>
+                  )}
                 </button>
+                {error && <p style={{ color: 'var(--color-error)', fontSize: '0.9rem', marginTop: 8 }}>{error}</p>}
               </>
             )}
           </form>

@@ -9,8 +9,8 @@ import Contact from '../components/Contact';
 import './ZonaLandingPage.css';
 
 /* ══════════════════════════════════════════════
-   ZONA LANDING PAGE — /asesoria-legal-para-agencias/:slug
-   100% dinámico desde Wix CMS "EstadosPaginas".
+   ZONA LANDING PAGE — /ciudades/:slug
+   100% dinámico desde Wix CMS "LandingdeCiudades".
    Cada campo en el CMS → renderiza en la landing.
    Sin campos hardcodeados.
    ══════════════════════════════════════════════ */
@@ -37,7 +37,7 @@ export default function ZonaLandingPage() {
     return () => { cancelled = true; };
   }, [slug]);
 
-  if (notFound) return <Navigate to="/zonas" replace />;
+  if (notFound) return <Navigate to="/ciudades" replace />;
 
   if (loading || !page) {
     return (
@@ -70,7 +70,7 @@ export default function ZonaLandingPage() {
               <nav className="zona-breadcrumb" aria-label="Breadcrumb">
                 <Link to="/">Inicio</Link>
                 <span>/</span>
-                <Link to="/zonas">Zonas</Link>
+                <Link to="/ciudades">Ciudades</Link>
                 <span>/</span>
                 <span>{zona}</span>
               </nav>

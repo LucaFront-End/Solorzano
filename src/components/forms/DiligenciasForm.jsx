@@ -88,6 +88,7 @@ export default function DiligenciasForm() {
       title="Solicitud de Diligencias Foráneas"
       subtitle="Control de cada diligencia"
       steps={steps}
+      collectionId="FormularioDiligencias"
       onSubmit={handleSubmit}
     />
   );

@@ -107,6 +107,7 @@ export default function CitatoriosForm() {
       title="Formulario para la atención de citatorios"
       subtitle="En el Centro de Conciliación Laboral"
       steps={steps}
+      collectionId="FormularioCitatorios"
       onSubmit={handleSubmit}
     />
   );
