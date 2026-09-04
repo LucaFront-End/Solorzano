@@ -55,10 +55,13 @@ function normalizePost(p) {
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const limit = Math.min(Number(req.query.limit) || 6, 50);
+    const limit = Math.min(Number(req.query.limit) || 12, 100);
     const wixClient = makeWixClient();
 
     const result = await wixClient.posts

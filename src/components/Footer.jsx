@@ -84,7 +84,7 @@ export default function Footer() {
           </p>
           <div className="footer__bottom-row">
             <span>© {new Date().getFullYear()} Solórzano Cerezo y Asociados. Todos los derechos reservados.</span>
-            <a href="https://www.dsc.mx/pol%C3%ADtica-de-privacidad" target="_blank" rel="noopener noreferrer">Aviso de Privacidad</a>
+            <Link to="/aviso-de-privacidad">Aviso de Privacidad</Link>
           </div>
         </div>
       </div>

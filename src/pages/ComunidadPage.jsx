@@ -38,7 +38,7 @@ export default function ComunidadPage() {
   const [activeCategory, setActiveCategory] = useState('todos');
 
   // Dynamic blog posts from Wix
-  const { posts: wixPosts, loading: blogLoading } = useWixBlog({ limit: 12 });
+  const { posts: wixPosts, loading: blogLoading } = useWixBlog({ limit: 50 });
 
   // Filter posts client-side
   const filteredPosts = wixPosts.filter(post => {

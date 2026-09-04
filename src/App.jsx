@@ -27,6 +27,7 @@ import ComunidadPage from './pages/ComunidadPage';
 import BlogPostPage from './pages/BlogPostPage';
 import ZonasIndexPage from './pages/ZonasIndexPage';
 import ZonaLandingPage from './pages/ZonaLandingPage';
+import AvisoPrivacidadPage from './pages/AvisoPrivacidadPage';
 
 function HomePage() {
   return (
@@ -65,6 +66,8 @@ export default function App() {
         <Route path="/formularios/:slug" element={<FormularioPage />} />
         <Route path="/terminos-de-citatorios-ante-el-ccl" element={<TerminosCitatoriosPage />} />
         <Route path="/tickets-de-diligencias-en-despacho-legal-solorzano" element={<TicketsDiligenciasPage />} />
+        <Route path="/aviso-de-privacidad" element={<AvisoPrivacidadPage />} />
+        <Route path="/politica-de-privacidad" element={<AvisoPrivacidadPage />} />
       </Routes>
       <Footer />
       <WhatsAppButton />

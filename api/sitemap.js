@@ -72,6 +72,7 @@ export default async function handler(req, res) {
         { loc: '/ciudades', priority: '0.9', changefreq: 'weekly' },
         { loc: '/terminos-de-citatorios-ante-el-ccl', priority: '0.4', changefreq: 'monthly' },
         { loc: '/tickets-de-diligencias-en-despacho-legal-solorzano', priority: '0.4', changefreq: 'monthly' },
+        { loc: '/aviso-de-privacidad', priority: '0.5', changefreq: 'monthly' },
       ];
 
       const industries = [

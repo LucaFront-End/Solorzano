@@ -21,7 +21,7 @@ export function useWixBlog({ limit = 6 } = {}) {
     setLoading(true);
     setError(null);
 
-    fetch(`/api/blog-posts?limit=${limit}`)
+    fetch(`/api/blog-posts?limit=${limit}&_t=${Date.now()}`, { cache: 'no-store' })
       .then(r => {
         if (!r.ok) throw new Error(`API error ${r.status}`);
         return r.json();
@@ -60,7 +60,7 @@ export function useWixPost(slug) {
     setLoading(true);
     setError(null);
 
-    fetch(`/api/blog-post?slug=${encodeURIComponent(slug)}`)
+    fetch(`/api/blog-post?slug=${encodeURIComponent(slug)}&_t=${Date.now()}`, { cache: 'no-store' })
       .then(r => {
         if (!r.ok) throw new Error(`API error ${r.status}`);
         return r.json();
